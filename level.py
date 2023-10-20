@@ -1,6 +1,7 @@
 import pygame 
 from settings import *
 from player import Player
+from bush import Bush
 
 
 class Level:
@@ -15,6 +16,7 @@ class Level:
 
     def setup(self):
         self.player = Player((SCREEN_WIDTH//2,SCREEN_HEIGHT//2), self.all_sprites)
+        self.bush = Bush((400,200), self.all_sprites)
 
     def run(self,dt):
         self.display_surface.fill('black')
