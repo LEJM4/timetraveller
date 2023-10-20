@@ -5,7 +5,7 @@ from os import walk
 def import_folder(path):
     surface_list = []
 
-    #durchlauft alle Ordnerzum angegebenen Pfad
+    #durchlauft alle Ordner zum angegebenen Pfad
     for _, __, img_files in walk(path):
         for image in img_files:
             # erstellt den Pfad zur aktuellen Bilddatei

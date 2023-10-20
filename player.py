@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
 
 		for animation in self.animations.keys():
 			#  Pfad zur Animation
-			full_path = '../graphics/character/' + animation
+			full_path = 'graphics/character/' + animation
 
 			# Bilder aus Ordner import.
 			# importierte Bilder speichern als Liste Schlüssel des dict.
@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
 
 
 	def animate(self,dt):
-		self.frame_index += 1 * dt #Zahl enspricht der ANzahl der Bilder fuer die Animation
+		self.frame_index += 7 * dt #Zahl enspricht der schnelligkeit der Bilder fuer die Animation
 		if self.frame_index >= len(self.animations[self.status]):
 			self.frame_index = 0
 
