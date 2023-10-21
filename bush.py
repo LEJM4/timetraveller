@@ -9,6 +9,6 @@ class Bush(pygame.sprite.Sprite):
         super().__init__(groups)
 
         # self.frame_index_bush = 1 
-        self.image = pygame.image.load('graphics/objects/bush/blueberry.png').convert_alpha()
+        self.image = pygame.image.load('graphics/objects/bush/blackberry.png').convert_alpha()
         self.rect = self.image.get_rect(center=pos) 
 
