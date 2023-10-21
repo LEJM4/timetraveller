@@ -24,8 +24,11 @@ class Level:
 
     def run(self,dt):
         self.display_surface.fill('black')
-        image = self.backround.get_tile_image(0, 0, 0)
-        self.display_surface.blit(image, (0,0))
+        
+        for i in range (self.backround.width):
+            for j in range (self.backround.height):
+                image = self.backround.get_tile_image(i, j, 0) # ..._image (x , y , layer)
+                self.display_surface.blit(image, (i*64,j*64))
 
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt)
