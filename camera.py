@@ -1,13 +1,12 @@
 import pygame
 from pytmx.util_pygame import load_pygame
-from pygame.sprite import AbstractGroup
 from player import Player
 from bush import Bush
 from settings import *
 from level import *
 
 
-class AllSprites(pygame.sprite.Group):
+class Camera(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
         self.offset = pygame.math.Vector2()
