@@ -9,7 +9,7 @@ class Level:
     def __init__(self):
         #display_surface
         self.display_surface = pygame.display.get_surface()
-        self.backround = load_pygame('map/DerHundKriegtNichts.tmx')
+        self.backround = load_pygame('map/backround_ground.tmx')
 
         
 
