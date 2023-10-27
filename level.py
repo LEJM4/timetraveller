@@ -3,7 +3,7 @@ from pytmx.util_pygame import load_pygame
 from settings import *
 from player import Player
 from bush import Bush
-
+from camera import Camera
 
 class Level:
     def __init__(self):
@@ -14,7 +14,7 @@ class Level:
         
 
         # sprite groups
-        self.all_sprites = pygame.sprite.Group()
+        self.all_sprites = Camera()
 
         self.setup()
 
