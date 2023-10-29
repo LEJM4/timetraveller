@@ -9,11 +9,7 @@ class Level:
     def __init__(self):
         #display_surface
         self.display_surface = pygame.display.get_surface()
-        self.backround = load_pygame('map/backround_ground.tmx')
-
         
-
-        # sprite groups
         self.all_sprites = Camera()
         self.setup()
 
@@ -22,12 +18,8 @@ class Level:
         self.bush = Bush((400,200), self.all_sprites)
 
     def run(self,dt):
-        self.display_surface.fill('black')
-        
-        for i in range (self.backround.width):
-            for j in range (self.backround.height):
-                image = self.backround.get_tile_image(i, j, 0) # ..._image (x , y , layer)
-                self.display_surface.blit(image, (i*64,j*64))
 
+
+        self.all_sprites.custom_draw()
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt)
