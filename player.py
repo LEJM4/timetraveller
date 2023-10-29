@@ -105,8 +105,28 @@ class Player(pygame.sprite.Sprite):
 		self.pos.y += self.direction.y * self.speed * dt
 		self.rect.centery = self.pos.y
 
+	def limit_movement(self):
+		if self.rect.left < 0:
+			self.pos.x = 0 + self.rect.width / 2
+			self.rect.left = 0
+			self.hitbox_player.left = 0
+		if self.rect.right > 1280:
+			self.pos.x = 1280 - self.rect.width / 2
+			self.rect.right = 1280
+			self.hitbox_player.right = 1280
+		if self.rect.bottom > 720:
+			self.pos.y = 720 - self.rect.height / 2
+			self.hitbox_player.centery = self.rect.centery
+			self.rect.bottom = 720
+		if self.rect.top < 0:
+			self.pos.y = 0 + self.rect.height / 2
+			self.hitbox_player.centery = self.rect.centery
+			self.rect.top = 0
+	
+
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
 		self.input() #player input --> movement
 		self.get_status() #status (idle or item use)
 		self.move(dt) #movement in dt
 		self.animate(dt) #animation in dt
+		self.limit_movement()
