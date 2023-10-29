@@ -72,7 +72,6 @@ class Player(pygame.sprite.Sprite):
 		else:
 			self.direction.x = 0
 
-
 	def get_status(self):
 		keys = pygame.key.get_pressed()
 		
