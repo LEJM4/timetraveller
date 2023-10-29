@@ -15,7 +15,6 @@ class Level:
 
         # sprite groups
         self.all_sprites = Camera()
-
         self.setup()
 
     def setup(self):

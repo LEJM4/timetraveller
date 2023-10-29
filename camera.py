@@ -20,8 +20,8 @@ class Camera(pygame.sprite.Group):
 
     def custom_draw (self):
         #create the offset
-        self.offset.x = self.player.rect.centerx - SCREEN_WIDTH / 2
-        self.offset.y = self.player.rect - SCREEN_HEIGHT / 2
+        # self.offset.x = self.player.rect.centerx - SCREEN_WIDTH / 2
+        # self.offset.y = self.player.rect - SCREEN_HEIGHT / 2
 
         #backround_ground
         self.display_surface.blit(self.backround_ground, (0,0))
