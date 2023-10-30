@@ -96,10 +96,6 @@ class Player(pygame.sprite.Sprite):
 		# x movement
 		self.pos.x += self.direction.x * self.speed * dt
 		self.rect.centerx = self.pos.x
-		if self.rect.centerx <= 18:
-			self.rect.centerx = 18
-
-
 
 		# y movement
 		self.pos.y += self.direction.y * self.speed * dt
