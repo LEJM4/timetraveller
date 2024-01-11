@@ -9,7 +9,6 @@ class Level:
     def __init__(self):
         #display_surface
         self.display_surface = pygame.display.get_surface()
-        
         self.all_sprites = Camera()
         self.setup()
 

@@ -13,10 +13,9 @@ class Camera(pygame.sprite.Group):
         self.relocation = pygame.math.Vector2()
         self.display_surface = pygame.display.get_surface()
         self.background_ground =  pygame.image.load('map/background_ground.png').convert()
-                
 
 
-    def draw_all_objects (self):
+    def draw_all_objects (self, player):
         #relocating the player
 
         self.relocation.x = player.rect.centerx - SCREEN_WIDTH / 2
