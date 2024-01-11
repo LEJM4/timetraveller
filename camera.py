@@ -11,13 +11,16 @@ class Camera(pygame.sprite.Group):
         super().__init__()
         self.offset = pygame.math.Vector2()
         self.display_surface = pygame.display.get_surface()
-        self.backround_ground = load_pygame('map/background_ground.tmx')
+        self.background_ground =  pygame.image.load('map/background_ground.png').convert()
                 
 
 
     def custom_draw (self):
+        self.display_surface.blit(self.background_ground, (0,0))
+
+"""
         for x in range (20):
             for y in range (12):
                 image = self.backround_ground.get_tile_image(x, y, layer =0) 
                 self.display_surface.blit(image, (x*64,y*64))
-
+"""
