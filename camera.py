@@ -21,10 +21,10 @@ class Camera(pygame.sprite.Group):
         self.relocation.x = player.rect.centerx - SCREEN_WIDTH / 2
         self.relocation.y = player.rect.centery - SCREEN_HEIGHT / 2
                 
-        self.display_surface.blit(self.background_ground, (0,0))
+        self.display_surface.blit(self.background_ground, -self.relocation)
         for sprite in self.sprites():
-            relocated_position = sprite.rect.topleft - self.relocation
-            self.display_surface.blit(sprite.image, relocated_position)
+            self.relocated_position = sprite.rect.topleft - self.relocation
+            self.display_surface.blit(sprite.image, self.relocated_position)
 
 """
         for x in range (20):
