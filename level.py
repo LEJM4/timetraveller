@@ -20,5 +20,5 @@ class Level:
     def run(self,dt):
 
 
-        self.all_sprites.draw_all_objects()
+        self.all_sprites.draw_all_objects(self.player)
         self.all_sprites.update(dt)
