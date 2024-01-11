@@ -11,7 +11,7 @@ class Camera(pygame.sprite.Group):
         super().__init__()
         self.offset = pygame.math.Vector2()
         self.display_surface = pygame.display.get_surface()
-        self.backround_ground = load_pygame('map/backround_ground.tmx')
+        self.backround_ground = load_pygame('map/background_ground.tmx')
                 
 
 
