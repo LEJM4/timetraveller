@@ -20,6 +20,5 @@ class Level:
     def run(self,dt):
 
 
-        self.all_sprites.custom_draw()
-        self.all_sprites.draw(self.display_surface)
+        self.all_sprites.draw_all_objects()
         self.all_sprites.update(dt)

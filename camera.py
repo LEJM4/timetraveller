@@ -15,8 +15,10 @@ class Camera(pygame.sprite.Group):
                 
 
 
-    def custom_draw (self):
+    def draw_all_objects (self):
         self.display_surface.blit(self.background_ground, (0,0))
+        for sprite in self.sprites():
+            self.display_surface.blit(sprite.image, sprite.rect)
 
 """
         for x in range (20):
