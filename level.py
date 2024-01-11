@@ -13,7 +13,7 @@ class Level:
         self.setup()
 
     def setup(self):
-        self.player = Player((SCREEN_WIDTH//2,SCREEN_HEIGHT//2), self.all_sprites)
+        self.player = Player((SCREEN_WIDTH,SCREEN_HEIGHT), self.all_sprites)
         self.bush = Bush((400,200), self.all_sprites)
 
     def run(self,dt):

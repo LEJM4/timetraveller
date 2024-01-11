@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
 		# movement attributes
 		self.direction = pygame.math.Vector2()
 		self.pos = pygame.math.Vector2(self.rect.center)
-		self.speed = 200
+		self.speed = 2000
 
 
 
@@ -102,22 +102,23 @@ class Player(pygame.sprite.Sprite):
 		self.rect.centery = self.pos.y
 
 	def limit_movement(self):
-		if self.rect.left < 0:
-			self.pos.x = 0 + self.rect.width / 2
-			self.rect.left = 0
+		if self.rect.left < 640:
+			self.pos.x = 640 + self.rect.width / 2
+			self.rect.left = 640
 			self.hitbox_player.left = 0
-		if self.rect.right > 1280:
-			self.pos.x = 1280 - self.rect.width / 2
-			self.rect.right = 1280
-			self.hitbox_player.right = 1280
-		if self.rect.bottom > 720:
-			self.pos.y = 720 - self.rect.height / 2
+		if self.rect.right > 3840: #limitiert Bewegung auf 3840 x --> nach rechts
+			self.pos.x = 3840 - self.rect.width / 2
+			self.rect.right = 3840
+			self.hitbox_player.right = 3840
+		if self.rect.bottom > 3520: #limitiert Bewegung auf 3520 y  --> nach unten
+			self.pos.y = 3520 - self.rect.height / 2
 			self.hitbox_player.centery = self.rect.centery
-			self.rect.bottom = 720
-		if self.rect.top < 0:
-			self.pos.y = 0 + self.rect.height / 2
+			self.rect.bottom = 3520
+		if self.rect.top < 360: #limitiert Bewegung auf 360 y --> nach oben
+			self.pos.y = 360 + self.rect.height / 2
 			self.hitbox_player.centery = self.rect.centery
-			self.rect.top = 0
+			self.rect.top = 360
+
 	
 
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
