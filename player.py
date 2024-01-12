@@ -102,7 +102,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.centery = self.pos.y
 
 	def limit_movement(self):
-		if self.rect.left < 640:
+		if self.rect.left < 640:  #limitiert Bewegung auf 3840 x --> nach links
 			self.pos.x = 640 + self.rect.width / 2
 			self.rect.left = 640
 			self.hitbox_player.left = 0

@@ -1,6 +1,6 @@
 import pygame 
-from pytmx.util_pygame import load_pygame
-from settings import *
+#from pytmx.util_pygame import load_pygame
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 from bush import Bush
 from camera import Camera

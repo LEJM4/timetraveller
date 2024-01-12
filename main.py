@@ -1,5 +1,5 @@
 import pygame, sys
-from settings import *
+from settings import SCREEN_HEIGHT, SCREEN_WIDTH
 from level import Level
 
 

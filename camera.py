@@ -1,7 +1,7 @@
 import pygame
 from pytmx.util_pygame import load_pygame
 from player import Player
-from bush import Bush
+#from bush import Bush
 from settings import *
 from level import *
 from settings import *
@@ -10,9 +10,10 @@ from settings import *
 class Camera(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
+        self.background_ground = pygame.image.load('map/background_ground.png').convert()
         self.relocation = pygame.math.Vector2()
         self.display_surface = pygame.display.get_surface()
-        self.background_ground =  pygame.image.load('map/background_ground.png').convert()
+
 
 
     def draw_all_objects (self, player):
