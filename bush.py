@@ -1,8 +1,8 @@
 import pygame
 from player import *
 from support import *
-from random import choice
-from os import walk
+#from random import choice
+#from os import walk
 
 class Bush(pygame.sprite.Sprite):
     def __init__(self, pos, groups):
