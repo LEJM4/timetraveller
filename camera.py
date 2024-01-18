@@ -1,5 +1,6 @@
 import pygame
 from pytmx.util_pygame import load_pygame
+import pytmx
 from player import Player
 #from bush import Bush
 from settings import *
@@ -38,4 +39,10 @@ class Camera(pygame.sprite.Group):
             for y in range (12):
                 image = self.backround_ground.get_tile_image(x, y, layer =0) 
                 self.display_surface.blit(image, (x*64,y*64))
+        
+        for x in range (20):
+            for y in range (12):
+                image = self.backround_ground.get_tile_image(int(self.x_coordinate/64) + x, (int(self.y_coordinate/64) +y, layer =0) 
+                self.display_surface.blit(image, (x*64,y*64))
+
 """
