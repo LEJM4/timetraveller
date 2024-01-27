@@ -1,5 +1,5 @@
 import pygame, sys
-from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from settings import SCREEN_HEIGHT, SCREEN_WIDTH, installieren_aller_requirements
 from level import Level
 
 
@@ -12,6 +12,9 @@ class Game:
         self.level = Level()
 
     def run(self):
+
+        installieren_aller_requirements()
+        
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
