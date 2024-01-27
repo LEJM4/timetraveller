@@ -16,11 +16,17 @@ class Game:
         installieren_aller_requirements()
         
         while True:
+            #self.keys = pygame.key.get_pressed()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-  
+                
+                # if self.keys[pygame.K_ESCAPE]:
+                #     pygame.quit()
+                #     sys.exit()
+                
             dt = self.clock.tick() / 1000
             self.level.run(dt)
             pygame.display.update()

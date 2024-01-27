@@ -1,4 +1,7 @@
+from pyautogui import size
 # screen
+#SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
+#print (SCREEN_WIDTH, SCREEN_HEIGHT)
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 TILE_SIZE = 64 #Tile_Pixel = 64x64
@@ -44,4 +47,3 @@ def installieren_aller_requirements():
         print("")
         print("Installation abgeschlossen.")
 
-installieren_aller_requirements()
