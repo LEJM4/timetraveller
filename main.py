@@ -3,6 +3,8 @@ from settings import SCREEN_HEIGHT, SCREEN_WIDTH, installieren_aller_requirement
 from level import Level
 
 
+installieren_aller_requirements()
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -13,7 +15,6 @@ class Game:
 
     def run(self):
 
-        installieren_aller_requirements()
         
         while True:
             #self.keys = pygame.key.get_pressed()
