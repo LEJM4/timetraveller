@@ -2,7 +2,7 @@ import pygame
 #from pytmx.util_pygame import load_pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
-from bush import Bush
+#from bush import Bush
 from camera import Camera
 
 class Level:
@@ -14,7 +14,7 @@ class Level:
 
     def setup(self):
         self.player = Player((SCREEN_WIDTH, SCREEN_HEIGHT), self.all_sprites)  # Spawnpunkt auf der gesamten Karte
-        self.bush = Bush((400,200), self.all_sprites)
+        #self.bush = Bush((400,200), self.all_sprites)
 
     def run(self,dt):
 
