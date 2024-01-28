@@ -1,6 +1,6 @@
 import pygame
 from pytmx.util_pygame import load_pygame
-import pytmx
+from pygame.math import Vector2
 from player import Player
 #from bush import Bush
 from settings import *
@@ -13,7 +13,7 @@ class Camera(pygame.sprite.Group):
         super().__init__()
         
         self.tile_map = load_pygame("map/background_ground.tmx")
-        self.relocation = pygame.math.Vector2()
+        self.relocation = Vector2()
         self.display_surface = pygame.display.get_surface()
 
 
