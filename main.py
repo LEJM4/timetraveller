@@ -3,7 +3,7 @@ from settings import SCREEN_HEIGHT, SCREEN_WIDTH, installieren_aller_requirement
 from level import Level
 
 
-installieren_aller_requirements()
+#installieren_aller_requirements()
 
 class Game:
     def __init__(self):
