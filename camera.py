@@ -38,9 +38,14 @@ class Camera(pygame.sprite.Group):
                 self.display_surface.blit(image, (x*64,y*64) -self.relocation)
         
     def draw_backround_object_layers(self):
-        pass
-
-
+        object_layer = self.tile_map.get_layer_by_name('Trees')
+        
+        for object in object_layer:
+            if hasattr(object, 'image'):
+                if  object.image:
+                    image = object.image
+                    position = (object.x, object.y) - self.relocation
+                    self.display_surface.blit(image, position)
 
 """
         ground = t.get_layer_by_name('Ground')
