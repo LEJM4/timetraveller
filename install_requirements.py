@@ -1,13 +1,5 @@
-from pyautogui import size
-# screen
-#SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
-#print (SCREEN_WIDTH, SCREEN_HEIGHT)
-
-
-# hier kommen dann evtl. noch dict. rein, um den Code in anderen
-#Dateien sauberer zu halten 
-
 import subprocess as supr
+
 def installieren_aller_requirements():
     try:
         # Installiere pyautogui

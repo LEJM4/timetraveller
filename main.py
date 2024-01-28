@@ -4,7 +4,7 @@ from level import Level
 from install_requirements import installieren_aller_requirements
 
 
-installieren_aller_requirements()
+#installieren_aller_requirements()
 
 class Game:
     def __init__(self):
@@ -18,16 +18,16 @@ class Game:
 
         
         while True:
-            #self.keys = pygame.key.get_pressed()
+            self.keys = pygame.key.get_pressed()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 
-                # if self.keys[pygame.K_ESCAPE]:
-                #     pygame.quit()
-                #     sys.exit()
+                if self.keys[pygame.K_BACKSPACE]:
+                    pygame.quit()
+                    sys.exit()
                 
             dt = self.clock.tick() / 1000
             self.level.run(dt)
