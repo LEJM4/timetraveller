@@ -24,19 +24,21 @@ class Camera(pygame.sprite.Group):
         self.relocation.x = player.rect.centerx - SCREEN_WIDTH / 2
         self.relocation.y = player.rect.centery - SCREEN_HEIGHT / 2
                 
-        self.draw_backround()
+        self.draw_backround_normal_layers()
+        self.draw_backround_object_layers()
         for sprite in self.sprites():
             self.relocated_position = sprite.rect.topleft - self.relocation
             self.display_surface.blit(sprite.image, self.relocated_position)
 
-    def draw_backround(self):
+    def draw_backround_normal_layers(self):
         
         for index in self.tile_map.visible_tile_layers:
             for x, y, image in self.tile_map.layers[index].tiles():
                 if not image: continue
                 self.display_surface.blit(image, (x*64,y*64) -self.relocation)
         
-
+    def draw_backround_object_layers(self):
+        pass
 
 
 
