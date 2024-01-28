@@ -1,6 +1,7 @@
 import pygame, sys
-from settings import SCREEN_HEIGHT, SCREEN_WIDTH, installieren_aller_requirements
+from settings import SCREEN_HEIGHT, SCREEN_WIDTH
 from level import Level
+from install_requirements import installieren_aller_requirements
 
 
 installieren_aller_requirements()
