@@ -1,10 +1,14 @@
-import pygame, sys
-from settings import SCREEN_HEIGHT, SCREEN_WIDTH
-from level import Level
 from install_requirements import installieren_aller_requirements
 
 
 #installieren_aller_requirements()
+
+import pygame, sys
+from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from level import Level
+
+
+
 
 class Game:
     def __init__(self):
