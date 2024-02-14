@@ -124,10 +124,10 @@ class Player(pygame.sprite.Sprite):
 			self.pos.x = 3840 - self.rect.width / 2
 			self.rect.right = 3840
 			self.hitbox_player.right = 3840
-		if self.rect.bottom > 3520: #limitiert Bewegung auf 3520 y  --> nach unten
-			self.pos.y = 3520 - self.rect.height / 2
+		if self.rect.bottom > 3200: #limitiert Bewegung auf 3520 y  --> nach unten
+			self.pos.y = 3200 - self.rect.height / 2
 			self.hitbox_player.centery = self.rect.centery
-			self.rect.bottom = 3520
+			self.rect.bottom = 3200
 		if self.rect.top < 360: #limitiert Bewegung auf 360 y --> nach oben
 			self.pos.y = 360 + self.rect.height / 2
 			self.hitbox_player.centery = self.rect.centery
