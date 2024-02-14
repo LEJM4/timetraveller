@@ -1,9 +1,9 @@
 import pygame 
-#from pytmx.util_pygame import load_pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from pytmx.util_pygame import load_pygame
 from player import Player
 from bush import Bush
 from camera import Camera
+from objects import Tree, Bush
 
 class Level:
     def __init__(self):
@@ -11,17 +11,36 @@ class Level:
         self.display_surface = pygame.display.get_surface()
         
         #groups
-        self.interaction_objects = pygame.sprite.Group()
         self.all_sprites = Camera()
+
+        self.tree_group = pygame.sprite.Group()
+        self.bush_group = pygame.sprite.Group()
+        
+        self.interaction_objects = pygame.sprite.Group()
+        
         self.setup()
 
     def setup(self):
-        self.player = Player((SCREEN_WIDTH, SCREEN_HEIGHT), self.all_sprites, self.interaction_objects)  # Spawnpunkt auf der gesamten Karte
-        #self.bush = Bush((1111,840), self.all_sprites, self.object_group)
+        tile_map = load_pygame("map/background_ground.tmx")
+        tree_layer = tile_map.get_layer_by_name('Trees')
+        bush_layer = tile_map.get_layer_by_name('Bush')
+
+        for tree in tree_layer:
+            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.tree_group ])
+
+        for bush in bush_layer:
+            Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.bush_group])
+
+        for object in tile_map.get_layer_by_name('Spawn'):
+               if object.name == 'Player':
+                   self.player = Player((object.x, object.y), self.all_sprites, self.interaction_objects)
+
 
     def run(self,dt):
 
-
-
-        self.all_sprites.draw_all_objects(self.player)
         self.all_sprites.update(dt)
+
+		
+        self.display_surface.fill('black')
+        
+        self.all_sprites.draw_all_objects(self.player)

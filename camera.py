@@ -6,6 +6,7 @@ from player import Player
 from settings import *
 from level import *
 from settings import *
+from objects import Tree, Bush
 
 
 class Camera(pygame.sprite.Group):
@@ -19,7 +20,6 @@ class Camera(pygame.sprite.Group):
         self.relocation = Vector2()
         self.display_surface = pygame.display.get_surface()
         
-        
 
 
     def draw_all_objects (self, player):
@@ -29,7 +29,6 @@ class Camera(pygame.sprite.Group):
         self.relocation.y = player.rect.centery - SCREEN_HEIGHT / 2
                 
         self.draw_backround_normal_layers()
-        self.draw_backround_object_layers()
 
         for sprite in self.sprites():
             self.relocated_position = sprite.rect.topleft - self.relocation
@@ -49,7 +48,7 @@ class Camera(pygame.sprite.Group):
                 
         for normal_layer in ["ground" , "trail"]:
             for x,y, image in self.tile_map.get_layer_by_name(normal_layer).tiles():
-                if not image: continue
+                #if not image: continue
                 self.display_surface.blit(image, (x*64,y*64) -self.relocation)
         
         #draw the objects in object_layers
@@ -67,65 +66,17 @@ class Camera(pygame.sprite.Group):
         tree_layer = self.tile_map.get_layer_by_name('Trees')
         bush_layer = self.tile_map.get_layer_by_name('Bush')
         
+        # for tree in tree_layer:
+        #     if hasattr(tree, 'image'):
+        #         if  tree.image:
+        #             image = tree.image
+        #             position = (tree.x, tree.y) - self.relocation
+        #             self.display_surface.blit(image, position)
+        
         for tree in tree_layer:
-            if hasattr(tree, 'image'):
-                if  tree.image:
-                    image = tree.image
-                    position = (tree.x, tree.y) - self.relocation
-                    self.display_surface.blit(image, position)
-        
+            Tree((tree.x, tree.y), tree.image, [self.tree_group ])
+
+
         for bush in bush_layer:
-           if hasattr(bush, 'image'):
-                if  bush.image:
-                    image = bush.image
-                    position = (bush.x, bush.y) - self.relocation
-                    self.display_surface.blit(image, position)
-"""
-        ground = t.get_layer_by_name('Ground')
-        trail = t.get_layer_by_name('Trail')
-        bush = t.get_layer_by_name('bush_2')
+            Bush((bush.x, bush.y), bush.image, [self.bush_group ])
 
-        for x, y, image in ground.tiles():
-            if not image: continue
-            self.display_surface.blit(image, (x*64,y*64) -self.relocation)
-            
-        
-        for x, y, image in trail.tiles():
-            if not image: continue
-            self.display_surface.blit(image, (x*64,y*64) -self.relocation)
-
-        for x, y, image in bush.tiles():
-            if not image: continue
-            self.display_surface.blit(image, (x*64,y*64) -self.relocation)
-"""
-
-"""
-        for x in range (t.width):
-            for y in range (t.height):
-                image = t.get_tile_image(x, y, layer =1) 
-                if image:
-                    self.display_surface.blit(image, (x*64,y*64) -self.relocation)
-
-                    """
-"""
-        print(player.rect.centerx)
-        print("")
-        print("")
-        print(player.rect.centery)
-"""
-"""
-        for x in range (20):
-            for y in range (12):
-                image = self.backround_ground.get_tile_image(x, y, layer =0) 
-                self.display_surface.blit(image, (x*64,y*64))
-        
-        for x in range (20):
-            for y in range (12):
-                image = self.backround_ground.get_tile_image(int(self.x_coordinate/64) + x, (int(self.y_coordinate/64) +y, layer =0) 
-                self.display_surface.blit(image, (x*64,y*64))
-
-        from pytmx.util_pygame import load_pygame
->>> tmxdata = load_pygame("map.tmx")
-tmxdata = load_pygame("map/background_ground.tmx")
-
-"""
