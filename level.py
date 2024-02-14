@@ -37,7 +37,7 @@ class Level:
         tile_map = load_pygame("map/background_ground.tmx")
         for object in tile_map.get_layer_by_name('Spawn'):
                if object.name == 'Player':
-                   self.player = Player((object.x, object.y), self.all_sprites)
+                   self.player = Player((object.x, object.y), self.all_sprites, self.interaction_objects_group)
 
     def run(self,dt):
 
