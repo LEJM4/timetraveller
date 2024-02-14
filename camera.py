@@ -30,12 +30,19 @@ class Camera(pygame.sprite.Group):
                 
         self.draw_backround_normal_layers()
 
-        for sprite in self.sprites():
+        for sprite in self.sort_sprites():
             self.relocated_position = sprite.rect.topleft - self.relocation
             self.display_surface.blit(sprite.image, self.relocated_position)
 
-            
+    def sort_sprites(self):
+        # liste mit sprites nach y-WerteN
+        return sorted(self.sprites(), key=self.sprite_sort_key)
 
+    def sprite_sort_key(self, sprite):
+        # nach y werten sortieren
+        return sprite.rect.centery
+    
+    
     def draw_backround_normal_layers(self):
         #draw normal layers
                 
