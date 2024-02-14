@@ -32,15 +32,12 @@ class Level:
         for bush in bush_layer:
             Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.bush_group, self.interaction_objects_group])
 
-        for object in tile_map.get_layer_by_name('Spawn'):
-               if object.name == 'Player':
-                   self.player = Player((object.x, object.y), self.all_sprites, self.interaction_objects_group)
 
     def player_spawnpoint(self):
         tile_map = load_pygame("map/background_ground.tmx")
         for object in tile_map.get_layer_by_name('Spawn'):
                if object.name == 'Player':
-                   self.player = Player((object.x, object.y), self.all_sprites, self.interaction_objects_group)
+                   self.player = Player((object.x, object.y), self.all_sprites)
 
     def run(self,dt):
 
