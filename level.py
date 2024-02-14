@@ -15,7 +15,7 @@ class Level:
 
         self.tree_group = pygame.sprite.Group()
         self.bush_group = pygame.sprite.Group()
-        self.obstacles = pygame.sprite.Group()
+        self.collision_objects = pygame.sprite.Group()
         self.interaction_objects = pygame.sprite.Group()
         
         self.draw_backround_object_layers()
@@ -28,7 +28,7 @@ class Level:
         bush_layer = tile_map.get_layer_by_name('Bush')
 
         for tree in tree_layer:
-            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.obstacles ,self.tree_group ])
+            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.collision_objects ,self.tree_group ])
 
         for bush in bush_layer:
             Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.bush_group, self.interaction_objects])
@@ -38,7 +38,7 @@ class Level:
         tile_map = load_pygame("map/background_ground.tmx")
         for object in tile_map.get_layer_by_name('Spawn'):
                if object.name == 'Player':
-                   self.player = Player((object.x, object.y), self.all_sprites, self.obstacles ,self.interaction_objects)
+                   self.player = Player((object.x, object.y), self.all_sprites, self.collision_objects ,self.interaction_objects)
 
     def run(self,dt):
 

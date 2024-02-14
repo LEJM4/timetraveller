@@ -103,10 +103,9 @@ class Player(pygame.sprite.Sprite):
 		self.rect.centery = self.pos.y
 
 	def collision(self):
-		for objects in self.object_group:
+		for objects in self.collision_objects:
 			if self.hitbox_player.colliderect(objects):
-				pass
-				#print("Es funktioneirt.")
+				print("Es funktioneirt.")
 
 
 
