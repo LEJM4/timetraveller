@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
 		self.animation_pictures()
 		self.status = 'down_idle'
 		self.frame_index = 0
-		self.object_group = interaction_objects
+
 
 		# general setup
 		self.image = self.animations[self.status][self.frame_index]
@@ -27,6 +27,7 @@ class Player(pygame.sprite.Sprite):
 		# collision
 		self.hitbox_player = self.rect
 		self.collision_objects = collision_objects
+		self.interaction_objects = interaction_objects
 
 	def animation_pictures(self):
 		# Erzeugt ein Dict. mit versch. Animationen als Schlüssel + leere list --> als Werte
@@ -103,9 +104,9 @@ class Player(pygame.sprite.Sprite):
 		self.rect.centery = self.pos.y
 
 	def collision(self):
-		for objects in self.collision_objects:
+		for objects in self.interaction_objects:
 			if self.hitbox_player.colliderect(objects):
-				print("Es funktioneirt.")
+				print("Es funktioniert.")
 
 
 

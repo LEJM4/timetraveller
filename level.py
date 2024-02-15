@@ -13,8 +13,8 @@ class Level:
         #groups
         self.all_sprites = Camera()
 
-        self.tree_group = pygame.sprite.Group()
-        self.bush_group = pygame.sprite.Group()
+        #self.tree_group = pygame.sprite.Group()
+        #self.bush_group = pygame.sprite.Group()
         self.collision_objects = pygame.sprite.Group()
         self.interaction_objects = pygame.sprite.Group()
         
@@ -28,10 +28,13 @@ class Level:
         bush_layer = tile_map.get_layer_by_name('Bush')
 
         for tree in tree_layer:
-            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.collision_objects ,self.tree_group ])
+            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.collision_objects])
 
         for bush in bush_layer:
-            Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.bush_group, self.interaction_objects])
+            if bush.name == ('Empty'):
+                Bush((bush.x, bush.y), bush.image, [self.all_sprites])
+            else:
+                Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.interaction_objects])
 
 
     def player_spawnpoint(self):
