@@ -6,7 +6,7 @@ class Tree(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = image
         self.rect = self.image.get_rect(topleft = pos)
-        self.tree_hitbox = self.rect
+        self.hitbox = self.rect
 
 
 class Bush(pygame.sprite.Sprite):
@@ -14,4 +14,4 @@ class Bush(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = image
         self.rect = self.image.get_rect(topleft = pos)
-        self.tree_hitbox = self.rect
+        self.hitbox = self.rect
