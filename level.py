@@ -40,8 +40,12 @@ class Level:
     def player_spawnpoint(self):
         tile_map = load_pygame("map/background_ground.tmx")
         for object in tile_map.get_layer_by_name('Spawn'):
-               if object.name == 'Player':
-                   self.player = Player((object.x, object.y), self.all_sprites, self.collision_objects ,self.interaction_objects)
+            
+            if object.name == 'Player':
+                self.player = Player((object.x, object.y), self.all_sprites, self.collision_objects ,self.interaction_objects)
+                
+            if object.name == 'Trader':
+                pass
 
     def run(self,dt):
 
