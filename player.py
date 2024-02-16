@@ -5,7 +5,7 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups, collision_objects, interaction_objects):
+	def __init__(self, pos, groups, obstacle_objects, interaction_objects):
 		super().__init__(groups)
 		self.animation_pictures()
 		self.status = 'down_idle'
@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 
 		# collision
 		self.hitbox_player = self.rect
-		self.collision_objects = collision_objects
+		self.collision_objects = obstacle_objects
 		self.interaction_objects = interaction_objects
 
 	def animation_pictures(self):

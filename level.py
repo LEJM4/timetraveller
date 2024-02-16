@@ -3,7 +3,7 @@ from pytmx.util_pygame import load_pygame
 from player import Player
 from bush import Bush
 from camera import Camera
-from objects import Tree, Bush
+from objects import Tree, Bush, Trail
 
 class Level:
     def __init__(self):
@@ -15,7 +15,7 @@ class Level:
 
         #self.tree_group = pygame.sprite.Group()
         #self.bush_group = pygame.sprite.Group()
-        self.collision_objects = pygame.sprite.Group()
+        self.obstacle_objects = pygame.sprite.Group()
         self.interaction_objects = pygame.sprite.Group()
         
         self.draw_backround_object_layers()
@@ -28,7 +28,7 @@ class Level:
         bush_layer = tile_map.get_layer_by_name('Bush')
 
         for tree in tree_layer:
-            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.collision_objects])
+            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.obstacle_objects])
 
         for bush in bush_layer:
             if bush.name == ('Empty'):
@@ -42,7 +42,7 @@ class Level:
         for object in tile_map.get_layer_by_name('Spawn'):
             
             if object.name == 'Player':
-                self.player = Player((object.x, object.y), self.all_sprites, self.collision_objects ,self.interaction_objects)
+                self.player = Player((object.x, object.y), self.all_sprites, self.obstacle_objects ,self.interaction_objects)
                 
             if object.name == 'Trader':
                 pass
