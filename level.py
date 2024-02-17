@@ -32,9 +32,13 @@ class Level:
 
         for bush in bush_layer:
             if bush.name == ('Empty'):
-                Bush((bush.x, bush.y), bush.image, [self.all_sprites])
-            else:
-                Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.interaction_objects])
+                Bush((bush.x, bush.y), bush.image, [self.all_sprites], 'Empty')
+
+            if bush.name == ('Blueberry'):
+                Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.interaction_objects], 'Blueberry')
+
+            if bush.name == ('Raspberry'):
+                Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.interaction_objects], 'Raspberry')
 
 
     def player_spawnpoint(self):
@@ -46,6 +50,18 @@ class Level:
                 
             if object.name == 'Trader':
                 pass
+    
+
+    def bush_collision(self):
+        keys = pygame.key.get_just_pressed()
+        #pic item
+        if keys[pygame.K_e]:
+            if self.interaction_objects:
+                interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True)
+                if interaction_objects:
+                    print(interaction_objects[0].item_type)
+                    print('Collision in lvl.py + Remove object')
+
 
     def run(self,dt):
 
@@ -53,5 +69,7 @@ class Level:
 
 		
         self.display_surface.fill('black')
+
+        self.bush_collision() # methode muss aufgerufen werden, damit coll. hier fkt
         
         self.all_sprites.draw_all_objects(self.player)

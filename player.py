@@ -74,6 +74,8 @@ class Player(pygame.sprite.Sprite):
 		else:
 			self.direction.x = 0
 
+
+
 	def status_player(self):
 		keys = pygame.key.get_pressed()
 		
@@ -84,7 +86,7 @@ class Player(pygame.sprite.Sprite):
 		#pic item
 		if keys[pygame.K_e]:
 			if self.direction.magnitude() == 0: #ueberprueft die Laenge des Vektors
-				print("pick up an item")
+				self.collision_bush()
 
 		
 
@@ -103,10 +105,12 @@ class Player(pygame.sprite.Sprite):
 		self.pos.y += self.direction.y * self.speed * dt
 		self.rect.centery = self.pos.y
 
-	def collision(self):
+
+
+	def collision_bush(self):
 		for object in self.interaction_objects.sprites():
 			if object.hitbox.colliderect(self.hitbox_player):
-				print("Es funktioniert.")
+				print("Collision in  Player funktioniert.")
 
 
 
@@ -141,4 +145,4 @@ class Player(pygame.sprite.Sprite):
 		self.move(dt) #movement in dt
 		self.animation_player(dt) #animation in dt
 		self.limit_movement()
-		self.collision()
+		#self.collision_bush() --> nur zum ueberpruefen aufrufen
