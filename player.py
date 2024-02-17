@@ -5,7 +5,7 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups, obstacle_objects, interaction_objects):
+	def __init__(self, pos, groups, obstacle_objects, interaction_objects, trail):
 		super().__init__(groups)
 		self.animation_pictures()
 		self.status = 'down_idle'
@@ -26,8 +26,11 @@ class Player(pygame.sprite.Sprite):
 
 		# collision
 		self.hitbox_player = self.rect
-		self.collision_objects = obstacle_objects
+
+		#Parametergroups
+		self.obstacle_objects = obstacle_objects
 		self.interaction_objects = interaction_objects
+		self.trail = trail
 
 	def animation_pictures(self):
 		# Erzeugt ein Dict. mit versch. Animationen als Schlüssel + leere list --> als Werte
@@ -111,6 +114,13 @@ class Player(pygame.sprite.Sprite):
 		for object in self.interaction_objects.sprites():
 			if object.hitbox.colliderect(self.hitbox_player):
 				print("Collision in  Player funktioniert.")
+	
+	
+	def trail_collision(self):
+		for trail in self.trail.sprites():
+			if trail.hitbox.colliderect(self.hitbox_player):
+				print('auf dem Weg')
+			
 
 
 
@@ -146,3 +156,4 @@ class Player(pygame.sprite.Sprite):
 		self.animation_player(dt) #animation in dt
 		self.limit_movement()
 		#self.collision_bush() --> nur zum ueberpruefen aufrufen
+		self.trail_collision()
