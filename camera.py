@@ -4,9 +4,9 @@ from pygame.math import Vector2
 from player import Player
 #from bush import Bush
 from settings import *
-from level import *
+#from level import *
 from settings import *
-from objects import Tree, Bush
+#from objects import Tree, Bush
 
 
 class Camera(pygame.sprite.Group):
