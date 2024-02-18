@@ -80,16 +80,16 @@ class Player(pygame.sprite.Sprite):
 
 
 	def status_player(self):
-		keys = pygame.key.get_pressed()
+		#keys = pygame.key.get_pressed()
 		
 		# idle
 		if self.direction.magnitude() == 0:
 			self.status = self.status.split('_')[0] + '_idle'
 		
 		#pic item
-		if keys[pygame.K_e]:
-			if self.direction.magnitude() == 0: #ueberprueft die Laenge des Vektors
-				self.collision_bush()
+		# if keys[pygame.K_e]:
+		# 	if self.direction.magnitude() == 0: #ueberprueft die Laenge des Vektors
+		# 		self.collision_bush()
 
 		
 
@@ -119,7 +119,8 @@ class Player(pygame.sprite.Sprite):
 	def trail_collision(self):
 		for trail in self.trail.sprites():
 			if trail.hitbox.colliderect(self.hitbox_player):
-				print('auf dem Weg')
+				#print('auf dem Weg')
+				pass
 			
 
 

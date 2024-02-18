@@ -61,11 +61,12 @@ class Level:
         keys = pygame.key.get_just_pressed()
         #pic item
         if keys[pygame.K_e]:
-            if self.interaction_objects:
-                interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
-                if interaction_objects:
-                    print(interaction_objects[0].item_type)
-                    print('Collision in lvl.py + Remove object')
+            if self.player.direction.magnitude() == 0:
+                if self.interaction_objects:
+                    interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
+                    if interaction_objects:
+                        print(interaction_objects[0].item_type)
+                        print('Collision in lvl.py + Remove object')
 
 
     def run(self,dt):
