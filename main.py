@@ -6,6 +6,7 @@ from install_requirements import installieren_aller_requirements
 import pygame, sys
 from settings import SCREEN_HEIGHT, SCREEN_WIDTH
 from level import Level
+from data import Data   
 
 
 
@@ -16,7 +17,13 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
         pygame.display.set_caption('Time_traveller')
         self.clock = pygame.time.Clock()
-        self.level = Level()
+
+        self.data = Data()
+
+        self.level = Level(self.data)
+
+
+
 
     def run(self):
 

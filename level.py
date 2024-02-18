@@ -6,9 +6,12 @@ from camera import Camera
 from objects import Tree, Bush, Trail
 
 class Level:
-    def __init__(self):
+    def __init__(self, data):
         #display_surface
         self.display_surface = pygame.display.get_surface()
+
+        #data 4 the berrys
+        self.data = data
         
         #groups
         self.all_sprites = Camera()
@@ -29,17 +32,41 @@ class Level:
         bush_layer = tile_map.get_layer_by_name('Bush')
 
         for tree in tree_layer:
-            Tree((tree.x, tree.y), tree.image, [self.all_sprites, self.obstacle_objects])
+            if tree.name == ('Tree'):
+                Tree(
+                    pos= (tree.x, tree.y), 
+                    image= tree.image, 
+                    groups= [self.all_sprites, self.obstacle_objects],
+                    item_type= 'normal_tree')
+            if tree.name == ('Big_Tree'):
+                Tree(
+                    pos= (tree.x, tree.y), 
+                    image= tree.image, 
+                    groups= [self.all_sprites, self.obstacle_objects],
+                    item_type= 'Big_tree')
 
         for bush in bush_layer:
             if bush.name == ('Empty'):
-                Bush((bush.x, bush.y), bush.image, [self.all_sprites], 'Empty')
+                Bush(
+                    pos = (bush.x, bush.y), 
+                    image = bush.image, 
+                    groups = [self.all_sprites], 
+                    item_type = 'Empty')
 
             if bush.name == ('Blueberry'):
-                Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.interaction_objects], 'Blueberry')
+                Bush(
+                    pos = (bush.x, bush.y),
+                    image = bush.image, 
+                    groups = [self.all_sprites, self.interaction_objects], 
+                    item_type = 'Blueberry')
 
             if bush.name == ('Raspberry'):
-                Bush((bush.x, bush.y), bush.image, [self.all_sprites, self.interaction_objects], 'Raspberry')
+                Bush(
+                    pos = (bush.x, bush.y),
+                    image =bush.image, 
+                    groups =[self.all_sprites, self.interaction_objects], 
+                    item_type= 'Raspberry')
+
 
 
         #draw trail_layer --> damit vel von player erhoeht werden kann
@@ -51,7 +78,13 @@ class Level:
         for object in tile_map.get_layer_by_name('Spawn'):
             
             if object.name == 'Player':
-                self.player = Player((object.x, object.y), self.all_sprites, self.obstacle_objects ,self.interaction_objects, self.trail)
+                self.player = Player(
+                    pos = (object.x, object.y), 
+                    groups = self.all_sprites, 
+                    obstacle_objects= self.obstacle_objects ,
+                    interaction_objects= self.interaction_objects, 
+                    trail= self.trail,
+                    data = self.data)
                 
             if object.name == 'Trader':
                 pass
@@ -64,8 +97,17 @@ class Level:
             if self.player.direction.magnitude() == 0:
                 if self.interaction_objects:
                     interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
+                    
+                    
                     if interaction_objects:
-                        print(interaction_objects[0].item_type)
+                        if (interaction_objects[0].item_type) == 'Blueberry':
+                            self.player.collision_bush_update('blueberry')
+                        
+                        if (interaction_objects[0].item_type) == 'Raspberry':
+                            self.player.collision_bush_update('raspberry')
+
+                        if (interaction_objects[0].item_type) == 'Coin':
+                            self.player.collision_bush_update('coin')
                         print('Collision in lvl.py + Remove object')
 
 

@@ -5,16 +5,19 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups, obstacle_objects, interaction_objects, trail):
+	def __init__(self, pos, groups, obstacle_objects, interaction_objects, trail, data):
 		super().__init__(groups)
 		self.animation_pictures()
 		self.status = 'down_idle'
 		self.frame_index = 0
 
+		self.data = data
+		
 
 		# general setup
 		self.image = self.animations[self.status][self.frame_index]
 		self.rect = self.image.get_rect(center = pos)
+
 
 
 		# movement attributes
@@ -110,10 +113,17 @@ class Player(pygame.sprite.Sprite):
 
 
 
-	def collision_bush(self):
-		for object in self.interaction_objects.sprites():
-			if object.hitbox.colliderect(self.hitbox_player):
-				print("Collision in  Player funktioniert.")
+	def collision_bush_update(self, type):
+		
+		if type == 'blueberry':
+			self.data.blueberry += 1
+
+
+		if type == 'raspberry':
+			self.data.raspberry += 1
+
+		if type == 'coin':
+			self.data.coin += 1
 	
 	
 	def trail_collision(self):
@@ -156,5 +166,5 @@ class Player(pygame.sprite.Sprite):
 		self.move(dt) #movement in dt
 		self.animation_player(dt) #animation in dt
 		self.limit_movement()
-		#self.collision_bush() --> nur zum ueberpruefen aufrufen
+		#self.collision_bush_update() #--> nur zum ueberpruefen aufrufen
 		self.trail_collision()
