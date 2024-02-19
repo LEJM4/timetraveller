@@ -6,7 +6,7 @@ class Tree(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = image
         self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect
+        self.hitbox = self.rect.inflate(-self.rect.width * 0.9 , -self.rect.height*0.2)
         self.item_type = item_type
 
 
