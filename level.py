@@ -89,7 +89,10 @@ class Level:
             if object.name == 'Trader':
                 pass
     
-
+    def obstacle_collision(self):
+        for obstacle in self.obstacle_objects:
+            pass
+        
     def bush_collision(self):
         keys = pygame.key.get_just_pressed()
         #pic item
