@@ -29,6 +29,7 @@ class Player(pygame.sprite.Sprite):
 
 		# collision
 		self.hitbox_player = self.rect
+		self.player_mask = pygame.mask.from_surface(self.image)
 
 		#Parametergroups
 		self.obstacle_objects = obstacle_objects

@@ -96,19 +96,19 @@ class Level:
         if keys[pygame.K_e]:
             if self.player.direction.magnitude() == 0:
                 if self.interaction_objects:
-                    interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
-                    
-                    
-                    if interaction_objects:
-                        if (interaction_objects[0].item_type) == 'Blueberry':
-                            self.player.collision_bush_update('blueberry')
+                    interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, False) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
+                    if pygame.sprite.spritecollide(self.player, self.interaction_objects, True, pygame.sprite.collide_mask):
                         
-                        if (interaction_objects[0].item_type) == 'Raspberry':
-                            self.player.collision_bush_update('raspberry')
+                        if interaction_objects:
+                            if (interaction_objects[0].item_type) == 'Blueberry':
+                                self.player.collision_bush_update('blueberry')
+                            
+                            if (interaction_objects[0].item_type) == 'Raspberry':
+                                self.player.collision_bush_update('raspberry')
 
-                        if (interaction_objects[0].item_type) == 'Coin':
-                            self.player.collision_bush_update('coin')
-                        print('Collision in lvl.py + Remove object')
+                            if (interaction_objects[0].item_type) == 'Coin':
+                                self.player.collision_bush_update('coin')
+                            print('Collision in lvl.py + Remove object')
 
 
     def run(self,dt):

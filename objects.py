@@ -17,6 +17,7 @@ class Bush(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect
         self.item_type = item_type
+        self.mask = pygame.mask.from_surface(self.image)
 
 class Trail(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups):
