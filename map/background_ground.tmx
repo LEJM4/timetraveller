@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="105" height="60" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="59">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="105" height="60" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="70">
  <tileset firstgid="1" source="gras.tsx"/>
  <tileset firstgid="26" source="trees.tsx"/>
  <tileset firstgid="27" source="bush.tsx"/>
- <tileset firstgid="30" source="bush.tsx"/>
  <layer id="1" name="ground" width="105" height="60">
   <data encoding="csv">
 16,24,24,16,22,16,18,24,25,23,21,16,21,23,17,1,23,22,23,25,19,23,25,22,17,21,23,25,23,24,19,18,1,17,21,23,22,23,21,21,21,24,22,19,1,16,17,21,22,21,21,17,23,24,22,25,25,21,22,24,22,22,17,20,21,25,19,19,23,1,17,21,1,18,24,18,19,22,21,17,23,19,17,19,18,17,25,19,20,18,19,25,21,19,25,18,1,1,1,17,24,18,21,19,21,
@@ -153,47 +152,52 @@
   <object id="45" name="Blueberry" gid="27" x="1668" y="1018" width="64" height="64"/>
   <object id="46" name="Blueberry" gid="27" x="1734" y="1018" width="64" height="64"/>
   <object id="47" name="Blueberry" gid="27" x="1734" y="1084" width="64" height="64"/>
-  <object id="57" name="Empty" gid="31" x="1730" y="1345" width="64" height="64"/>
-  <object id="58" name="Blueberry" gid="30" x="1730" y="1345" width="64" height="64"/>
+  <object id="57" name="Empty" gid="28" x="1730" y="1345" width="64" height="64"/>
+  <object id="58" name="Blueberry" gid="27" x="1730" y="1345" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="6" name="Trees">
-  <object id="1" name="Tree" type="Plant" gid="26" x="4" y="272" width="256" height="256"/>
-  <object id="2" name="Tree" type="Plant" gid="26" x="4" y="272" width="256" height="256"/>
-  <object id="3" name="Tree" type="Plant" gid="26" x="140" y="604" width="256" height="256"/>
-  <object id="4" name="Tree" type="Plant" gid="26" x="-36" y="836" width="256" height="256"/>
-  <object id="5" name="Tree" type="Plant" gid="26" x="144" y="1028" width="256" height="256"/>
-  <object id="6" name="Tree" type="Plant" gid="26" x="-16" y="1228" width="256" height="256"/>
-  <object id="7" name="Tree" type="Plant" gid="26" x="108" y="1516" width="256" height="256"/>
-  <object id="8" name="Tree" type="Plant" gid="26" x="-36" y="1608" width="256" height="256"/>
-  <object id="9" name="Tree" type="Plant" gid="26" x="56" y="1852" width="256" height="256"/>
-  <object id="10" name="Tree" type="Plant" gid="26" x="56" y="1852" width="256" height="256"/>
-  <object id="11" name="Tree" type="Plant" gid="26" x="-8" y="2100" width="256" height="256"/>
-  <object id="12" name="Tree" type="Plant" gid="26" x="204" y="2136" width="256" height="256"/>
-  <object id="13" name="Tree" type="Plant" gid="26" x="84" y="2348" width="256" height="256"/>
-  <object id="14" name="Tree" type="Plant" gid="26" x="0" y="2640" width="256" height="256"/>
-  <object id="15" name="Tree" type="Plant" gid="26" x="144" y="2848" width="256" height="256"/>
-  <object id="16" name="Tree" type="Plant" gid="26" x="16" y="3216" width="256" height="256"/>
-  <object id="17" name="Tree" type="Plant" gid="26" x="268" y="3296" width="256" height="256"/>
-  <object id="18" name="Tree" type="Plant" gid="26" x="212" y="3596" width="256" height="256"/>
-  <object id="19" name="Tree" type="Plant" gid="26" x="24" y="3820" width="256" height="256"/>
-  <object id="20" name="Tree" type="Plant" gid="26" x="20" y="3536" width="256" height="256"/>
-  <object id="21" name="Tree" type="Plant" gid="26" x="232" y="3876" width="256" height="256"/>
-  <object id="23" name="Tree" type="Plant" gid="26" x="380" y="3680" width="256" height="256"/>
-  <object id="24" name="Tree" type="Plant" gid="26" x="580" y="3868" width="256" height="256"/>
-  <object id="25" name="Tree" type="Plant" gid="26" x="756" y="3588" width="256" height="256"/>
-  <object id="26" name="Tree" type="Plant" gid="26" x="920" y="3860" width="256" height="256"/>
-  <object id="27" name="Tree" type="Plant" gid="26" x="1144" y="3592" width="256" height="256"/>
-  <object id="28" name="Tree" type="Plant" gid="26" x="1256" y="3860" width="256" height="256"/>
-  <object id="29" name="Tree" type="Plant" gid="26" x="1520" y="3876" width="256" height="256"/>
-  <object id="30" name="Tree" type="Plant" gid="26" x="1376" y="3580" width="256" height="256"/>
-  <object id="31" name="Tree" type="Plant" gid="26" x="1684" y="3724" width="256" height="256"/>
-  <object id="32" name="Tree" type="Plant" gid="26" x="2064" y="3572" width="256" height="256"/>
-  <object id="33" name="Tree" type="Plant" gid="26" x="1900" y="3840" width="256" height="256"/>
-  <object id="34" name="Tree" type="Plant" gid="26" x="2224" y="3864" width="256" height="256"/>
-  <object id="49" name="Tree" type="Plant" gid="26" x="2436" y="1028" width="64" height="128"/>
-  <object id="50" name="Tree" type="Plant" gid="26" x="2498.67" y="1026.67" width="64" height="128"/>
-  <object id="51" name="Tree" type="Plant" gid="26" x="2560" y="1026.67" width="64" height="128"/>
-  <object id="52" name="Tree" type="Plant" gid="26" x="2465.33" y="966.667" width="64" height="128"/>
-  <object id="53" name="Tree" type="Plant" gid="26" x="2529.33" y="966.667" width="64" height="128"/>
+  <object id="1" name="tree" type="Plant" gid="26" x="4" y="272" width="256" height="256"/>
+  <object id="2" name="tree" type="Plant" gid="26" x="4" y="272" width="256" height="256"/>
+  <object id="3" name="tree" type="Plant" gid="26" x="140" y="604" width="256" height="256"/>
+  <object id="4" name="tree" type="Plant" gid="26" x="-36" y="836" width="256" height="256"/>
+  <object id="5" name="tree" type="Plant" gid="26" x="144" y="1028" width="256" height="256"/>
+  <object id="6" name="tree" type="Plant" gid="26" x="-16" y="1228" width="256" height="256"/>
+  <object id="7" name="tree" type="Plant" gid="26" x="108" y="1516" width="256" height="256"/>
+  <object id="8" name="tree" type="Plant" gid="26" x="-36" y="1608" width="256" height="256"/>
+  <object id="9" name="tree" type="Plant" gid="26" x="56" y="1852" width="256" height="256"/>
+  <object id="10" name="tree" type="Plant" gid="26" x="56" y="1852" width="256" height="256"/>
+  <object id="11" name="tree" type="Plant" gid="26" x="-8" y="2100" width="256" height="256"/>
+  <object id="12" name="tree" type="Plant" gid="26" x="204" y="2136" width="256" height="256"/>
+  <object id="13" name="tree" type="Plant" gid="26" x="84" y="2348" width="256" height="256"/>
+  <object id="14" name="tree" type="Plant" gid="26" x="0" y="2640" width="256" height="256"/>
+  <object id="15" name="tree" type="Plant" gid="26" x="144" y="2848" width="256" height="256"/>
+  <object id="16" name="tree" type="Plant" gid="26" x="16" y="3216" width="256" height="256"/>
+  <object id="17" name="tree" type="Plant" gid="26" x="268" y="3296" width="256" height="256"/>
+  <object id="18" name="tree" type="Plant" gid="26" x="212" y="3596" width="256" height="256"/>
+  <object id="19" name="tree" type="Plant" gid="26" x="24" y="3820" width="256" height="256"/>
+  <object id="20" name="tree" type="Plant" gid="26" x="20" y="3536" width="256" height="256"/>
+  <object id="21" name="tree" type="Plant" gid="26" x="232" y="3876" width="256" height="256"/>
+  <object id="23" name="tree" type="Plant" gid="26" x="380" y="3680" width="256" height="256"/>
+  <object id="24" name="tree" type="Plant" gid="26" x="580" y="3868" width="256" height="256"/>
+  <object id="25" name="tree" type="Plant" gid="26" x="756" y="3588" width="256" height="256"/>
+  <object id="26" name="tree" type="Plant" gid="26" x="920" y="3860" width="256" height="256"/>
+  <object id="27" name="tree" type="Plant" gid="26" x="1144" y="3592" width="256" height="256"/>
+  <object id="28" name="tree" type="Plant" gid="26" x="1256" y="3860" width="256" height="256"/>
+  <object id="29" name="tree" type="Plant" gid="26" x="1520" y="3876" width="256" height="256"/>
+  <object id="30" name="tree" type="Plant" gid="26" x="1376" y="3580" width="256" height="256"/>
+  <object id="31" name="tree" type="Plant" gid="26" x="1684" y="3724" width="256" height="256"/>
+  <object id="32" name="tree" type="Plant" gid="26" x="2064" y="3572" width="256" height="256"/>
+  <object id="33" name="tree" type="Plant" gid="26" x="1900" y="3840" width="256" height="256"/>
+  <object id="34" name="tree" type="Plant" gid="26" x="2224" y="3864" width="256" height="256"/>
+  <object id="49" name="tree" type="Plant" gid="26" x="2436" y="1028" width="64" height="128"/>
+  <object id="50" name="tree" type="Plant" gid="26" x="2498.67" y="1026.67" width="64" height="128"/>
+  <object id="51" name="tree" type="Plant" gid="26" x="2560" y="1026.67" width="64" height="128"/>
+  <object id="52" name="tree" type="Plant" gid="26" x="2465.33" y="966.667" width="64" height="128"/>
+  <object id="53" name="tree" type="Plant" gid="26" x="2529.33" y="966.667" width="64" height="128"/>
+  <object id="59" name="big_tree" gid="26" x="2370.67" y="1516" width="64" height="128"/>
+  <object id="60" name="transparent_tree" gid="26" x="2890" y="1280" width="64" height="128"/>
+  <object id="61" name="transparent_tree" gid="26" x="2962" y="1281" width="64" height="128"/>
+  <object id="62" name="transparent_tree" gid="26" x="2964" y="1371" width="64" height="128"/>
+  <object id="63" name="transparent_tree" gid="26" x="2897" y="1372" width="64" height="128"/>
  </objectgroup>
 </map>

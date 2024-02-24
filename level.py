@@ -32,18 +32,26 @@ class Level:
         bush_layer = tile_map.get_layer_by_name('Bush')
 
         for tree in tree_layer:
-            if tree.name == ('Tree'):
+            if tree.name == ('tree'):
                 Tree(
                     pos= (tree.x, tree.y), 
                     image= tree.image, 
                     groups= [self.all_sprites, self.obstacle_objects],
                     item_type= 'normal_tree')
-            if tree.name == ('Big_Tree'):
+                
+            if tree.name == ('big_tree'):
                 Tree(
                     pos= (tree.x, tree.y), 
                     image= tree.image, 
                     groups= [self.all_sprites, self.obstacle_objects],
-                    item_type= 'Big_tree')
+                    item_type= 'big_tree')
+                
+            if tree.name == ('transparent_tree'):
+                Tree(
+                    pos= (tree.x, tree.y), 
+                    image= tree.image, 
+                    groups= [self.all_sprites],
+                    item_type= 'big_tree')
 
         for bush in bush_layer:
             if bush.name == ('Empty'):
