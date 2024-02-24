@@ -17,7 +17,7 @@ def installieren_aller_requirements():
 
         #installieren aller anderen requirements
         #pygame
-        supr.run(['pip', 'install', 'pygame'], shell=True, check=True) 
+        supr.run(['pip', 'install', 'pygame-ce'], shell=True, check=True) 
         #pytmx
         supr.run(['pip', 'install', 'pytmx'], shell=True, check=True) 
 
