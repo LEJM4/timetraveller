@@ -32,21 +32,14 @@ class Button:
         self.mouse_pressed = False
         self.button_is_pressed = False
 
-    def button_border(self):
-        border_color = self.text_color_overlap  # 
-        border_thickness = int(self.button_width / 80) # dicke rahmen
-        
-        # Rahmen 
-        pygame.draw.rect(self.screen, border_color, self.button_rect, border_thickness)
 
     def draw(self, screen):
-        # create button rect
 
         # Transparente oberfläche für button 
         button_surface = pygame.Surface((self.button_width, self.button_height), pygame.SRCALPHA)
         button_surface.fill(self.button_color)   #oberfläche mit transp. Farbe
 
-        # Button-Oberfläche und Text zeichnen
+        # Button  und Text malen
         screen.blit(button_surface, (self.x_position, self.y_position))
         screen.blit(self.text_surf, self.text_rect)
 
@@ -57,12 +50,9 @@ class Button:
         mouse_get_pressed_left = pygame.mouse.get_pressed()[0] #[0] = linke Maustaste ;[1] = Mausrad ; [2] = rechte Maustaste
 
         if self.button_rect.collidepoint(mouse_pos):
-            self.text_surf = self.font.render(self.text, True, self.text_color_overlap)
-            
-            self.button_border()
+            self.button_border_and_size()
 
             if mouse_get_pressed_left:
-
                 self.mouse_pressed = True
                 self.button_is_pressed = True
                 print(self.button_is_pressed)
@@ -74,8 +64,20 @@ class Button:
         else:
             self.text_surf = self.font.render(self.text, True, self.text_color_normal)
 
+
+    def button_border_and_size(self):
+        border_color = self.text_color_overlap  
+        border_thickness = int(self.button_width / 80) # dicke rahmen
+
+        #change font color
+        self.text_surf = self.font.render(self.text, True, self.text_color_overlap)
+        
+        # frame / Rahmen
+        pygame.draw.rect(self.screen, border_color, self.button_rect, border_thickness)
+
     def button_clicked(self):
         if self.button_is_pressed:
             self.button_is_pressed = False  # Button zustand zurücksetzen
             return True
         return False
+    
