@@ -62,7 +62,7 @@ class Button:
             self.button_border()
 
             if mouse_get_pressed_left:
-                
+
                 self.mouse_pressed = True
                 self.button_is_pressed = True
                 print(self.button_is_pressed)
@@ -73,3 +73,9 @@ class Button:
                     self.mouse_pressed = False
         else:
             self.text_surf = self.font.render(self.text, True, self.text_color_normal)
+
+    def button_clicked(self):
+        if self.button_is_pressed:
+            self.button_is_pressed = False  # Button zustand zurücksetzen
+            return True
+        return False
