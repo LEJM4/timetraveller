@@ -28,7 +28,7 @@ class Button:
         self.text_surf = self.font.render(self.text, True, self.text_color_normal)  #(zu rendernder text , glattere Kanten, textfarbe) 
         self.text_rect = self.text_surf.get_rect(center=self.button_rect.center)  #text pos  
         
-        self.text_color_overlap = (0,255,0) #ovberlap
+        self.text_color_overlap =  (19, 15, 48, 0)#(0,255,0) #ovberlap
 
         #mouse
         self.mouse_pressed = False
@@ -77,7 +77,7 @@ class Button:
 
     def button_border_and_size(self):
         border_color = self.text_color_overlap  
-        border_thickness = int(self.button_width / 80) # dicke rahmen
+        border_thickness = int(self.button_width / 40) # dicke rahmen
 
         #change font color
         self.text_surf = self.font.render(self.text, True, self.text_color_overlap)
