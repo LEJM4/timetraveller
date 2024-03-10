@@ -275,7 +275,7 @@ class EscMenu:
         self.button_pressed_exit = False
         self.esc_visible = True  # 
 
-
+"""
 class TEST:
     def __init__(self):
         pygame.init()
@@ -289,7 +289,7 @@ class TEST:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.esc_menu_running = False
-                    
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.activate_esc_menu()
@@ -315,3 +315,4 @@ class TEST:
 
 a = TEST()
 a.run()
+"""
