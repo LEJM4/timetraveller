@@ -2,8 +2,10 @@ import pygame
 from settings import font_path
 
 class Button:
-    def __init__(self, text, x_position, y_position, button_width, button_height, screen):
+    def __init__(self, text, x_position, y_position, button_width, button_height, screen, collision_allowed):
         
+        self.collision_allowed = collision_allowed
+
         #screen
         self.screen = screen
         #button rect
@@ -38,29 +40,37 @@ class Button:
         # Transparente oberfläche für button 
         button_surface = pygame.Surface((self.button_width, self.button_height), pygame.SRCALPHA)
         button_surface.fill(self.button_color)   #oberfläche mit transp. Farbe
-
+        if self.collision_allowed:
+            self.button_collision()
+        
         # Button  und Text malen
         screen.blit(button_surface, (self.x_position, self.y_position))
         screen.blit(self.text_surf, self.text_rect)
+        
 
-        self.button_collision()
 
     def button_collision(self):
         mouse_pos = pygame.mouse.get_pos()
         mouse_get_pressed_left = pygame.mouse.get_pressed()[0] #[0] = linke Maustaste ;[1] = Mausrad ; [2] = rechte Maustaste
 
-        if self.button_rect.collidepoint(mouse_pos):
+        if self.button_rect.collidepoint(mouse_pos): 
             self.button_border_and_size()
 
             if mouse_get_pressed_left:
                 self.mouse_pressed = True
                 self.button_is_pressed = True
-                print(self.button_is_pressed)
 
-            else:
+
+
+
+            else:              
                 if self.mouse_pressed == True:
-                    print('click')
+                    #print('click')
                     self.mouse_pressed = False
+
+                if self.button_is_pressed == True:
+                    self.button_is_pressed = False
+                    
         else:
             self.text_surf = self.font.render(self.text, True, self.text_color_normal)
 
@@ -75,9 +85,4 @@ class Button:
         # frame / Rahmen
         pygame.draw.rect(self.screen, border_color, self.button_rect, border_thickness)
 
-    def button_clicked(self):
-        if self.button_is_pressed:
-            self.button_is_pressed = False  # Button zustand zurücksetzen
-            return True
-        return False
     
