@@ -8,8 +8,8 @@ class Settings:
         self.SCREEN_HEIGHT = 720
         self.new_SCREEN_WIDTH = 0
         self.new_SCREEN_HEIGHT = 0
-        
-    
+
+            
 # screen
 #SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
 #print (SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -20,7 +20,14 @@ SCREEN_HEIGHT = i.SCREEN_HEIGHT
 
 TILE_SIZE = 64 #Tile_Pixel = 64x64
 
-
+LAYERS = {
+	'water': 0,
+	'ground': 1,
+    'trail': 2,
+    'gras':3,
+	'main': 4,
+    'player':5
+    }
 #a = pygame.display.get_desktop_sizes()
 #print(a)
 # hier kommen dann evtl. noch dict. rein, um den Code in anderen

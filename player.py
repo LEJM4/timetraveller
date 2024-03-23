@@ -5,14 +5,14 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups, obstacle_objects, interaction_objects, trail, data):
+	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data):
 		super().__init__(groups)
 		self.animation_pictures()
 		self.status = 'down_idle'
 		self.frame_index = 0
 
 		self.data = data
-		
+		self.z_layer = LAYERS['main']
 
 		# general setup
 		self.image = self.animations[self.status][self.frame_index]
@@ -23,7 +23,8 @@ class Player(pygame.sprite.Sprite):
 		# movement attributes
 		self.direction = pygame.math.Vector2()
 		self.pos = pygame.math.Vector2(self.rect.center)
-		self.speed = 600
+		
+		self.speed = 200
 
 
 
@@ -155,7 +156,9 @@ class Player(pygame.sprite.Sprite):
 	def trail_collision(self):
 		for trail in self.trail.sprites():
 			if trail.hitbox.colliderect(self.hitbox_player):
-				#print('auf dem Weg')
+				self.speed = 900
+			else:
+				self.speed = 600
 				pass
 			
 
