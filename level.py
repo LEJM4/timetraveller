@@ -125,7 +125,7 @@ class Level:
             pass
 
     def bush_collision(self):
-        keys = pygame.key.get_just_pressed()
+        keys = pygame.key.get_pressed()
         #pic item
         if keys[pygame.K_e]:
             if self.player.direction.magnitude() == 0:
