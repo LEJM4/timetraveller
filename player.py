@@ -163,6 +163,10 @@ class Player(pygame.sprite.Sprite):
 				self.speed = 400
 				self.change_speed = True
 				break
+			else:
+				self.speed = 200
+				self.change_speed = True
+				
 
 
 
