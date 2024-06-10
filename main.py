@@ -4,7 +4,7 @@ from install_requirements import installieren_aller_requirements
 #installieren_aller_requirements()
 
 import pygame, sys
-#from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+# from settings import SCREEN_HEIGHT, SCREEN_WIDTH
 from level import Level
 from data import Data   
 from esc_menu import EscMenu

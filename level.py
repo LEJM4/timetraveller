@@ -1,6 +1,9 @@
 import pygame 
 from pytmx.util_pygame import load_pygame
 from player import Player
+from os.path import join
+
+
 from bush import Bush
 from camera import Camera
 from objects import *
@@ -27,7 +30,7 @@ class Level:
         self.draw_backround_object_layers()
         self.player_spawnpoint()
 
-
+    
     def draw_backround_normal_layers(self):
         #draw normal layers
         tile_map = load_pygame("map/background_ground.tmx")
@@ -43,6 +46,12 @@ class Level:
                     image= image,
                     groups= [self.all_sprites, self.trail],
                     z_layer= LAYERS['trail'])
+            
+        for x, y, image in tile_map.get_layer_by_name('map_limit').tiles():
+            General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
+                    image= image,
+                    groups= [self.all_sprites,self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
+                    z_layer= LAYERS['ground'])
             
     def draw_backround_object_layers(self):
         tile_map = load_pygame("map/background_ground.tmx")
@@ -102,7 +111,6 @@ class Level:
                 self.player = Player(
                     pos = (object.x, object.y), 
                     groups = self.all_sprites, 
-                    #z_layer= ['water'],
                     obstacle_objects= self.obstacle_objects ,
                     interaction_objects= self.interaction_objects, 
                     trail= self.trail,
