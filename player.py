@@ -5,14 +5,18 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups, obstacle_objects, interaction_objects, trail, data):
+	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data):
 		super().__init__(groups)
+
+		#
 		self.animation_pictures()
 		self.status = 'down_idle'
 		self.frame_index = 0
+		self.z_layer = LAYERS['main']
 
+
+		#imports
 		self.data = data
-		
 
 		# general setup
 		self.image = self.animations[self.status][self.frame_index]
@@ -23,7 +27,8 @@ class Player(pygame.sprite.Sprite):
 		# movement attributes
 		self.direction = pygame.math.Vector2()
 		self.pos = pygame.math.Vector2(self.rect.center)
-		self.speed = 600
+		self.change_speed = False
+		self.speed = 200
 
 
 
@@ -155,9 +160,9 @@ class Player(pygame.sprite.Sprite):
 	def trail_collision(self):
 		for trail in self.trail.sprites():
 			if trail.hitbox.colliderect(self.hitbox_player):
-				#print('auf dem Weg')
-				pass
-			
+				self.speed = 400
+				self.change_speed = True
+				break
 
 
 
@@ -165,7 +170,7 @@ class Player(pygame.sprite.Sprite):
 
 
 
-
+	"""
 	def limit_movement(self):
 		if self.rect.left < 640:  #limitiert Bewegung auf 3840 x --> nach links
 			self.pos.x = 640 + self.rect.width / 2
@@ -183,7 +188,7 @@ class Player(pygame.sprite.Sprite):
 			self.pos.y = 360 + self.rect.height / 2
 			self.hitbox_player.centery = self.rect.centery
 			self.rect.top = 360
-
+	"""
 	
 
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
@@ -191,6 +196,6 @@ class Player(pygame.sprite.Sprite):
 		self.status_player() #status (idle or item use)
 		self.move(dt) #movement in dt
 		self.animation_player(dt) #animation in dt
-		self.limit_movement()
+		#self.limit_movement()
 		#self.collision_bush_update() #--> nur zum ueberpruefen aufrufen
 		self.trail_collision()

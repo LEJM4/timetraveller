@@ -1,9 +1,13 @@
 import pygame 
 from pytmx.util_pygame import load_pygame
 from player import Player
+from os.path import join
+
+
 from bush import Bush
 from camera import Camera
-from objects import Tree, Bush, Trail
+from objects import *
+from settings import *
 
 class Level:
     def __init__(self, data):
@@ -22,10 +26,33 @@ class Level:
         self.interaction_objects = pygame.sprite.Group()
         self.trail = pygame.sprite.Group()
         
+        self.draw_backround_normal_layers()
         self.draw_backround_object_layers()
         self.player_spawnpoint()
 
+    
+    def draw_backround_normal_layers(self):
+        #draw normal layers
+        tile_map = load_pygame("map/background_ground.tmx")
 
+        for x, y, image in tile_map.get_layer_by_name('ground').tiles():
+            General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
+                    image= image,
+                    groups= [self.all_sprites],
+                    z_layer= LAYERS['ground'])
+            
+        for x,y, image in tile_map.get_layer_by_name('trail').tiles():
+            Trail(pos=(x*TILE_SIZE, y*TILE_SIZE), 
+                    image= image,
+                    groups= [self.all_sprites, self.trail],
+                    z_layer= LAYERS['trail'])
+            
+        for x, y, image in tile_map.get_layer_by_name('map_limit').tiles():
+            General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
+                    image= image,
+                    groups= [self.all_sprites,self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
+                    z_layer= LAYERS['ground'])
+            
     def draw_backround_object_layers(self):
         tile_map = load_pygame("map/background_ground.tmx")
         tree_layer = tile_map.get_layer_by_name('Trees')
@@ -76,11 +103,6 @@ class Level:
                     item_type= 'Raspberry')
 
 
-
-        #draw trail_layer --> damit vel von player erhoeht werden kann
-        for x,y, image in tile_map.get_layer_by_name('trail').tiles():
-            Trail((x*64,y*64), image, self.trail)
-
     def player_spawnpoint(self):
         tile_map = load_pygame("map/background_ground.tmx")
         for object in tile_map.get_layer_by_name('Spawn'):
@@ -125,7 +147,6 @@ class Level:
 
     def run(self,dt):
 
-        self.all_sprites.update(dt)
 
 		
         self.display_surface.fill('black')
@@ -133,3 +154,5 @@ class Level:
         self.bush_collision() # methode muss aufgerufen werden, damit coll. hier fkt
         
         self.all_sprites.draw_all_objects(self.player)
+
+        self.all_sprites.update(dt)

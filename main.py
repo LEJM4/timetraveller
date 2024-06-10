@@ -4,28 +4,47 @@ from install_requirements import installieren_aller_requirements
 #installieren_aller_requirements()
 
 import pygame, sys
-from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+# from settings import SCREEN_HEIGHT, SCREEN_WIDTH
 from level import Level
 from data import Data   
 from esc_menu import EscMenu
-
+from settings import Settings
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-        pygame.display.set_caption('Time_traveller')
-        self.clock = pygame.time.Clock()
+
+        self.mouse_visible = False
+        pygame.mouse.set_visible(self.mouse_visible)
 
         #import stuff
         self.data = Data()
+        self.settings = Settings()
+
+        self.screen = pygame.display.set_mode((self.settings.SCREEN_WIDTH,self.settings.SCREEN_HEIGHT))
+        pygame.display.set_caption('Time_traveller')
+        self.clock = pygame.time.Clock()
+        
+        
+
+
+        
 
         #import menu
         self.esc_menu = EscMenu(self.screen)
         self.esc_pressed = False
         #states:
         self.level = Level(self.data)
+
+    def draw_mouse(self):
+        self.mouse_visible = True
+        mouse_x , mouse_y = pygame.mouse.get_pos()
+        
+        pygame.draw.circle(surface = self.screen,
+                color  =  (0, 0, 139),
+                center = (mouse_x, mouse_y), 
+                radius = self.settings.SCREEN_HEIGHT // 120)
 
 
     def activate_esc_menu(self):
@@ -67,7 +86,11 @@ class Game:
 
             if self.esc_pressed:
                 self.esc_menu.run()
+                self.draw_mouse()
 
+
+
+   
             pygame.display.update()
 
 

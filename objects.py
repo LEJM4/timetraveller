@@ -1,11 +1,13 @@
 import pygame
+from settings import *
 
 class PlantParent(pygame.sprite.Sprite):
-    def __init__(self, pos, image, groups):
+    def __init__(self, pos, image, groups, z_layer = LAYERS['main']):
         super().__init__(groups)
         self.image = image
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect
+        self.z_layer = z_layer
 
 
 class Tree(PlantParent):
@@ -22,7 +24,8 @@ class Bush(PlantParent):
         self.mask = pygame.mask.from_surface(self.image)
 
 class Trail(PlantParent):
-    pass
+    def __init__(self, pos, image, groups, z_layer=LAYERS['main']):
+        super().__init__(pos, image, groups, z_layer)
 
 class Item(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups, item_type):
@@ -31,3 +34,11 @@ class Item(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect
         self.item_type = item_type
+
+class General(pygame.sprite.Sprite):
+    def __init__(self, pos, image, groups, z_layer = LAYERS['main']) :
+        super().__init__(groups)
+        self.image = image
+        self.rect = self.image.get_rect(topleft = pos)
+        self.hitbox = self.rect
+        self.z_layer = z_layer

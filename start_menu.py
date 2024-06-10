@@ -47,7 +47,7 @@ class EscMenu:
     #first button screen: [Resume; Options; Exit]
     def normal_resume_options_exit(self):
         normal_resume_options_exit_list = []
-        self.resume_button = Button(text= "RESUME", 
+        self.resume_button = Button(text= "START", 
                                 x_position=  self.button_pos_x, #pos x
                                 y_position= self.button_pos_y, #erster button
                                 button_width= self.button_width,
@@ -63,7 +63,7 @@ class EscMenu:
                                 screen= self.screen,
                                 collision_allowed = True)
         
-        self.exit_button = Button(text= "HOME", 
+        self.exit_button = Button(text= "EXIT", 
                                 x_position=  self.button_pos_x, #pos x
                                 y_position= self.button_pos_y + 2* (self.button_height + self.space_between_buttons), # dritter button
                                 button_width= self.button_width,
@@ -219,27 +219,23 @@ class EscMenu:
         if self.can_click():
             if self.small_screen_setting_button.button_is_pressed == True:
                 self.settings_class.SCREEN_WIDTH = 800
-                self.settings_class.SCREEN_HEIGHT = 600
-                self.settings_class.resolution_changed = True
+                self.settings_class.SCREEN_HEIGHT = 800
                 print(f'Aenderung der Bildschirmgroesse zu {800,600}')
             
             if self.medium_screen_setting_button.button_is_pressed == True:
                 self.settings_class.SCREEN_WIDTH = 1280
-                self.settings_class.SCREEN_HEIGHT = 720
-                self.settings_class.resolution_changed = True            
+                self.settings_class.SCREEN_HEIGHT = 720                
                 print(f'Aenderung der Bildschirmgroesse zu {1280,720}')
 
 
             if self.large_screen_setting_button.button_is_pressed == True:
-                self.settings_class.new_SCREEN_WIDTH = 1920
-                self.settings_class.new_SCREEN_HEIGHT = 1080
-                self.settings_class.resolution_changed = True                
+                self.settings_class.SCREEN_WIDTH = 1920
+                self.settings_class.SCREEN_HEIGHT = 1080                
                 print(f'Aenderung der Bildschirmgroesse zu {1920,1080}')
 
             if self.full_screen_setting_button.button_is_pressed == True:
                 self.settings_class.SCREEN_WIDTH = pygame.display.Info().current_w
                 self.settings_class.SCREEN_HEIGHT = pygame.display.Info().current_h
-                self.settings_class.resolution_changed = True
                 print(f'Aenderung der Bildschirmgroesse zu FULLSCREEN')
 
             if self.back_screen_setting_button.button_is_pressed == True:
@@ -290,7 +286,7 @@ class EscMenu:
         self.button_pressed_exit = False
         self.esc_visible = True  # 
 
-"""
+#"""
 class TEST:
     def __init__(self):
         pygame.init()
@@ -330,4 +326,4 @@ class TEST:
 
 a = TEST()
 a.run()
-"""
+#"""
