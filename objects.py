@@ -42,3 +42,9 @@ class General(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect
         self.z_layer = z_layer
+
+class Tardis(PlantParent):
+    def __init__(self, pos, image, groups, item_type):
+        super().__init__(pos, image, groups)
+        self.item_type = item_type
+        self.mask = pygame.mask.from_surface(self.image)

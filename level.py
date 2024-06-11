@@ -57,6 +57,7 @@ class Level:
         tile_map = load_pygame("map/background_ground.tmx")
         tree_layer = tile_map.get_layer_by_name('Trees')
         bush_layer = tile_map.get_layer_by_name('Bush')
+        buildings_layer = tile_map.get_layer_by_name('Buildings')
 
         for tree in tree_layer:
             if tree.name == ('tree'):
@@ -101,6 +102,15 @@ class Level:
                     image =bush.image, 
                     groups =[self.all_sprites, self.interaction_objects], 
                     item_type= 'Raspberry')
+        
+        for building in buildings_layer:
+            if building.name == ('Tardis'):
+                Tardis(
+                    pos = (building.x, building.y),
+                    image =building.image, 
+                    groups =[self.all_sprites, self.interaction_objects], 
+                    item_type= 'Schoko')
+                
 
 
     def player_spawnpoint(self):
