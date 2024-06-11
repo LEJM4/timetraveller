@@ -202,7 +202,7 @@
   <object id="62" name="transparent_tree" gid="26" x="2964" y="1371" width="64" height="128"/>
   <object id="63" name="transparent_tree" gid="26" x="2897" y="1372" width="64" height="128"/>
  </objectgroup>
- <objectgroup id="11" name="buildings">
+ <objectgroup id="11" name="Buildings">
   <object id="70" name="Tardis" gid="34" x="2271.45" y="1354" width="128" height="192"/>
  </objectgroup>
  <layer id="10" name="map_limit" width="105" height="60">
