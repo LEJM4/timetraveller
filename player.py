@@ -90,12 +90,19 @@ class Player(pygame.sprite.Sprite):
 
 
 	def status_player(self):
+		keys = pygame.key.get_pressed()
 		#keys = pygame.key.get_pressed()
 		
 		# idle
-		if self.direction.magnitude() == 0:
-			self.status = self.status.split('_')[0] + '_idle'
-		
+		if keys[pygame.K_e]:
+			if self.direction.magnitude() == 0:
+				self.status = 'collect_up'
+
+		elif self.direction.magnitude() == 0:
+			#self.status = 'collect_up'
+
+			#self.status = self.status.split('_')[0] + '_idle'
+			pass 
 		#pic item
 		# if keys[pygame.K_e]:
 		# 	if self.direction.magnitude() == 0: #ueberprueft die Laenge des Vektors
