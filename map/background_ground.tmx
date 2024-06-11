@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="105" height="60" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="70">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="105" height="60" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="71">
  <tileset firstgid="1" source="gras.tsx"/>
  <tileset firstgid="26" source="trees.tsx"/>
  <tileset firstgid="27" source="bush.tsx"/>
  <tileset firstgid="30" source="Collision.tsx"/>
+ <tileset firstgid="34" source="Tardis.tsx"/>
  <layer id="1" name="ground" width="105" height="60">
   <data encoding="csv">
 16,24,24,16,22,16,18,24,25,23,21,16,21,23,17,1,23,22,23,25,19,23,25,22,17,21,23,25,23,24,19,18,1,17,21,23,22,23,21,21,21,24,22,19,1,16,17,21,22,21,21,17,23,24,22,25,25,21,22,24,22,22,17,20,21,25,19,19,23,1,17,21,1,18,24,18,19,22,21,17,23,19,17,19,18,17,25,19,20,18,19,25,21,19,25,18,1,1,1,17,24,18,21,19,21,
@@ -140,7 +141,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Bush" visible="0">
+ <objectgroup id="7" name="Bush">
   <object id="36" name="Blueberry" gid="27" x="1668" y="1086" width="64" height="64"/>
   <object id="37" name="Empty" gid="28" x="1924" y="1088" width="64" height="64"/>
   <object id="38" name="Raspberry" gid="29" x="2180" y="1094" width="64" height="64"/>
@@ -156,10 +157,10 @@
   <object id="57" name="Empty" gid="28" x="1730" y="1345" width="64" height="64"/>
   <object id="58" name="Blueberry" gid="27" x="1730" y="1345" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="6" name="Trees" visible="0">
+ <objectgroup id="6" name="Trees">
   <object id="1" name="tree" type="Plant" gid="26" x="4" y="272" width="256" height="256"/>
   <object id="2" name="tree" type="Plant" gid="26" x="4" y="272" width="256" height="256"/>
-  <object id="3" name="tree" type="Plant" gid="26" x="140" y="604" width="256" height="256"/>
+  <object id="3" name="tree" type="Plant" gid="26" x="140" y="604" width="980" height="256"/>
   <object id="4" name="tree" type="Plant" gid="26" x="-36" y="836" width="256" height="256"/>
   <object id="5" name="tree" type="Plant" gid="26" x="144" y="1028" width="256" height="256"/>
   <object id="6" name="tree" type="Plant" gid="26" x="-16" y="1228" width="256" height="256"/>
@@ -200,6 +201,9 @@
   <object id="61" name="transparent_tree" gid="26" x="2962" y="1281" width="64" height="128"/>
   <object id="62" name="transparent_tree" gid="26" x="2964" y="1371" width="64" height="128"/>
   <object id="63" name="transparent_tree" gid="26" x="2897" y="1372" width="64" height="128"/>
+ </objectgroup>
+ <objectgroup id="11" name="buildings">
+  <object id="70" name="Tardis" gid="34" x="2271.45" y="1354" width="128" height="192"/>
  </objectgroup>
  <layer id="10" name="map_limit" width="105" height="60">
   <data encoding="csv">
