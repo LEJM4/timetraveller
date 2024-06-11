@@ -46,6 +46,7 @@ class Player(pygame.sprite.Sprite):
 		self.animations = {
 			'up': [], 'down': [], 'left': [], 'right': [], 
 			'right_idle': [], 'left_idle': [], 'up_idle': [], 'down_idle': [],
+			'collect_up': [], 'collect_down': [], 'collect_left': [], 'collect_right': [],
 		}
 
 		for animation_picture in self.animations.keys():
@@ -165,7 +166,7 @@ class Player(pygame.sprite.Sprite):
 				break
 			else:
 				self.speed = 200
-				self.change_speed = True
+				self.change_speed = False
 				
 
 

@@ -132,6 +132,8 @@ class Level:
                 if self.interaction_objects:
                     interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, False) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
                     if pygame.sprite.spritecollide(self.player, self.interaction_objects, True, pygame.sprite.collide_mask):
+                        self.player.status = 'collect_up'
+                        print(self.player.status)
                         
                         if interaction_objects:
                             if (interaction_objects[0].item_type) == 'Blueberry':
@@ -146,6 +148,7 @@ class Level:
 
 
     def run(self,dt):
+        print(self.player.status)
 
 
 		
