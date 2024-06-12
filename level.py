@@ -33,7 +33,7 @@ class Level:
     
     def draw_backround_normal_layers(self):
         #draw normal layers
-        tile_map = load_pygame("map/background_ground.tmx")
+        tile_map = load_pygame("map/Trailer_Map.tmx")
 
         for x, y, image in tile_map.get_layer_by_name('ground').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
@@ -54,7 +54,7 @@ class Level:
                     z_layer= LAYERS['ground'])
             
     def draw_backround_object_layers(self):
-        tile_map = load_pygame("map/background_ground.tmx")
+        tile_map = load_pygame("map/Trailer_Map.tmx")
         tree_layer = tile_map.get_layer_by_name('Trees')
         bush_layer = tile_map.get_layer_by_name('Bush')
         buildings_layer = tile_map.get_layer_by_name('Buildings')
@@ -108,13 +108,13 @@ class Level:
                 Tardis(
                     pos = (building.x, building.y),
                     image =building.image, 
-                    groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
+                    groups =[self.all_sprites, self.interaction_objects], 
                     item_type= 'Schoko')
                 
 
 
     def player_spawnpoint(self):
-        tile_map = load_pygame("map/background_ground.tmx")
+        tile_map = load_pygame("map/Trailer_Map.tmx")
         for object in tile_map.get_layer_by_name('Spawn'):
             
             if object.name == 'Player':
