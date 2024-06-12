@@ -11,6 +11,10 @@ from settings import *
 
 class Level:
     def __init__(self, data):
+        #
+        self.map = "map/background_ground.tmx"
+        self.map = "map/background_ground.tmx"
+
         #display_surface
         self.display_surface = pygame.display.get_surface()
 
@@ -33,7 +37,7 @@ class Level:
     
     def draw_backround_normal_layers(self):
         #draw normal layers
-        tile_map = load_pygame("map/background_ground.tmx")
+        tile_map = load_pygame(self.map)
 
         for x, y, image in tile_map.get_layer_by_name('ground').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
@@ -107,7 +111,7 @@ class Level:
             if building.name == ('Tardis'):
                 Tardis(
                     pos = (building.x, building.y),
-                    image =building.image, 
+                    image = building.image, 
                     groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
                     item_type= 'Schoko')
                 
@@ -158,7 +162,7 @@ class Level:
 
 
     def run(self,dt):
-        print(self.player.status)
+        #print(self.player.status)
 
 
 		
