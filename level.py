@@ -114,7 +114,7 @@ class Level:
                     pos = (building.x, building.y),
                     image = building.image, 
                     groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
-                    item_type= 'Schoko')
+                    item_type= '')
                 
 
 
