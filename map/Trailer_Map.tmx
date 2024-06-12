@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="105" height="60" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="116">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="105" height="60" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="136">
  <tileset firstgid="1" source="gras.tsx"/>
  <tileset firstgid="26" source="trees.tsx"/>
- <tileset firstgid="27" source="bush.tsx"/>
- <tileset firstgid="30" source="Collision.tsx"/>
- <tileset firstgid="34" source="Tardis.tsx"/>
+ <tileset firstgid="33" source="bush.tsx"/>
+ <tileset firstgid="36" source="Collision.tsx"/>
+ <tileset firstgid="40" source="Tardis.tsx"/>
+ <tileset firstgid="41" source="statue.tsx"/>
  <layer id="1" name="ground" width="105" height="60">
   <data encoding="csv">
 16,24,24,16,22,16,18,24,25,23,21,16,21,23,17,1,23,22,23,25,19,23,25,22,17,21,23,25,23,24,19,18,1,17,21,23,22,23,21,21,21,24,22,19,1,16,17,21,22,21,21,17,23,24,22,25,25,21,22,24,22,22,17,20,21,25,19,19,23,1,17,21,1,18,24,18,19,22,21,17,23,19,17,19,18,17,25,19,20,18,19,25,21,19,25,18,1,1,1,17,24,18,21,19,21,
@@ -139,45 +140,57 @@
   </object>
  </objectgroup>
  <objectgroup id="7" name="Bush">
-  <object id="75" name="Empty" gid="28" x="4224" y="1984" width="64" height="64"/>
-  <object id="76" name="Empty" gid="28" x="4160" y="1920" width="64" height="64"/>
-  <object id="77" name="Empty" gid="28" x="4032" y="1920" width="64" height="64"/>
-  <object id="78" name="Empty" gid="28" x="4160" y="2112" width="64" height="64"/>
-  <object id="79" name="Empty" gid="28" x="4288" y="2176" width="64" height="64"/>
-  <object id="80" name="Empty" gid="28" x="4160" y="2304" width="64" height="64"/>
-  <object id="81" name="Empty" gid="28" x="4224" y="2240" width="64" height="64"/>
-  <object id="84" name="Empty" gid="28" x="4416" y="2048" width="64" height="64"/>
-  <object id="85" name="Empty" gid="28" x="4416" y="1984" width="64" height="64"/>
-  <object id="86" name="Empty" gid="28" x="4480" y="1984" width="64" height="64"/>
-  <object id="87" name="Empty" gid="28" x="4032" y="2112" width="64" height="64"/>
-  <object id="88" name="Empty" gid="28" x="3968" y="2176" width="64" height="64"/>
-  <object id="89" name="Empty" gid="28" x="3904" y="1984" width="64" height="64"/>
-  <object id="90" name="Empty" gid="28" x="3968" y="1792" width="64" height="64"/>
-  <object id="91" name="Empty" gid="28" x="4096" y="1792" width="64" height="64"/>
-  <object id="92" name="Empty" gid="28" x="4096" y="2240" width="64" height="64"/>
-  <object id="93" name="Empty" gid="28" x="3840" y="2112" width="64" height="64"/>
-  <object id="94" name="Empty" gid="28" x="3840" y="1920" width="64" height="64"/>
-  <object id="95" name="Empty" gid="28" x="3840" y="1792" width="64" height="64"/>
-  <object id="98" name="Empty" gid="28" x="4160" y="1728" width="64" height="64"/>
-  <object id="99" name="Blueberry" gid="27" x="3904" y="1984" width="64" height="64"/>
-  <object id="100" name="Blueberry" gid="27" x="4032" y="1920" width="64" height="64"/>
-  <object id="101" name="Blueberry" gid="27" x="3840" y="1792" width="64" height="64"/>
-  <object id="102" name="Empty" gid="28" x="3712" y="2112" width="64" height="64"/>
-  <object id="103" name="Empty" gid="28" x="3584" y="1984" width="64" height="64"/>
-  <object id="104" name="Empty" gid="28" x="3456" y="2112" width="64" height="64"/>
-  <object id="105" name="Empty" gid="28" x="3328" y="1984" width="64" height="64"/>
-  <object id="106" name="Empty" gid="28" x="3200" y="2112" width="64" height="64"/>
-  <object id="107" name="Empty" gid="28" x="2944" y="2112" width="64" height="64"/>
-  <object id="108" name="Empty" gid="28" x="3072" y="1984" width="64" height="64"/>
-  <object id="109" name="Empty" gid="28" x="2816" y="1984" width="64" height="64"/>
-  <object id="110" name="Empty" gid="28" x="2752" y="2112" width="64" height="64"/>
-  <object id="111" name="Empty" gid="28" x="2688" y="1984" width="64" height="64"/>
-  <object id="112" name="Empty" gid="28" x="2624" y="2112" width="64" height="64"/>
-  <object id="113" name="Empty" gid="28" x="2560" y="1984" width="64" height="64"/>
+  <object id="75" name="Empty" gid="34" x="4224" y="1984" width="64" height="64"/>
+  <object id="76" name="Empty" gid="34" x="4160" y="1920" width="64" height="64"/>
+  <object id="77" name="Empty" gid="34" x="4032" y="1920" width="64" height="64"/>
+  <object id="78" name="Empty" gid="34" x="4160" y="2112" width="64" height="64"/>
+  <object id="79" name="Empty" gid="34" x="4288" y="2176" width="64" height="64"/>
+  <object id="80" name="Empty" gid="34" x="4160" y="2304" width="64" height="64"/>
+  <object id="81" name="Empty" gid="34" x="4224" y="2240" width="64" height="64"/>
+  <object id="84" name="Empty" gid="34" x="4416" y="2048" width="64" height="64"/>
+  <object id="85" name="Empty" gid="34" x="4416" y="1984" width="64" height="64"/>
+  <object id="86" name="Empty" gid="34" x="4480" y="1984" width="64" height="64"/>
+  <object id="87" name="Empty" gid="34" x="4032" y="2112" width="64" height="64"/>
+  <object id="88" name="Empty" gid="34" x="3968" y="2176" width="64" height="64"/>
+  <object id="89" name="Empty" gid="34" x="3904" y="1984" width="64" height="64"/>
+  <object id="90" name="Empty" gid="34" x="3968" y="1792" width="64" height="64"/>
+  <object id="91" name="Empty" gid="34" x="4096" y="1792" width="64" height="64"/>
+  <object id="92" name="Empty" gid="34" x="4096" y="2240" width="64" height="64"/>
+  <object id="93" name="Empty" gid="34" x="3840" y="2112" width="64" height="64"/>
+  <object id="94" name="Empty" gid="34" x="3840" y="1920" width="64" height="64"/>
+  <object id="95" name="Empty" gid="34" x="3840" y="1792" width="64" height="64"/>
+  <object id="98" name="Empty" gid="34" x="4160" y="1728" width="64" height="64"/>
+  <object id="99" name="Blueberry" gid="33" x="3904" y="1984" width="64" height="64"/>
+  <object id="100" name="Blueberry" gid="33" x="4032" y="1920" width="64" height="64"/>
+  <object id="101" name="Blueberry" gid="33" x="3840" y="1792" width="64" height="64"/>
+  <object id="102" name="Empty" gid="34" x="3712" y="2112" width="64" height="64"/>
+  <object id="103" name="Empty" gid="34" x="3584" y="1984" width="64" height="64"/>
+  <object id="104" name="Empty" gid="34" x="3456" y="2112" width="64" height="64"/>
+  <object id="105" name="Empty" gid="34" x="3328" y="1984" width="64" height="64"/>
+  <object id="106" name="Empty" gid="34" x="3200" y="2112" width="64" height="64"/>
+  <object id="107" name="Empty" gid="34" x="2944" y="2112" width="64" height="64"/>
+  <object id="108" name="Empty" gid="34" x="3072" y="1984" width="64" height="64"/>
+  <object id="109" name="Empty" gid="34" x="2816" y="1984" width="64" height="64"/>
+  <object id="110" name="Empty" gid="34" x="2752" y="2112" width="64" height="64"/>
+  <object id="111" name="Empty" gid="34" x="2688" y="1984" width="64" height="64"/>
+  <object id="112" name="Empty" gid="34" x="2624" y="2112" width="64" height="64"/>
+  <object id="113" name="Empty" gid="34" x="2560" y="1984" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="6" name="Trees"/>
+ <objectgroup id="6" name="Trees">
+  <object id="124" name="tree" gid="32" x="2432" y="1792" width="129" height="130"/>
+  <object id="126" name="tree" gid="32" x="2368" y="2112" width="129" height="130"/>
+  <object id="127" name="tree" gid="32" x="2624" y="1792" width="129" height="130"/>
+  <object id="128" name="tree" gid="32" x="2560" y="2240" width="129" height="130"/>
+  <object id="129" name="tree" gid="32" x="2816" y="2240" width="129" height="130"/>
+  <object id="130" name="tree" gid="32" x="3008" y="2240" width="129" height="130"/>
+  <object id="131" name="tree" gid="32" x="2880" y="1792" width="129" height="130"/>
+  <object id="132" name="tree" gid="32" x="3136" y="1856" width="129" height="130"/>
+  <object id="133" name="tree" gid="32" x="3298.5" y="2241" width="129" height="130"/>
+ </objectgroup>
  <objectgroup id="11" name="Buildings">
-  <object id="115" name="Tardis" gid="34" x="2432" y="1984" width="84" height="140"/>
+  <object id="115" name="Tardis" gid="40" x="2432" y="1984" width="84" height="140"/>
+  <object id="134" name="Tardis" gid="42" x="2176" y="1984" width="119" height="127"/>
+  <object id="135" name="Tardis" gid="41" x="2176" y="2176" width="139" height="125"/>
  </objectgroup>
  <layer id="10" name="map_limit" width="105" height="60">
   <data encoding="csv">
