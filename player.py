@@ -60,7 +60,7 @@ class Player(pygame.sprite.Sprite):
 
 
 	def animation_player(self,dt):
-		self.frame_index += 7 * dt #Zahl enspricht der schnelligkeit der Bilder fuer die Animation
+		self.frame_index += 10 * dt #Zahl enspricht der schnelligkeit der Bilder fuer die Animation
 		if self.frame_index >= len(self.animations[self.status]):
 			self.frame_index = 0
 
