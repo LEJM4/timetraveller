@@ -31,12 +31,12 @@ class Level:
         self.interaction_objects = pygame.sprite.Group()
         self.trail = pygame.sprite.Group()
         
-        self.draw_backround_normal_layers()
-        self.draw_backround_object_layers()
+        self.draw_background_normal_layers()
+        self.draw_background_object_layers()
         self.player_spawnpoint()
 
     
-    def draw_backround_normal_layers(self):
+    def draw_background_normal_layers(self):
         #draw normal layers
         tile_map = load_pygame(self.map_string)
 
@@ -58,7 +58,7 @@ class Level:
                     groups= [self.all_sprites,self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
                     z_layer= LAYERS['ground'])
             
-    def draw_backround_object_layers(self):
+    def draw_background_object_layers(self):
         tile_map = load_pygame(self.map_string)
         tree_layer = tile_map.get_layer_by_name('Trees')
         bush_layer = tile_map.get_layer_by_name('Bush')
