@@ -11,9 +11,10 @@ from settings import *
 
 class Level:
     def __init__(self, data):
-        #
-        self.map = "map/background_ground.tmx"
-        self.map = "map/background_ground.tmx"
+        
+        #maps
+        #self.map = "map/background_ground.tmx"
+        self.map = "map/Trailer_Map.tmx"
 
         #display_surface
         self.display_surface = pygame.display.get_surface()
@@ -37,7 +38,7 @@ class Level:
     
     def draw_backround_normal_layers(self):
         #draw normal layers
-        tile_map = load_pygame("map/Trailer_Map.tmx")
+        tile_map = load_pygame(self.map)
 
         for x, y, image in tile_map.get_layer_by_name('ground').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
@@ -58,7 +59,7 @@ class Level:
                     z_layer= LAYERS['ground'])
             
     def draw_backround_object_layers(self):
-        tile_map = load_pygame("map/Trailer_Map.tmx")
+        tile_map = load_pygame(self.map)
         tree_layer = tile_map.get_layer_by_name('Trees')
         bush_layer = tile_map.get_layer_by_name('Bush')
         buildings_layer = tile_map.get_layer_by_name('Buildings')
@@ -118,7 +119,7 @@ class Level:
 
 
     def player_spawnpoint(self):
-        tile_map = load_pygame("map/Trailer_Map.tmx")
+        tile_map = load_pygame(self.map)
         for object in tile_map.get_layer_by_name('Spawn'):
             
             if object.name == 'Player':
