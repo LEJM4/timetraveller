@@ -28,7 +28,7 @@ class Player(pygame.sprite.Sprite):
 		self.direction = pygame.math.Vector2()
 		self.pos = pygame.math.Vector2(self.rect.center)
 		self.change_speed = False
-		self.speed = 200
+		self.speed = 100
 
 
 
@@ -168,11 +168,11 @@ class Player(pygame.sprite.Sprite):
 	def trail_collision(self):
 		for trail in self.trail.sprites():
 			if trail.hitbox.colliderect(self.hitbox_player):
-				self.speed = 400
+				self.speed = 200
 				self.change_speed = True
 				break
 			else:
-				self.speed = 200
+				self.speed = 100
 				self.change_speed = False
 				
 

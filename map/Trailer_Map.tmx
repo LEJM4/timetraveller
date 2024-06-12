@@ -177,20 +177,19 @@
   <object id="113" name="Empty" gid="34" x="2560" y="1984" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="6" name="Trees">
-  <object id="124" name="tree" gid="32" x="2432" y="1792" width="129" height="130"/>
-  <object id="126" name="tree" gid="32" x="2368" y="2112" width="129" height="130"/>
-  <object id="127" name="tree" gid="32" x="2624" y="1792" width="129" height="130"/>
-  <object id="128" name="tree" gid="32" x="2560" y="2240" width="129" height="130"/>
-  <object id="129" name="tree" gid="32" x="2816" y="2240" width="129" height="130"/>
-  <object id="130" name="tree" gid="32" x="3008" y="2240" width="129" height="130"/>
-  <object id="131" name="tree" gid="32" x="2880" y="1792" width="129" height="130"/>
+  <object id="124" name="tree" gid="32" x="2368" y="1856" width="129" height="130"/>
+  <object id="126" name="tree" gid="32" x="2368" y="2176" width="129" height="130"/>
+  <object id="127" name="tree" gid="32" x="2624" y="1728" width="129" height="130"/>
+  <object id="128" name="tree" gid="32" x="2624" y="2304" width="129" height="130"/>
+  <object id="129" name="tree" gid="32" x="2880" y="2368" width="129" height="130"/>
+  <object id="131" name="tree" gid="32" x="2880" y="1856" width="129" height="130"/>
   <object id="132" name="tree" gid="32" x="3136" y="1856" width="129" height="130"/>
-  <object id="133" name="tree" gid="32" x="3298.5" y="2241" width="129" height="130"/>
+  <object id="133" name="tree" gid="32" x="3136" y="2304" width="129" height="130"/>
  </objectgroup>
  <objectgroup id="11" name="Buildings">
-  <object id="115" name="Tardis" gid="40" x="2432" y="1984" width="84" height="140"/>
-  <object id="134" name="Tardis" gid="42" x="2176" y="1984" width="119" height="127"/>
-  <object id="135" name="Tardis" gid="41" x="2176" y="2176" width="139" height="125"/>
+  <object id="115" name="Tardis" gid="40" x="2294" y="1991.25" width="84" height="140"/>
+  <object id="134" name="Tardis" gid="42" x="2432" y="1984" width="119" height="127"/>
+  <object id="135" name="Tardis" gid="41" x="2112" y="1984" width="139" height="125"/>
  </objectgroup>
  <layer id="10" name="map_limit" width="105" height="60">
   <data encoding="csv">

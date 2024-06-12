@@ -113,7 +113,7 @@ class Level:
                 Tardis(
                     pos = (building.x, building.y),
                     image = building.image, 
-                    groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
+                    groups =[self.all_sprites, self.interaction_objects], 
                     item_type= '')
                 
 
