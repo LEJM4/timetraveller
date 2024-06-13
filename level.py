@@ -14,7 +14,7 @@ class Level:
         
         #maps
         #self.map = "map/background_ground.tmx"
-        self.map_string = "map/tile_maps/Trailer_Map.tmx"
+        self.map_string = "map/tile_maps/unbenannt.tmx"
 
         #display_surface
         self.display_surface = pygame.display.get_surface()
@@ -61,8 +61,8 @@ class Level:
     def draw_background_object_layers(self):
         tile_map = load_pygame(self.map_string)
         tree_layer = tile_map.get_layer_by_name('Trees')
-        bush_layer = tile_map.get_layer_by_name('Bush')
-        buildings_layer = tile_map.get_layer_by_name('Buildings')
+        bush_layer = tile_map.get_layer_by_name('bush')
+        buildings_layer = tile_map.get_layer_by_name('buildings')
 
         for tree in tree_layer:
             if tree.name == ('tree'):
@@ -120,9 +120,9 @@ class Level:
 
     def player_spawnpoint(self):
         tile_map = load_pygame(self.map_string)
-        for object in tile_map.get_layer_by_name('Spawn'):
+        for object in tile_map.get_layer_by_name('spawn'):
             
-            if object.name == 'Player':
+            if object.name == 'player':
                 self.player = Player(
                     pos = (object.x, object.y), 
                     groups = self.all_sprites, 
@@ -131,7 +131,7 @@ class Level:
                     trail= self.trail,
                     data = self.data)
                 
-            if object.name == 'Trader':
+            if object.name == 'trader':
                 pass
     
     
