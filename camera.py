@@ -13,7 +13,7 @@ class Camera(pygame.sprite.Group):
         super().__init__()
         
         #tiled
-        self.tile_map = load_pygame("map/background_ground.tmx")
+        self.tile_map = load_pygame("map/tile_maps/unbenannt.tmx")
         
         #for camera
         self.relocation = Vector2()
