@@ -14,7 +14,7 @@ class Level:
         
         #maps
         #self.map = "map/background_ground.tmx"
-        self.map_string = "map/tile_maps/unbenannt.tmx"
+        self.map_string = "map/tile_maps/test_lvl.tmx"
 
         #display_surface
         self.display_surface = pygame.display.get_surface()
@@ -60,7 +60,7 @@ class Level:
             
     def draw_background_object_layers(self):
         tile_map = load_pygame(self.map_string)
-        tree_layer = tile_map.get_layer_by_name('Trees')
+        tree_layer = tile_map.get_layer_by_name('tree')
         bush_layer = tile_map.get_layer_by_name('bush')
         buildings_layer = tile_map.get_layer_by_name('buildings')
 
@@ -87,21 +87,21 @@ class Level:
                     item_type= 'big_tree')
 
         for bush in bush_layer:
-            if bush.name == ('Empty'):
+            if bush.name == ('empty'):
                 Bush(
                     pos = (bush.x, bush.y), 
                     image = bush.image, 
                     groups = [self.all_sprites], 
                     item_type = 'Empty')
 
-            if bush.name == ('Blueberry'):
+            if bush.name == ('blueberry'):
                 Bush(
                     pos = (bush.x, bush.y),
                     image = bush.image, 
                     groups = [self.all_sprites, self.interaction_objects], 
                     item_type = 'Blueberry')
 
-            if bush.name == ('Raspberry'):
+            if bush.name == ('raspberry'):
                 Bush(
                     pos = (bush.x, bush.y),
                     image =bush.image, 
@@ -109,7 +109,7 @@ class Level:
                     item_type= 'Raspberry')
         
         for building in buildings_layer:
-            if building.name == ('Tardis'):
+            if building.name == ('tardis'):
                 Tardis(
                     pos = (building.x, building.y),
                     image = building.image, 
