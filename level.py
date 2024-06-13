@@ -120,9 +120,9 @@ class Level:
 
     def player_spawnpoint(self):
         tile_map = load_pygame(self.map_string)
-        for object in tile_map.get_layer_by_name('spawn'):
+        for object in tile_map.get_layer_by_name('player'):
             
-            if object.name == 'player':
+            if object.name == 'player_spawn':
                 self.player = Player(
                     pos = (object.x, object.y), 
                     groups = self.all_sprites, 
