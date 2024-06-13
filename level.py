@@ -14,7 +14,7 @@ class Level:
         
         #maps
         #self.map = "map/background_ground.tmx"
-        self.map_string = "map/Trailer_Map.tmx"
+        self.map_string = "map/tile_maps/Trailer_Map.tmx"
 
         #display_surface
         self.display_surface = pygame.display.get_surface()
