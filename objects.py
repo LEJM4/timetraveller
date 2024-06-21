@@ -48,3 +48,9 @@ class Tardis(PlantParent):
         super().__init__(pos, image, groups)
         self.item_type = item_type
         self.mask = pygame.mask.from_surface(self.image)
+
+class House(PlantParent):
+    def __init__(self, pos, image, groups, item_type):
+        super().__init__(pos, image, groups)
+        self.item_type = item_type
+        self.mask = pygame.mask.from_surface(self.image)
