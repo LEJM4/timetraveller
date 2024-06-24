@@ -16,9 +16,7 @@ class Level:
     def __init__(self, data):
         #maps
         self.tile_maps_import()
-        #maps
-        #self.map = "map/background_ground.tmx"
-        self.map_string = "map/tile_maps/test_lvl.tmx"
+
 
         #display_surface
         self.display_surface = pygame.display.get_surface()
@@ -37,14 +35,14 @@ class Level:
         self.draw_background_normal_layers(tile_map = self.tile_maps['start'])
         self.draw_background_object_layers(tile_map= self.tile_maps['start'],
                                            player_spawn_pos= 'start')
-        self.player_spawnpoint()
+        self.player_spawnpoint(tile_map= self.tile_maps['start'])
 
     def tile_maps_import(self):
         self.tile_maps = {
             'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
             'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx'))}
 
-        self.overworld_frames = {
+        self.map_animations = {
             'water' : import_folder('graphics', 'ground', 'water')      
         }
      
@@ -52,7 +50,6 @@ class Level:
 
     def draw_background_normal_layers(self, tile_map):
         #draw normal layers
-#        tile_map = load_pygame(self.map_string)
 
         for x, y, image in tile_map.get_layer_by_name('ground').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
@@ -79,14 +76,15 @@ class Level:
         buildings_layer = tile_map.get_layer_by_name('buildings')
         statue_layer=tile_map.get_layer_by_name('statue')
 
+
         water_layer = tile_map.get_layer_by_name('water')
 
         for water in water_layer:
             for x in range (int(water.x), int(water.x + water.width), TILE_SIZE):
                 for y in range (int(water.y), int(water.y + water.height), TILE_SIZE):
                     AnimatedSprites(pos = (x,y),
-                                    frame_list = self.overworld_frames['water'],
-                                    groups= self.all_sprites,
+                                    frame_list = self.map_animations['water'],
+                                    groups= [self.all_sprites, self.obstacle_objects],
                                     animation_speed= 4)
 
         for tree in tree_layer:
@@ -157,8 +155,7 @@ class Level:
                 
 
 
-    def player_spawnpoint(self):
-        tile_map = load_pygame(self.map_string)
+    def player_spawnpoint(self, tile_map):
         for object in tile_map.get_layer_by_name('player'):
             
             if object.name == 'spawn':
