@@ -148,8 +148,8 @@ class Level:
         
         for stone in statue_layer:
             if stone.name == ('stone'):
-                Stone(pos = (building.x, building.y),
-                    image = building.image, 
+                Stone(pos = (stone.x, stone.y),
+                    image = stone.image, 
                     groups =[self.all_sprites, self.interaction_objects], 
                     item_type= '')
                 
