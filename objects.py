@@ -7,7 +7,7 @@ class General(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups, z_layer = LAYERS['main']) :
         super().__init__(groups)
         self.image = image
-        self.rect = self.image.get_frect(topleft = pos)
+        self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect
         self.z_layer = z_layer
 
@@ -71,6 +71,12 @@ class Tardis(PlantParent):
         self.mask = pygame.mask.from_surface(self.image)
 
 class House(PlantParent):
+    def __init__(self, pos, image, groups, item_type):
+        super().__init__(pos, image, groups)
+        self.item_type = item_type
+        self.mask = pygame.mask.from_surface(self.image)
+
+class Stone(PlantParent):
     def __init__(self, pos, image, groups, item_type):
         super().__init__(pos, image, groups)
         self.item_type = item_type

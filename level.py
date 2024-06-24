@@ -77,6 +77,7 @@ class Level:
         tree_layer = tile_map.get_layer_by_name('tree')
         bush_layer = tile_map.get_layer_by_name('bush')
         buildings_layer = tile_map.get_layer_by_name('buildings')
+        statue_layer=tile_map.get_layer_by_name('statue')
 
         water_layer = tile_map.get_layer_by_name('water')
 
@@ -89,19 +90,19 @@ class Level:
                                     animation_speed= 4)
 
         for tree in tree_layer:
-            if tree.name == ('tree'):
+            if tree.name == ('tree_small'):
                 Tree(
                     pos= (tree.x, tree.y), 
                     image= tree.image, 
                     groups= [self.all_sprites, self.obstacle_objects],
-                    item_type= 'normal_tree')
+                    item_type= 'tree_small')
                 
-            if tree.name == ('big_tree'):
+            if tree.name == ('tree_big'):
                 Tree(
                     pos= (tree.x, tree.y), 
                     image= tree.image, 
                     groups= [self.all_sprites, self.obstacle_objects],
-                    item_type= 'big_tree')
+                    item_type= 'tree_big')
                 
             if tree.name == ('transparent_tree'):
                 Tree(
@@ -145,6 +146,13 @@ class Level:
                     pos = (building.x, building.y),
                     image = building.image, 
                     groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
+                    item_type= '')
+        
+        for stone in statue_layer:
+            if stone.name == ('stone'):
+                Stone(pos = (building.x, building.y),
+                    image = building.image, 
+                    groups =[self.all_sprites, self.interaction_objects], 
                     item_type= '')
                 
 
