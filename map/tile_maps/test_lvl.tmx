@@ -7,7 +7,7 @@
  <tileset firstgid="33" source="../tile_sets/statue.tsx"/>
  <tileset firstgid="35" source="../tile_sets/house.tsx"/>
  <tileset firstgid="38" source="../tile_sets/tree.tsx"/>
- <tileset firstgid="40" source="stone.tsx"/>
+ <tileset firstgid="40" source="../tile_sets/stone.tsx"/>
  <layer id="1" name="ground" width="105" height="60">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
