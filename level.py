@@ -11,7 +11,8 @@ from settings import *
 
 class Level:
     def __init__(self, data):
-        
+        #maps
+        self.tile_maps_import()
         #maps
         #self.map = "map/background_ground.tmx"
         self.map_string = "map/tile_maps/test_lvl.tmx"
@@ -24,21 +25,25 @@ class Level:
         
         #groups
         self.all_sprites = Camera()
-
         #self.tree_group = pygame.sprite.Group()
         #self.bush_group = pygame.sprite.Group()
         self.obstacle_objects = pygame.sprite.Group()
         self.interaction_objects = pygame.sprite.Group()
         self.trail = pygame.sprite.Group()
         
-        self.draw_background_normal_layers()
-        self.draw_background_object_layers()
+        self.draw_background_normal_layers(tile_map = self.tile_maps['start'])
+        self.draw_background_object_layers(tile_map= self.tile_maps['start'],
+                                           player_spawn_pos= 'start')
         self.player_spawnpoint()
 
-    
-    def draw_background_normal_layers(self):
+    def tile_maps_import(self):
+        self.tile_maps = {'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
+                        'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx'))}
+
+
+    def draw_background_normal_layers(self, tile_map):
         #draw normal layers
-        tile_map = load_pygame(self.map_string)
+#        tile_map = load_pygame(self.map_string)
 
         for x, y, image in tile_map.get_layer_by_name('ground').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
@@ -58,8 +63,8 @@ class Level:
                     groups= [self.all_sprites,self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
                     z_layer= LAYERS['ground'])
             
-    def draw_background_object_layers(self):
-        tile_map = load_pygame(self.map_string)
+    def draw_background_object_layers(self, tile_map, player_spawn_pos):
+        #tile_map = load_pygame(self.map_string)
         tree_layer = tile_map.get_layer_by_name('tree')
         bush_layer = tile_map.get_layer_by_name('bush')
         buildings_layer = tile_map.get_layer_by_name('buildings')
