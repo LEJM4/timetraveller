@@ -1,6 +1,16 @@
 import pygame
 from settings import *
 
+class General(pygame.sprite.Sprite):
+    def __init__(self, pos, image, groups, z_layer = LAYERS['main']) :
+        super().__init__(groups)
+        self.image = image
+        self.rect = self.image.get_frect(topleft = pos)
+        self.hitbox = self.rect
+        self.z_layer = z_layer
+
+
+        
 class PlantParent(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups, z_layer = LAYERS['main']):
         super().__init__(groups)
@@ -35,13 +45,6 @@ class Item(pygame.sprite.Sprite):
         self.hitbox = self.rect
         self.item_type = item_type
 
-class General(pygame.sprite.Sprite):
-    def __init__(self, pos, image, groups, z_layer = LAYERS['main']) :
-        super().__init__(groups)
-        self.image = image
-        self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect
-        self.z_layer = z_layer
 
 class Tardis(PlantParent):
     def __init__(self, pos, image, groups, item_type):
