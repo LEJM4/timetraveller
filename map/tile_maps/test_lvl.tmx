@@ -5,7 +5,6 @@
  <tileset firstgid="30" source="../tile_sets/bush.tsx"/>
  <tileset firstgid="32" source="../tile_sets/tardis.tsx"/>
  <tileset firstgid="33" source="../tile_sets/statue.tsx"/>
- <tileset firstgid="35" source="../tile_sets/tree.tsx"/>
  <tileset firstgid="36" source="../tile_sets/house.tsx"/>
  <layer id="1" name="ground" width="105" height="60">
   <data encoding="csv">
@@ -199,10 +198,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="9" name="tree">
-  <object id="18" name="tree" gid="35" x="2752" y="2496" width="64" height="64"/>
-  <object id="31" name="tree" gid="35" x="2816" y="2496" width="64" height="64"/>
- </objectgroup>
+ <objectgroup id="9" name="tree"/>
  <objectgroup id="5" name="bush">
   <object id="6" name="empty" gid="30" x="3392" y="2176" width="64" height="64"/>
   <object id="7" name="empty" gid="30" x="3264" y="2176" width="64" height="64"/>
