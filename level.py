@@ -116,7 +116,7 @@ class Level:
                     groups =[self.all_sprites, self.interaction_objects], 
                     item_type= '')
             
-            if building.name == ('house_1'):
+            if building.name == ('house_1') or building.name == ('house_2') or building.name == ('house_3'):
                 House(
                     pos = (building.x, building.y),
                     image = building.image, 
