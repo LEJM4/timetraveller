@@ -120,7 +120,7 @@ class Level:
                 House(
                     pos = (building.x, building.y),
                     image = building.image, 
-                    groups =[self.all_sprites, self.interaction_objects], 
+                    groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
                     item_type= '')
                 
 
