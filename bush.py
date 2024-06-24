@@ -11,7 +11,7 @@ class Bush(pygame.sprite.Sprite):
         # self.frame_index_bush = 1
         self.object_group = object_group
         self.bush_empty = False 
-        self.image = image or pygame.image.load('graphics/objects/bush/blueberry.png').convert_alpha()
+        self.image = image or pygame.image.load('graphics/objects/bush_tree/blueberry.png').convert_alpha()
         self.rect = self.image.get_rect(center=pos)
         self.object_group.add(self) 
 

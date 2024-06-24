@@ -2,9 +2,9 @@
 <tileset version="1.10" tiledversion="1.10.2" name="bush" tilewidth="64" tileheight="64" tilecount="2" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
-  <image width="64" height="64" source="../../graphics/objects/bush/empty.png"/>
+  <image width="64" height="64" source="../../graphics/objects/bush_tree/empty.png"/>
  </tile>
  <tile id="1">
-  <image width="64" height="64" source="../../graphics/objects/bush/blueberry.png"/>
+  <image width="64" height="64" source="../../graphics/objects/bush_tree/blueberry.png"/>
  </tile>
 </tileset>
