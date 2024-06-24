@@ -9,6 +9,9 @@ from camera import Camera
 from objects import *
 from settings import *
 
+from support import *
+
+
 class Level:
     def __init__(self, data):
         #maps
@@ -37,8 +40,14 @@ class Level:
         self.player_spawnpoint()
 
     def tile_maps_import(self):
-        self.tile_maps = {'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
-                        'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx'))}
+        self.tile_maps = {
+            'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
+            'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx'))}
+
+        self.overworld_frames = {
+            'water' : import_folder('graphics', 'ground', 'water')      
+        }
+     
 
 
     def draw_background_normal_layers(self, tile_map):
@@ -68,6 +77,16 @@ class Level:
         tree_layer = tile_map.get_layer_by_name('tree')
         bush_layer = tile_map.get_layer_by_name('bush')
         buildings_layer = tile_map.get_layer_by_name('buildings')
+
+        water_layer = tile_map.get_layer_by_name('water')
+
+        for water in water_layer:
+            for x in range (int(water.x), int(water.x + water.width), TILE_SIZE):
+                for y in range (int(water.y), int(water.y + water.height), TILE_SIZE):
+                    AnimatedSprites(pos = (x,y),
+                                    frame_list = self.overworld_frames['water'],
+                                    groups= self.all_sprites,
+                                    animation_speed= 4)
 
         for tree in tree_layer:
             if tree.name == ('tree'):

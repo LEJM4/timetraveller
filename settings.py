@@ -1,6 +1,6 @@
 import pygame
 from pyautogui import size
-
+from pygame.math import Vector2 as vector 
 class Settings:
     def __init__(self):
         self.resolution_changed = False

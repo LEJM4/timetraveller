@@ -1,5 +1,7 @@
+from typing import Any
 import pygame
 from settings import *
+from settings import LAYERS
 
 class General(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups, z_layer = LAYERS['main']) :
@@ -9,8 +11,24 @@ class General(pygame.sprite.Sprite):
         self.hitbox = self.rect
         self.z_layer = z_layer
 
+class AnimatedSprites(General):
+    def __init__(self, pos, frame_list, groups, animation_speed, z_layer=LAYERS['main']):
+        self.frame_index = 0
+        self.frames = frame_list
+        self.animation_speed = animation_speed
+        super().__init__(pos, frame_list[self.frame_index], groups, z_layer)
+    
+    def animation(self,dt):
+        self.frame_index += self.animation_speed * dt #Zahl enspricht der schnelligkeit der Bilder fuer die Animation
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
 
-        
+        self.image = self.frames[int(self.frame_index)]
+
+    def update(self, dt):
+        self.animation(dt)
+
+
 class PlantParent(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups, z_layer = LAYERS['main']):
         super().__init__(groups)
