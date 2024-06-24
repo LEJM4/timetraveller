@@ -37,7 +37,8 @@ class Level:
         self.player_spawnpoint()
 
     def tile_maps_import(self):
-        self.tile_maps = {'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx'))}
+        self.tile_maps = {'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
+                        'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx'))}
 
 
     def draw_background_normal_layers(self, tile_map):
