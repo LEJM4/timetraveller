@@ -857,83 +857,83 @@
  </objectgroup>
  <objectgroup id="2" name="buildings">
   <object id="1" gid="26" x="5504" y="3008" width="84" height="140"/>
-  <object id="2" gid="28" x="5888" y="3264" width="64" height="39"/>
-  <object id="4" gid="28" x="6016" y="3520" width="64" height="39"/>
-  <object id="5" gid="28" x="5824" y="3456" width="64" height="39"/>
-  <object id="6" gid="28" x="6080" y="3328" width="64" height="39"/>
-  <object id="7" gid="28" x="5696" y="3520" width="64" height="39"/>
-  <object id="8" gid="28" x="5568" y="3392" width="64" height="39"/>
+  <object id="2" name="stone" gid="28" x="5888" y="3264" width="64" height="39"/>
+  <object id="4" name="stone" gid="28" x="6016" y="3520" width="64" height="39"/>
+  <object id="5" name="stone" gid="28" x="5824" y="3456" width="64" height="39"/>
+  <object id="6" name="stone" gid="28" x="6080" y="3328" width="64" height="39"/>
+  <object id="7" name="stone" gid="28" x="5696" y="3520" width="64" height="39"/>
+  <object id="8" name="stone" gid="28" x="5568" y="3392" width="64" height="39"/>
   <object id="9" gid="28" x="5568" y="3136" width="64" height="39"/>
-  <object id="980" gid="28" x="4392" y="3436.5" width="64" height="39"/>
-  <object id="981" gid="28" x="4520" y="3692.5" width="64" height="39"/>
-  <object id="982" gid="28" x="4328" y="3628.5" width="64" height="39"/>
-  <object id="983" gid="28" x="4584" y="3500.5" width="64" height="39"/>
-  <object id="984" gid="28" x="4200" y="3692.5" width="64" height="39"/>
-  <object id="985" gid="28" x="4072" y="3564.5" width="64" height="39"/>
-  <object id="986" gid="28" x="3216" y="3424.5" width="64" height="39"/>
-  <object id="987" gid="28" x="3344" y="3680.5" width="64" height="39"/>
-  <object id="988" gid="28" x="3152" y="3616.5" width="64" height="39"/>
-  <object id="989" gid="28" x="3408" y="3488.5" width="64" height="39"/>
-  <object id="990" gid="28" x="3024" y="3680.5" width="64" height="39"/>
-  <object id="991" gid="28" x="2896" y="3552.5" width="64" height="39"/>
-  <object id="992" gid="28" x="1500" y="3308.5" width="64" height="39"/>
-  <object id="993" gid="28" x="1628" y="3564.5" width="64" height="39"/>
-  <object id="994" gid="28" x="1436" y="3500.5" width="64" height="39"/>
-  <object id="995" gid="28" x="1692" y="3372.5" width="64" height="39"/>
-  <object id="996" gid="28" x="1308" y="3564.5" width="64" height="39"/>
-  <object id="997" gid="28" x="1180" y="3436.5" width="64" height="39"/>
-  <object id="998" gid="28" x="432" y="3604.5" width="64" height="39"/>
-  <object id="999" gid="28" x="560" y="3860.5" width="64" height="39"/>
-  <object id="1000" gid="28" x="368" y="3796.5" width="64" height="39"/>
-  <object id="1001" gid="28" x="624" y="3668.5" width="64" height="39"/>
-  <object id="1002" gid="28" x="240" y="3860.5" width="64" height="39"/>
-  <object id="1003" gid="28" x="112" y="3732.5" width="64" height="39"/>
-  <object id="1004" gid="28" x="256" y="2048" width="64" height="39"/>
-  <object id="1005" gid="28" x="384" y="2304" width="64" height="39"/>
-  <object id="1006" gid="28" x="192" y="2240" width="64" height="39"/>
-  <object id="1007" gid="28" x="448" y="2112" width="64" height="39"/>
-  <object id="1008" gid="28" x="64" y="2304" width="64" height="39"/>
-  <object id="1010" gid="28" x="512" y="192" width="64" height="39"/>
-  <object id="1011" gid="28" x="640" y="448" width="64" height="39"/>
-  <object id="1012" gid="28" x="448" y="384" width="64" height="39"/>
-  <object id="1013" gid="28" x="704" y="256" width="64" height="39"/>
-  <object id="1014" gid="28" x="320" y="448" width="64" height="39"/>
-  <object id="1015" gid="28" x="192" y="320" width="64" height="39"/>
-  <object id="1016" gid="28" x="2586" y="162.5" width="64" height="39"/>
-  <object id="1017" gid="28" x="2714" y="418.5" width="64" height="39"/>
-  <object id="1018" gid="28" x="2522" y="354.5" width="64" height="39"/>
-  <object id="1019" gid="28" x="2778" y="226.5" width="64" height="39"/>
-  <object id="1020" gid="28" x="2394" y="418.5" width="64" height="39"/>
-  <object id="1021" gid="28" x="2266" y="290.5" width="64" height="39"/>
-  <object id="1022" gid="28" x="5108" y="222.5" width="64" height="39"/>
-  <object id="1023" gid="28" x="5236" y="478.5" width="64" height="39"/>
-  <object id="1024" gid="28" x="5044" y="414.5" width="64" height="39"/>
-  <object id="1025" gid="28" x="5300" y="286.5" width="64" height="39"/>
-  <object id="1026" gid="28" x="4916" y="478.5" width="64" height="39"/>
-  <object id="1027" gid="28" x="4788" y="350.5" width="64" height="39"/>
-  <object id="1028" gid="28" x="6144" y="1024" width="64" height="39"/>
-  <object id="1029" gid="28" x="6272" y="1280" width="64" height="39"/>
-  <object id="1030" gid="28" x="6080" y="1216" width="64" height="39"/>
-  <object id="1031" gid="28" x="6336" y="1088" width="64" height="39"/>
-  <object id="1032" gid="28" x="5952" y="1280" width="64" height="39"/>
-  <object id="1033" gid="28" x="5824" y="1152" width="64" height="39"/>
-  <object id="1034" gid="28" x="6144" y="2176" width="64" height="39"/>
-  <object id="1035" gid="28" x="6272" y="2432" width="64" height="39"/>
-  <object id="1036" gid="28" x="6080" y="2368" width="64" height="39"/>
-  <object id="1037" gid="28" x="6336" y="2240" width="64" height="39"/>
-  <object id="1038" gid="28" x="5952" y="2432" width="64" height="39"/>
-  <object id="1039" gid="28" x="5824" y="2304" width="64" height="39"/>
+  <object id="980" name="stone" gid="28" x="4392" y="3436.5" width="64" height="39"/>
+  <object id="981" name="stone" gid="28" x="4520" y="3692.5" width="64" height="39"/>
+  <object id="982" name="stone" gid="28" x="4328" y="3628.5" width="64" height="39"/>
+  <object id="983" name="stone" gid="28" x="4584" y="3500.5" width="64" height="39"/>
+  <object id="984" name="stone" gid="28" x="4200" y="3692.5" width="64" height="39"/>
+  <object id="985" name="stone" gid="28" x="4072" y="3564.5" width="64" height="39"/>
+  <object id="986" name="stone" gid="28" x="3216" y="3424.5" width="64" height="39"/>
+  <object id="987" name="stone" gid="28" x="3344" y="3680.5" width="64" height="39"/>
+  <object id="988" name="stone" gid="28" x="3152" y="3616.5" width="64" height="39"/>
+  <object id="989" name="stone" gid="28" x="3408" y="3488.5" width="64" height="39"/>
+  <object id="990" name="stone" gid="28" x="3024" y="3680.5" width="64" height="39"/>
+  <object id="991" name="stone" gid="28" x="2896" y="3552.5" width="64" height="39"/>
+  <object id="992" name="stone" gid="28" x="1500" y="3308.5" width="64" height="39"/>
+  <object id="993" name="stone" gid="28" x="1628" y="3564.5" width="64" height="39"/>
+  <object id="994" name="stone" gid="28" x="1436" y="3500.5" width="64" height="39"/>
+  <object id="995" name="stone" gid="28" x="1692" y="3372.5" width="64" height="39"/>
+  <object id="996" name="stone" gid="28" x="1308" y="3564.5" width="64" height="39"/>
+  <object id="997" name="stone" gid="28" x="1180" y="3436.5" width="64" height="39"/>
+  <object id="998" name="stone" gid="28" x="432" y="3604.5" width="64" height="39"/>
+  <object id="999" name="stone" gid="28" x="560" y="3860.5" width="64" height="39"/>
+  <object id="1000" name="stone" gid="28" x="368" y="3796.5" width="64" height="39"/>
+  <object id="1001" name="stone" gid="28" x="624" y="3668.5" width="64" height="39"/>
+  <object id="1002" name="stone" gid="28" x="240" y="3860.5" width="64" height="39"/>
+  <object id="1003" name="stone" gid="28" x="112" y="3732.5" width="64" height="39"/>
+  <object id="1004" name="stone" gid="28" x="256" y="2048" width="64" height="39"/>
+  <object id="1005" name="stone" gid="28" x="384" y="2304" width="64" height="39"/>
+  <object id="1006" name="stone" gid="28" x="192" y="2240" width="64" height="39"/>
+  <object id="1007" name="stone" gid="28" x="448" y="2112" width="64" height="39"/>
+  <object id="1008" name="stone" gid="28" x="64" y="2304" width="64" height="39"/>
+  <object id="1010" name="stone" gid="28" x="512" y="192" width="64" height="39"/>
+  <object id="1011" name="stone" gid="28" x="640" y="448" width="64" height="39"/>
+  <object id="1012" name="stone" gid="28" x="448" y="384" width="64" height="39"/>
+  <object id="1013" name="stone" gid="28" x="704" y="256" width="64" height="39"/>
+  <object id="1014" name="stone" gid="28" x="320" y="448" width="64" height="39"/>
+  <object id="1015" name="stone" gid="28" x="192" y="320" width="64" height="39"/>
+  <object id="1016" name="stone" gid="28" x="2586" y="162.5" width="64" height="39"/>
+  <object id="1017" name="stone" gid="28" x="2714" y="418.5" width="64" height="39"/>
+  <object id="1018" name="stone" gid="28" x="2522" y="354.5" width="64" height="39"/>
+  <object id="1019" name="stone" gid="28" x="2778" y="226.5" width="64" height="39"/>
+  <object id="1020" name="stone" gid="28" x="2394" y="418.5" width="64" height="39"/>
+  <object id="1021" name="stone" gid="28" x="2266" y="290.5" width="64" height="39"/>
+  <object id="1022" name="stone" gid="28" x="5108" y="222.5" width="64" height="39"/>
+  <object id="1023" name="stone" gid="28" x="5236" y="478.5" width="64" height="39"/>
+  <object id="1024" name="stone" gid="28" x="5044" y="414.5" width="64" height="39"/>
+  <object id="1025" name="stone" gid="28" x="5300" y="286.5" width="64" height="39"/>
+  <object id="1026" name="stone" gid="28" x="4916" y="478.5" width="64" height="39"/>
+  <object id="1027" name="stone" gid="28" x="4788" y="350.5" width="64" height="39"/>
+  <object id="1028" name="stone" gid="28" x="6144" y="1024" width="64" height="39"/>
+  <object id="1029" name="stone" gid="28" x="6272" y="1280" width="64" height="39"/>
+  <object id="1030" name="stone" gid="28" x="6080" y="1216" width="64" height="39"/>
+  <object id="1031" name="stone" gid="28" x="6336" y="1088" width="64" height="39"/>
+  <object id="1032" name="stone" gid="28" x="5952" y="1280" width="64" height="39"/>
+  <object id="1033" name="stone" gid="28" x="5824" y="1152" width="64" height="39"/>
+  <object id="1034" name="stone" gid="28" x="6144" y="2176" width="64" height="39"/>
+  <object id="1035" name="stone" gid="28" x="6272" y="2432" width="64" height="39"/>
+  <object id="1036" name="stone" gid="28" x="6080" y="2368" width="64" height="39"/>
+  <object id="1037" name="stone" gid="28" x="6336" y="2240" width="64" height="39"/>
+  <object id="1038" name="stone" gid="28" x="5952" y="2432" width="64" height="39"/>
+  <object id="1039" name="stone" gid="28" x="5824" y="2304" width="64" height="39"/>
   <object id="1134" name="tardis" gid="26" x="4864" y="1536" width="84" height="140"/>
-  <object id="1150" gid="37" x="2688" y="2176" width="235" height="208"/>
-  <object id="1152" gid="38" x="2487.5" y="2176" width="205" height="192"/>
-  <object id="1153" gid="37" x="2240" y="2176" width="235" height="208"/>
-  <object id="1163" gid="37" x="1992.5" y="2176" width="235" height="208"/>
-  <object id="1164" name="house" gid="38" x="1792" y="2176" width="205" height="192"/>
-  <object id="1165" gid="38" x="2688" y="2560" width="205" height="192"/>
-  <object id="1167" gid="37" x="2440.5" y="2560" width="235" height="208"/>
-  <object id="1168" gid="38" x="2240" y="2560" width="205" height="192"/>
-  <object id="1170" gid="37" x="1992.5" y="2560" width="235" height="208"/>
-  <object id="1171" gid="38" x="1792" y="2560" width="205" height="192"/>
+  <object id="1150" name="house_1" gid="37" x="2688" y="2176" width="235" height="208"/>
+  <object id="1152" name="house_2" gid="38" x="2487.5" y="2176" width="205" height="192"/>
+  <object id="1153" name="house_1" gid="37" x="2240" y="2176" width="235" height="208"/>
+  <object id="1163" name="house_1" gid="37" x="1992.5" y="2176" width="235" height="208"/>
+  <object id="1164" name="house_2" gid="38" x="1792" y="2176" width="205" height="192"/>
+  <object id="1165" name="house_2" gid="38" x="2688" y="2560" width="205" height="192"/>
+  <object id="1167" name="house_1" gid="37" x="2440.5" y="2560" width="235" height="208"/>
+  <object id="1168" name="house_2" gid="38" x="2240" y="2560" width="205" height="192"/>
+  <object id="1170" name="house_1" gid="37" x="1992.5" y="2560" width="235" height="208"/>
+  <object id="1171" name="house_2" gid="38" x="1792" y="2560" width="205" height="192"/>
  </objectgroup>
  <objectgroup id="8" name="player">
   <object id="1188" name="spawn" x="4992" y="1600">
@@ -950,17 +950,17 @@
   <object id="1198" x="1088" y="1664" width="192" height="448"/>
  </objectgroup>
  <objectgroup id="6" name="statue">
-  <object id="1135" gid="28" x="5056" y="1408" width="64" height="39"/>
-  <object id="1136" gid="28" x="5184" y="1472" width="64" height="39"/>
-  <object id="1137" gid="28" x="5120" y="1664" width="64" height="39"/>
-  <object id="1138" gid="28" x="4928" y="1792" width="64" height="39"/>
-  <object id="1139" gid="28" x="4736" y="1856" width="64" height="39"/>
-  <object id="1140" gid="28" x="4672" y="1728" width="64" height="39"/>
-  <object id="1141" gid="28" x="4736" y="1600" width="64" height="39"/>
-  <object id="1142" gid="28" x="4480" y="1408" width="64" height="39"/>
-  <object id="1143" gid="28" x="4736" y="1280" width="64" height="39"/>
-  <object id="1144" gid="28" x="4672" y="1408" width="64" height="39"/>
-  <object id="1145" gid="28" x="4928" y="1344" width="64" height="39"/>
+  <object id="1135" name="stone" gid="28" x="5056" y="1408" width="64" height="39"/>
+  <object id="1136" name="stone" gid="28" x="5184" y="1472" width="64" height="39"/>
+  <object id="1137" name="stone" gid="28" x="5120" y="1664" width="64" height="39"/>
+  <object id="1138" name="stone" gid="28" x="4928" y="1792" width="64" height="39"/>
+  <object id="1139" name="stone" gid="28" x="4736" y="1856" width="64" height="39"/>
+  <object id="1140" name="stone" gid="28" x="4672" y="1728" width="64" height="39"/>
+  <object id="1141" name="stone" gid="28" x="4736" y="1600" width="64" height="39"/>
+  <object id="1142" name="stone" gid="28" x="4480" y="1408" width="64" height="39"/>
+  <object id="1143" name="stone" gid="28" x="4736" y="1280" width="64" height="39"/>
+  <object id="1144" name="stone" gid="28" x="4672" y="1408" width="64" height="39"/>
+  <object id="1145" name="stone" gid="28" x="4928" y="1344" width="64" height="39"/>
   <object id="1199" gid="39" x="1152" y="2368" width="119" height="127"/>
   <object id="1200" gid="40" x="1152" y="2240" width="139" height="125"/>
  </objectgroup>
