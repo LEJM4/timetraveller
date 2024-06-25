@@ -5,13 +5,17 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data):
+	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data, path):
 		super().__init__(groups)
 
-		#
-		self.animation_pictures()
+		# 
+		self.path = path
+
+		# graphic
+		self.import_pictures_4_animation()
 		self.status = 'down_idle'
 		self.frame_index = 0
+		self.anmation_speed = 10
 		self.z_layer = LAYERS['main']
 
 
@@ -41,74 +45,91 @@ class Player(pygame.sprite.Sprite):
 		self.interaction_objects = interaction_objects
 		self.trail = trail
 
-	def animation_pictures(self):
-		# Erzeugt ein Dict. mit versch. Animationen als Schlüssel + leere list --> als Werte
-		self.animations = {
-			'up': [], 'down': [], 'left': [], 'right': [], 
-			'right_idle': [], 'left_idle': [], 'up_idle': [], 'down_idle': [],
-			'collect_up': [], 'collect_down': [], 'collect_left': [], 'collect_right': [],
-		}
 
-		for animation_picture in self.animations.keys():
-			#  Pfad zur Animation
-			full_path = 'graphics/character/' + animation_picture
 
-			# Bilder aus Ordner import.
-			# importierte Bilder speichern als Liste Schlüssel des dict.
-			self.animations[animation_picture] = import_folder(full_path)
-			#folge daraus --> animationen der jeweiligen Aktivität des Characters
+		#attack
+		self.attacking = False
+
+
+		#collect
+
+		self.collecting = False
+
+	
+	def import_pictures_4_animation(self):
+		# alle animaatonen mithiilfe der funktiion "subfolder" laden
+		self.animations = import_sub_folders(*self.path)
+
+
 
 
 	def animation_player(self,dt):
-		self.frame_index += 10 * dt #Zahl enspricht der schnelligkeit der Bilder fuer die Animation
-		if self.frame_index >= len(self.animations[self.status]):
-			self.frame_index = 0
+		current_animation = self.animations[self.status]
 
-		self.image = self.animations[self.status][int(self.frame_index)]
+		self.frame_index += self.anmation_speed * dt
+		if self.frame_index >= len(current_animation):
+			self.frame_index = 0
+			if self.attacking:
+				self.attacking = False
+			
+			if self.collecting:
+				self.collecting = False
+
+		self.image = current_animation[int(self.frame_index)]
+		
 
 	def input(self):
 		keys = pygame.key.get_pressed()
 
-		if keys[pygame.K_UP] or keys[pygame.K_w]:
-			self.direction.y = -1
-			self.status = 'up'
-		elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
-			self.direction.y = 1
-			self.status = 'down'
-		else:
-			self.direction.y = 0
+		#moving
+		if not self.attacking:
+				if keys[pygame.K_UP] or keys[pygame.K_w]:
+					self.direction.y = -1
+					self.status = 'up'
+				elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+					self.direction.y = 1
+					self.status = 'down'
+				else:
+					self.direction.y = 0
 
-		if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-			self.direction.x = 1
-			self.status = 'right'
-		elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
-			self.direction.x = -1
-			self.status = 'left'
-		else:
-			self.direction.x = 0
+				if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+					self.direction.x = 1
+					self.status = 'right'
+				elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+					self.direction.x = -1
+					self.status = 'left'
+				else:
+					self.direction.x = 0
 
+		
+		#attack
+		if keys[pygame.K_SPACE]:
+			self.attack = True
+			self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
+			self.frame_index = 0
+
+		#collect
+		if keys[pygame.K_e]:
+			self.collecting = True
+			self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
+			self.frame_index = 0
+			self.status = 'up_collect'
 
 
 	def status_player(self):
-		keys = pygame.key.get_pressed()
-		#keys = pygame.key.get_pressed()
-		
-		# idle
-		if keys[pygame.K_e]:
-			if self.direction.magnitude() == 0:
-				self.status = 'collect_up'
 
-		elif self.direction.magnitude() == 0:
-			#self.status = 'collect_up'
+		# idle 
+		if self.direction.x == 0 and self.direction.y == 0:
+			self.status = self.status.split('_')[0] + '_idle'
 
-			#self.status = self.status.split('_')[0] + '_idle'
-			pass 
-		#pic item
-		# if keys[pygame.K_e]:
-		# 	if self.direction.magnitude() == 0: #ueberprueft die Laenge des Vektors
-		# 		self.collision_bush()
+		#attack
+		if self.attacking:
+			self.status = self.status.split('_')[0] + '_attack'
 
-		
+
+		# collect
+		if self.collecting:
+			self.status = self.status.split('_')[0] + '_collect'
 
 				
 
@@ -174,40 +195,10 @@ class Player(pygame.sprite.Sprite):
 			else:
 				self.speed = 100
 				self.change_speed = False
-				
-
-
-
-
-
-
-
-	"""
-	def limit_movement(self):
-		if self.rect.left < 640:  #limitiert Bewegung auf 3840 x --> nach links
-			self.pos.x = 640 + self.rect.width / 2
-			self.rect.left = 640
-			self.hitbox_player.left = 640
-		if self.rect.right > 3840: #limitiert Bewegung auf 3840 x --> nach rechts
-			self.pos.x = 3840 - self.rect.width / 2
-			self.rect.right = 3840
-			self.hitbox_player.right = 3840
-		if self.rect.bottom > 3200: #limitiert Bewegung auf 3520 y  --> nach unten
-			self.pos.y = 3200 - self.rect.height / 2
-			self.hitbox_player.centery = self.rect.centery
-			self.rect.bottom = 3200
-		if self.rect.top < 360: #limitiert Bewegung auf 360 y --> nach oben
-			self.pos.y = 360 + self.rect.height / 2
-			self.hitbox_player.centery = self.rect.centery
-			self.rect.top = 360
-	"""
-	
 
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
 		self.input() #player input --> movement
 		self.status_player() #status (idle or item use)
 		self.move(dt) #movement in dt
 		self.animation_player(dt) #animation in dt
-		#self.limit_movement()
-		#self.collision_bush_update() #--> nur zum ueberpruefen aufrufen
 		self.trail_collision()

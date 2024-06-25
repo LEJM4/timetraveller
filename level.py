@@ -3,8 +3,8 @@ from pytmx.util_pygame import load_pygame
 from player import Player
 from os.path import join
 
+#from entity import Entity, Player
 
-from bush import Bush
 from camera import Camera
 from objects import *
 from settings import *
@@ -40,12 +40,14 @@ class Level:
     def tile_maps_import(self):
         self.tile_maps = {
             'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
-            'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx'))}
+            'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx')),
+            'tardis_room':load_pygame(join('map', 'tile_maps', 'tardis_room.tmx'))}
 
         self.map_animations = {
-            'water' : import_folder('graphics', 'ground', 'water')      
+            'water' : import_folder_big('graphics', 'ground', 'water',),
+            'characters' : import_npc('graphics', 'npc', 'npc_1')      
         }
-     
+        print(self.map_animations['characters'])
 
 
     def draw_background_normal_layers(self, tile_map):
@@ -62,13 +64,13 @@ class Level:
                     image= image,
                     groups= [self.all_sprites, self.trail],
                     z_layer= LAYERS['trail'])
-            
+        '''   
         for x, y, image in tile_map.get_layer_by_name('map_limit').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
                     image= image,
                     groups= [self.all_sprites,self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
                     z_layer= LAYERS['ground'])
-            
+        '''    
     def draw_background_object_layers(self, tile_map, player_spawn_pos):
         #tile_map = load_pygame(self.map_string)
         tree_layer = tile_map.get_layer_by_name('tree')
@@ -76,7 +78,14 @@ class Level:
         buildings_layer = tile_map.get_layer_by_name('buildings')
         statue_layer=tile_map.get_layer_by_name('statue')
 
+        map_limit_layer = tile_map.get_layer_by_name('map_limit')
 
+        for tile in map_limit_layer:
+            General(pos=(tile.x, tile.y), 
+                    image= tile.image,
+                    groups= [self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
+                    z_layer= LAYERS['ground'])
+            
         water_layer = tile_map.get_layer_by_name('water')
 
         for water in water_layer:
@@ -165,8 +174,9 @@ class Level:
                     obstacle_objects= self.obstacle_objects ,
                     interaction_objects= self.interaction_objects, 
                     trail= self.trail,
-                    data = self.data)
-                
+                    data = self.data,
+                    path= ('graphics', 'character'))
+
             if object.name == 'trader':
                 pass
     
