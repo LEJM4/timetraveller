@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="102" height="62" tilewidth="64" tileheight="64" infinite="0" nextlayerid="10" nextobjectid="1201">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="102" height="62" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="1204">
  <tileset firstgid="1" source="../tile_sets/ground.tsx"/>
  <tileset firstgid="26" source="../tile_sets/tardis.tsx"/>
  <tileset firstgid="27" source="../tile_sets/stone.tsx"/>
@@ -856,7 +856,6 @@
   <object id="1187" name="blueberry" gid="35" x="3008" y="2688" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="2" name="buildings">
-  <object id="1" gid="26" x="5504" y="3008" width="84" height="140"/>
   <object id="2" name="stone" gid="28" x="5888" y="3264" width="64" height="39"/>
   <object id="4" name="stone" gid="28" x="6016" y="3520" width="64" height="39"/>
   <object id="5" name="stone" gid="28" x="5824" y="3456" width="64" height="39"/>
@@ -934,6 +933,20 @@
   <object id="1168" name="house_2" gid="38" x="2240" y="2560" width="205" height="192"/>
   <object id="1170" name="house_1" gid="37" x="1992.5" y="2560" width="235" height="208"/>
   <object id="1171" name="house_2" gid="38" x="1792" y="2560" width="205" height="192"/>
+ </objectgroup>
+ <objectgroup id="10" name="transition">
+  <object id="1202" x="4864.36" y="1536" width="83.4545" height="3.27273">
+   <properties>
+    <property name="destination" value="tardis"/>
+    <property name="location" value="lvl_1"/>
+   </properties>
+  </object>
+  <object id="1203" x="1866.96" y="2173" width="38.0435" height="2.95652">
+   <properties>
+    <property name="destination" value="house_room"/>
+    <property name="location" value="lvl_1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="player">
   <object id="1188" name="spawn" x="4992" y="1600">
