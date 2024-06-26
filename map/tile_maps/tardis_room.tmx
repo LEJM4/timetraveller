@@ -7,7 +7,7 @@
  <objectgroup id="12" name="transition">
   <object id="68" x="255.719" y="630.188" width="128.063" height="9.875">
    <properties>
-    <property name="destination" value="lvl_1"/>
+    <property name="destination" value="tardis"/>
     <property name="target_location" value="lvl_1"/>
    </properties>
   </object>
@@ -100,7 +100,7 @@
   <object id="14" name="player" x="320" y="576">
    <properties>
     <property name="direction" value="up"/>
-    <property name="position" value="tardis_room"/>
+    <property name="position" value="entrance_tardis"/>
    </properties>
    <point/>
   </object>

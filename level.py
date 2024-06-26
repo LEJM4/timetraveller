@@ -261,7 +261,7 @@ class Level:
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt
             if self.tint_progress >= 255:
-                self.create_map(self.tile_maps[self.transition_target_location[0]], self.transition_target_location[0])
+                self.create_map(self.tile_maps[self.transition_target_location[0]], self.transition_target_location[1])
                 self.tint_mode = 'untint'
                 self.transition_target_location = None
 
