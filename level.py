@@ -14,6 +14,10 @@ from support import *
 
 class Level:
     def __init__(self, data):
+       # self.bu = import_image('graphcis', 'objects', 'projectile', '0')
+        self.bu = pygame.image.load('graphics/objects/projectile/0.png').convert_alpha()
+
+
         #maps
         self.tile_maps_import()
 
@@ -24,6 +28,8 @@ class Level:
         #data 4 the berrys
         self.data = data
         
+
+
         #groups
         self.all_sprites = Camera()
         #self.tree_group = pygame.sprite.Group()
@@ -31,17 +37,31 @@ class Level:
         self.obstacle_objects = pygame.sprite.Group()
         self.interaction_objects = pygame.sprite.Group()
         self.trail = pygame.sprite.Group()
+
+        self.star_bullet_group = pygame.sprite.Group()
+
+        self.transition_objects = pygame.sprite.Group()
         
-        self.draw_background_normal_layers(tile_map = self.tile_maps['start'])
-        self.draw_background_object_layers(tile_map= self.tile_maps['start'],
-                                           player_spawn_pos= 'start')
-        self.player_spawnpoint(tile_map= self.tile_maps['start'])
+        self.draw_background_normal_layers(tile_map = self.tile_maps['lvl'])
+        self.draw_background_object_layers(tile_map= self.tile_maps['lvl'],
+                                           player_spawn_pos= 'lvl')
+        self.player_spawnpoint(tile_map= self.tile_maps['lvl'])
+
+
+		# transition / tint
+        self.transition_target = None
+        self.tint_surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.tint_mode = 'untint'
+        self.tint_progress = 0
+        self.tint_direction = -1
+        self.tint_speed = 600
 
     def tile_maps_import(self):
         self.tile_maps = {
             'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
             'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx')),
-            'tardis_room':load_pygame(join('map', 'tile_maps', 'tardis_room.tmx'))}
+            'tardis':load_pygame(join('map', 'tile_maps', 'tardis_room.tmx')),
+            'lvl': load_pygame(join('map', 'tile_maps', 'lvl_1.tmx')),}
 
         self.map_animations = {
             'water' : import_folder_big('graphics', 'ground', 'water',),
@@ -162,7 +182,12 @@ class Level:
                     groups =[self.all_sprites, self.interaction_objects], 
                     item_type= '')
                 
-
+        for obj in tile_map.get_layer_by_name('transition'):
+            TransitionObjects(pos= (obj.x, obj.y),
+                              size= (obj.width, obj.height),
+                              target= (obj.properties['destination'], obj.properties['location']),
+                              groups= [self.transition_objects]
+                              )
 
     def player_spawnpoint(self, tile_map):
         for object in tile_map.get_layer_by_name('player'):
@@ -175,15 +200,20 @@ class Level:
                     interaction_objects= self.interaction_objects, 
                     trail= self.trail,
                     data = self.data,
-                    path= ('graphics', 'character'))
+                    path= ('graphics', 'character'),
+                    create_star_bullet= self.star_bullet_player)
 
             if object.name == 'trader':
                 pass
     
     
-    def obstacle_collision(self):
-        for obstacle in self.obstacle_objects:
-            pass
+    def star_bullet_player(self, pos, direction):#:, path):
+        Star(pos= pos,
+            direction = direction,
+            surf= self.bu,
+            groups= [self.all_sprites , self.star_bullet_group])
+            
+            #path = ('character', 'objects', 'projectile'))
 
     def bush_collision(self):
         keys = pygame.key.get_pressed()
@@ -193,8 +223,6 @@ class Level:
                 if self.interaction_objects:
                     interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, False) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
                     if pygame.sprite.spritecollide(self.player, self.interaction_objects, True, pygame.sprite.collide_mask):
-                        self.player.status = 'collect_up'
-                        print(self.player.status)
                         
                         if interaction_objects:
                             if (interaction_objects[0].item_type) == 'Blueberry':
@@ -207,6 +235,27 @@ class Level:
                                 self.player.collision_bush_update('coin')
                             print('Collision in lvl.py + Remove object')
 
+    def transition_check(self):
+        sprites = [sprite for sprite in self.transition_objects if sprite.rect.colliderect(self.player.hitbox_player)]
+        if sprites:
+            self.player.block()
+            self.transition_target = sprites[0].target
+            self.tint_mode = 'tint'
+
+    def tint_screen(self, dt):
+        if self.tint_mode == 'untint':
+            self.tint_progress -= self.tint_speed * dt
+
+        if self.tint_mode == 'tint':
+            self.tint_progress += self.tint_speed * dt
+            if self.tint_progress >= 255:
+                self.tile_maps_import(self.tile_maps[self.transition_target[0]], self.transition_target[1])
+                self.tint_mode = 'untint'
+                self.transition_target = None
+
+        self.tint_progress = max(0, min(self.tint_progress, 255))
+        self.tint_surf.set_alpha(self.tint_progress)
+        self.display_surface.blit(self.tint_surf, (0,0))
 
     def run(self,dt):
         #print(self.player.status)
@@ -214,9 +263,12 @@ class Level:
 
 		
         self.display_surface.fill('black')
+        self.transition_check()
 
         self.bush_collision() # methode muss aufgerufen werden, damit coll. hier fkt
         
         self.all_sprites.draw_all_objects(self.player)
 
         self.all_sprites.update(dt)
+
+        self.tint_screen(dt)

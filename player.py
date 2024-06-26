@@ -5,7 +5,7 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data, path):
+	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data, path, create_star_bullet):
 		super().__init__(groups)
 
 		# 
@@ -34,6 +34,7 @@ class Player(pygame.sprite.Sprite):
 		self.change_speed = False
 		self.speed = 100
 
+		self.blocked = False
 
 
 		# collision
@@ -49,6 +50,9 @@ class Player(pygame.sprite.Sprite):
 
 		#attack
 		self.attacking = False
+		
+		self.create_star_projectile = create_star_bullet
+		self.projectile_shot = 	False
 
 
 		#collect
@@ -63,57 +67,52 @@ class Player(pygame.sprite.Sprite):
 
 
 
-	def animation_player(self,dt):
-		current_animation = self.animations[self.status]
-
-		self.frame_index += self.anmation_speed * dt
-		if self.frame_index >= len(current_animation):
-			self.frame_index = 0
-			if self.attacking:
-				self.attacking = False
-			
-			if self.collecting:
-				self.collecting = False
-
-		self.image = current_animation[int(self.frame_index)]
 		
 
 	def input(self):
 		keys = pygame.key.get_pressed()
 
 		#moving
-		if not self.attacking:
-				if keys[pygame.K_UP] or keys[pygame.K_w]:
-					self.direction.y = -1
-					self.status = 'up'
-				elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
-					self.direction.y = 1
-					self.status = 'down'
-				else:
-					self.direction.y = 0
+		if not self.attacking and not self.collecting:
+			if keys[pygame.K_UP] or keys[pygame.K_w]:
+				self.direction.y = -1
+				self.status = 'up'
+			elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+				self.direction.y = 1
+				self.status = 'down'
+			else:
+				self.direction.y = 0
 
-				if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-					self.direction.x = 1
-					self.status = 'right'
-				elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
-					self.direction.x = -1
-					self.status = 'left'
-				else:
-					self.direction.x = 0
+			if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+				self.direction.x = 1
+				self.status = 'right'
+			elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+				self.direction.x = -1
+				self.status = 'left'
+			else:
+				self.direction.x = 0
 
 		
-		#attack
-		if keys[pygame.K_SPACE]:
-			self.attack = True
-			self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
-			self.frame_index = 0
+			#attack
+			if keys[pygame.K_SPACE]:
+				self.attacking = True
+				self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
+				self.frame_index = 0
+				self.projectile_shot = False
+				#self.create_star_bullet(self.rect.center, vector(1,0))
+				match self.status.split('_')[0]:
+					case 'left': self.projectile_direction = vector (-1,0)
+					case 'right': self.projectile_direction = vector (1,0)
+					case 'up': self.projectile_direction = vector (0,-1)
+					case 'down': self.projectile_direction = vector (0,1)
+				
 
-		#collect
-		if keys[pygame.K_e]:
-			self.collecting = True
-			self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
-			self.frame_index = 0
-			self.status = 'up_collect'
+			#collect
+			if keys[pygame.K_e]:
+				self.collecting = True
+				self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
+				self.frame_index = 0
+				#self.status = 'up_collect'
 
 
 	def status_player(self):
@@ -131,7 +130,7 @@ class Player(pygame.sprite.Sprite):
 		if self.collecting:
 			self.status = self.status.split('_')[0] + '_collect'
 
-				
+		print(self.status)
 
 	def move(self,dt):
 		# vector normalisieren
@@ -148,6 +147,36 @@ class Player(pygame.sprite.Sprite):
 		self.rect.centery = self.pos.y
 		self.obstacle_collision('vertical')
 		
+
+	def animation_player(self,dt):
+		current_animation = self.animations[self.status]
+
+		self.frame_index += self.anmation_speed * dt
+
+
+
+		if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
+			
+
+			projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
+
+			#projectile_start_pos = self.rect.center + self.projectile_direction * 80
+			
+			self.create_star_projectile(projectile_start_pos, self.projectile_direction)
+			self.projectile_shot = True
+			#pass
+			
+		
+		if self.frame_index >= len(current_animation):
+			self.frame_index = 0
+
+			if self.attacking:
+				self.attacking = False
+			
+			if self.collecting:
+				self.collecting = False
+
+		self.image = current_animation[int(self.frame_index)]
 
 	def obstacle_collision(self, direction):
 		for obstacle in self.obstacle_objects.sprites():
@@ -173,6 +202,7 @@ class Player(pygame.sprite.Sprite):
 					self.rect.centery = self.hitbox_player.centery
 					self.pos.y = self.hitbox_player.centery
 
+
 	def collision_bush_update(self, type):
 		
 		if type == 'blueberry':
@@ -196,9 +226,21 @@ class Player(pygame.sprite.Sprite):
 				self.speed = 100
 				self.change_speed = False
 
+	def block(self):
+		self.blocked = True
+		if self.blocked:
+			self.direction = vector(0,0)
+
+	def unblock(self):
+		self.blocked = False
+
+
+
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
 		self.input() #player input --> movement
 		self.status_player() #status (idle or item use)
 		self.move(dt) #movement in dt
+		# self.block()
+		# self.unblock()
 		self.animation_player(dt) #animation in dt
 		self.trail_collision()

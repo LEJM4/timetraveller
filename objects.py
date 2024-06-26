@@ -1,7 +1,8 @@
-from typing import Any
 import pygame
 from settings import *
 from settings import LAYERS
+from support import *
+
 
 class General(pygame.sprite.Sprite):
     def __init__(self, pos, image, groups, z_layer = LAYERS['main']) :
@@ -81,3 +82,41 @@ class Stone(PlantParent):
         super().__init__(pos, image, groups)
         self.item_type = item_type
         self.mask = pygame.mask.from_surface(self.image)
+
+
+
+class Star(pygame.sprite.Sprite):
+    def __init__(self, pos, direction, surf, groups, z_layer = LAYERS['main']):
+        super().__init__(groups)
+        self.image = surf
+        self.rect = self.image.get_rect(center = pos)
+        self.z_layer = z_layer
+
+        self.pos = vector(self.rect.center)
+        self.direction = direction
+        self.speed = 400
+    
+    def animation(self, dt):
+        pass
+    
+    def update(self, dt):
+        self.pos += self.direction * self.speed * dt
+        self.rect.center = (round(self.pos.x), round(self.pos.y))
+
+
+
+class Sprite(pygame.sprite.Sprite):
+	def __init__(self, pos, surf, groups, z = LAYERS['main']):
+		super().__init__(groups)
+		self.image = surf 
+		self.rect = self.image.get_frect(topleft = pos)
+		self.z = z
+		self.y_sort = self.rect.centery
+		self.hitbox = self.rect.copy()
+
+class TransitionObjects(Sprite):
+    def __init__(self, pos, size, target, groups,  z_layer=LAYERS['main']):
+        surf = pygame.Surface(size)
+        super().__init__(pos, surf, groups, z_layer)
+        self.target = target
+

@@ -103,3 +103,6 @@ while True:
 	pygame.display.update()
 
 #'''
+
+# a = import_image('graphics', 'objects', 'projectiles', '0.png' )#, 'objects', 'projectile')
+# print(a)
