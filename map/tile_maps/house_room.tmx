@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="6" height="5" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="50">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="6" height="5" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="50">
  <tileset firstgid="1" source="../tile_sets/wood_floor.tsx"/>
  <tileset firstgid="2" source="../tile_sets/house_inside.tsx"/>
  <tileset firstgid="4" source="../tile_sets/collision.tsx"/>
@@ -39,8 +39,12 @@
   <object id="2" gid="2" x="256" y="128" width="64" height="128"/>
   <object id="4" gid="3" x="128" y="112.5" width="128" height="64"/>
  </objectgroup>
- <objectgroup id="4" name="player">
-  <object id="47" name="spawn" x="192" y="256">
+ <objectgroup id="4" name="character">
+  <object id="47" name="player" x="192" y="256">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="position" value="house_room"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
@@ -53,9 +57,6 @@
 0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="7" name="tree"/>
- <objectgroup id="8" name="bush"/>
- <objectgroup id="9" name="statue"/>
  <objectgroup id="10" name="water"/>
  <objectgroup id="11" name="transition">
   <object id="49" x="128.063" y="304.958" width="127.875" height="14.75">
@@ -65,4 +66,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="12" name="nature"/>
 </map>

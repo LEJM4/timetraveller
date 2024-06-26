@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="69">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="14" nextobjectid="69">
  <tileset firstgid="1" source="../tile_sets/tardis_room.tsx"/>
  <tileset firstgid="65" source="../tile_sets/collision.tsx"/>
  <objectgroup id="4" name="water"/>
- <objectgroup id="5" name="statue"/>
  <objectgroup id="6" name="buildings"/>
  <objectgroup id="12" name="transition">
   <object id="68" x="255.719" y="630.188" width="128.063" height="9.875">
@@ -13,8 +12,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="bush"/>
- <objectgroup id="8" name="tree"/>
+ <objectgroup id="13" name="nature"/>
  <layer id="9" name="trail" width="10" height="11">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
@@ -98,8 +96,12 @@
 0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="player">
-  <object id="14" name="spawn" x="320" y="576">
+ <objectgroup id="3" name="character">
+  <object id="14" name="player" x="320" y="576">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="position" value="tardis_room"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
