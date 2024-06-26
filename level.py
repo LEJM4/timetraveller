@@ -185,6 +185,10 @@ class Level:
                     image = building.image, 
                     groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
                     item_type= '')
+            else:
+                General(pos = (building.x, building.y),
+                    image = building.image, 
+                    groups =[self.all_sprites])
         
         
 
