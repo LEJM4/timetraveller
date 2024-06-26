@@ -140,7 +140,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="map_limit">
+ <objectgroup id="3" name="map_limit" visible="0">
   <object id="12" gid="29" x="6464" y="64" width="64" height="64"/>
   <object id="13" gid="29" x="6464" y="128" width="64" height="64"/>
   <object id="14" gid="29" x="6464" y="192" width="64" height="64"/>
@@ -495,7 +495,7 @@
   <object id="1189" gid="31" x="4874.13" y="1472" width="64" height="20"/>
   <object id="1190" gid="31" x="4874.25" y="1452" width="64" height="20"/>
  </objectgroup>
- <objectgroup id="4" name="tree">
+ <objectgroup id="4" name="tree" visible="0">
   <object id="739" name="tree_small" gid="32" x="5696" y="3136" width="56" height="109"/>
   <object id="740" name="tree_small" gid="32" x="5696" y="3072" width="56" height="109"/>
   <object id="741" name="tree_small" gid="32" x="5696" y="3008" width="56" height="109"/>
@@ -773,7 +773,7 @@
   <object id="1161" name="tree_big" gid="33" x="2496" y="2112" width="201" height="229"/>
   <object id="1162" name="tree_big" gid="33" x="2688" y="2112" width="201" height="229"/>
  </objectgroup>
- <objectgroup id="5" name="bush">
+ <objectgroup id="5" name="bush" visible="0">
   <object id="1066" name="empty" gid="34" x="4928" y="3392" width="64" height="64"/>
   <object id="1067" name="empty" gid="34" x="4736" y="3648" width="64" height="64"/>
   <object id="1068" name="empty" gid="34" x="4160" y="3392" width="64" height="64"/>
@@ -855,7 +855,7 @@
   <object id="1186" name="blueberry" gid="35" x="3072" y="2560" width="64" height="64"/>
   <object id="1187" name="blueberry" gid="35" x="3008" y="2688" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="2" name="buildings">
+ <objectgroup id="2" name="buildings" visible="0">
   <object id="2" name="stone" gid="28" x="5888" y="3264" width="64" height="39"/>
   <object id="4" name="stone" gid="28" x="6016" y="3520" width="64" height="39"/>
   <object id="5" name="stone" gid="28" x="5824" y="3456" width="64" height="39"/>
@@ -938,7 +938,7 @@
   <object id="1202" x="4864.36" y="1536" width="83.4545" height="3.27273">
    <properties>
     <property name="destination" value="tardis"/>
-    <property name="location" value="lvl_1"/>
+    <property name="location" value="tardis_room"/>
    </properties>
   </object>
   <object id="1203" x="1866.96" y="2173" width="38.0435" height="2.95652">
@@ -948,12 +948,12 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="player">
+ <objectgroup id="8" name="player" visible="0">
   <object id="1188" name="spawn" x="4992" y="1600">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="9" name="water">
+ <objectgroup id="9" name="water" visible="0">
   <object id="1192" x="1280" y="2176" width="256" height="320"/>
   <object id="1193" x="1280" y="1664" width="192" height="512"/>
   <object id="1194" x="1280" y="2496" width="192" height="512"/>
@@ -962,7 +962,7 @@
   <object id="1197" x="960" y="2112" width="192" height="256"/>
   <object id="1198" x="1088" y="1664" width="192" height="448"/>
  </objectgroup>
- <objectgroup id="6" name="statue">
+ <objectgroup id="6" name="statue" visible="0">
   <object id="1135" name="stone" gid="28" x="5056" y="1408" width="64" height="39"/>
   <object id="1136" name="stone" gid="28" x="5184" y="1472" width="64" height="39"/>
   <object id="1137" name="stone" gid="28" x="5120" y="1664" width="64" height="39"/>
