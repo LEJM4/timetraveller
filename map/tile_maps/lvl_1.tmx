@@ -495,7 +495,7 @@
   <object id="1189" gid="31" x="4874.13" y="1472" width="64" height="20"/>
   <object id="1190" gid="31" x="4874.25" y="1452" width="64" height="20"/>
  </objectgroup>
- <objectgroup id="12" name="nature">
+ <objectgroup id="12" name="nature" visible="0">
   <object id="1204" name="tree_small" gid="32" x="5696" y="3136" width="56" height="109"/>
   <object id="1205" name="tree_small" gid="32" x="5696" y="3072" width="56" height="109"/>
   <object id="1206" name="tree_small" gid="32" x="5696" y="3008" width="56" height="109"/>
@@ -938,32 +938,32 @@
   <object id="1152" name="house_2" gid="38" x="2487.5" y="2176" width="205" height="192"/>
   <object id="1153" name="house_1" gid="37" x="2240" y="2176" width="235" height="208"/>
   <object id="1163" name="house_1" gid="37" x="1992.5" y="2176" width="235" height="208"/>
-  <object id="1164" name="house_2" gid="38" x="1792" y="2176" width="205" height="192"/>
+  <object id="1164" name="house_2" gid="38" x="1791.67" y="2176.67" width="205" height="192"/>
   <object id="1165" name="house_2" gid="38" x="2688" y="2560" width="205" height="192"/>
   <object id="1167" name="house_1" gid="37" x="2440.5" y="2560" width="235" height="208"/>
   <object id="1168" name="house_2" gid="38" x="2240" y="2560" width="205" height="192"/>
   <object id="1170" name="house_1" gid="37" x="1992.5" y="2560" width="235" height="208"/>
   <object id="1171" name="house_2" gid="38" x="1792" y="2560" width="205" height="192"/>
  </objectgroup>
- <objectgroup id="10" name="transition" visible="0">
+ <objectgroup id="10" name="transition">
   <object id="1202" x="4864.36" y="1536" width="83.4545" height="3.27273">
    <properties>
     <property name="destination" value="tardis"/>
-    <property name="location" value="tardis_room"/>
+    <property name="target_location" value="tardis_room"/>
    </properties>
   </object>
-  <object id="1203" x="1866.96" y="2173" width="38.0435" height="2.95652">
+  <object id="1203" x="1866.96" y="2178" width="38.0435" height="2.95652">
    <properties>
     <property name="destination" value="house_room"/>
-    <property name="location" value="lvl_1"/>
+    <property name="target_location" value="house_room"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="character" visible="0">
+ <objectgroup id="8" name="character">
   <object id="1188" name="player" x="4992" y="1600">
    <properties>
     <property name="direction" value="up"/>
-    <property name="position" value="house_room"/>
+    <property name="position" value="meadow"/>
    </properties>
    <point/>
   </object>

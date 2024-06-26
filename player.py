@@ -1,56 +1,20 @@
 import pygame
 from settings import *
 from support import *
+from entity import Entity_M
 
 
-class Player(pygame.sprite.Sprite):
+class Player(Entity_M):
 
-	def __init__(self, pos, groups,	obstacle_objects, interaction_objects, trail, data, path, create_star_bullet):
-		super().__init__(groups)
+	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_star_bullet):
+		super().__init__( pos, groups, facing_direction, obstacle_objects, data, path)
 
-		# 
-		self.path = path
-
-		# graphic
-		self.import_pictures_4_animation()
-		self.status = 'down_idle'
-		self.frame_index = 0
-		self.anmation_speed = 10
-		self.z_layer = LAYERS['main']
-
-
-		#imports
-		self.data = data
-
-		# general setup
-		self.image = self.animations[self.status][self.frame_index]
-		self.rect = self.image.get_rect(center = pos)
-
-
-
-		# movement attributes
-		self.direction = pygame.math.Vector2()
-		self.pos = pygame.math.Vector2(self.rect.center)
-		self.change_speed = False
-		self.speed = 100
-
-		self.blocked = False
-
-
-		# collision
-		self.hitbox_player = self.rect
-		self.player_mask = pygame.mask.from_surface(self.image)
-
+		
 		#Parametergroups
-		self.obstacle_objects = obstacle_objects
 		self.interaction_objects = interaction_objects
 		self.trail = trail
 
-
-
-		#attack
-		self.attacking = False
-		
+		#
 		self.create_star_projectile = create_star_bullet
 		self.projectile_shot = 	False
 
@@ -58,11 +22,6 @@ class Player(pygame.sprite.Sprite):
 		#collect
 
 		self.collecting = False
-
-	
-	def import_pictures_4_animation(self):
-		# alle animaatonen mithiilfe der funktiion "subfolder" laden
-		self.animations = import_sub_folders(*self.path)
 
 
 
@@ -130,7 +89,7 @@ class Player(pygame.sprite.Sprite):
 		if self.collecting:
 			self.status = self.status.split('_')[0] + '_collect'
 
-		print(self.status)
+		#print(self.status)
 
 	def move(self,dt):
 		# vector normalisieren

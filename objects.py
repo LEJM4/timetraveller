@@ -115,8 +115,8 @@ class Sprite(pygame.sprite.Sprite):
 		self.hitbox = self.rect.copy()
 
 class TransitionObjects(Sprite):
-    def __init__(self, pos, size, target, groups,  z_layer=LAYERS['main']):
+    def __init__(self, pos, size, target_location, groups,  z_layer=LAYERS['main']):
         surf = pygame.Surface(size)
         super().__init__(pos, surf, groups, z_layer)
-        self.target = target
+        self.target_location = target_location
 

@@ -82,16 +82,20 @@ def import_sub_folders(*path):
 	return frames
 
 
+def tmx_importer(*path):
+	tmx_dict = {}
+	for folder_path, sub_folders, file_names in walk(join(*path)):
+		for file in file_names:
+			tmx_dict[file.split('.')[0]] = load_pygame(join(folder_path, file))
+	return tmx_dict
+
 
 '''
 pygame.init()
 ds = pygame.display.set_mode((1100, 900))
 
 aa = (import_folder_big('graphics','character'))
-#print(aa)
-b = import_sub_folders('graphics','character')
-print(b)
-
+print(aa)
 
 while True:
 	for event in pygame.event.get():
@@ -104,5 +108,4 @@ while True:
 
 #'''
 
-# a = import_image('graphics', 'objects', 'projectiles', '0.png' )#, 'objects', 'projectile')
-# print(a)
+

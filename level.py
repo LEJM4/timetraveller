@@ -15,11 +15,11 @@ from support import *
 class Level:
     def __init__(self, data):
        # self.bu = import_image('graphcis', 'objects', 'projectile', '0')
-        self.bu = pygame.image.load('graphics/objects/projectile/0.png').convert_alpha()
+        self.bu = pygame.image.load('graphics/objects/projectile/left/0.png').convert_alpha()
 
 
         #maps
-        self.tile_maps_import()
+
 
 
         #display_surface
@@ -41,15 +41,18 @@ class Level:
         self.star_bullet_group = pygame.sprite.Group()
 
         self.transition_objects = pygame.sprite.Group()
-        
+
+        self.tile_maps_import()
+        self.create_map(self.tile_maps['lvl_1'], 'meadow')
+        """
         self.draw_background_normal_layers(tile_map = self.tile_maps['lvl'])
         self.draw_background_object_layers(tile_map= self.tile_maps['lvl'],
                                            player_spawn_pos= 'lvl')
         self.player_spawnpoint(tile_map= self.tile_maps['lvl'])
-
+        #"""
 
 		# transition / tint
-        self.transition_target = None
+        self.transition_target_location = None
         self.tint_surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.tint_mode = 'untint'
         self.tint_progress = 0
@@ -57,12 +60,16 @@ class Level:
         self.tint_speed = 600
 
     def tile_maps_import(self):
+        self.tile_maps = tmx_importer('map', 'tile_maps')
+        '''
         self.tile_maps = {
             'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
             'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx')),
             'tardis':load_pygame(join('map', 'tile_maps', 'tardis_room.tmx')),
             'lvl': load_pygame(join('map', 'tile_maps', 'lvl_1.tmx')),}
 
+        #'''
+            
         self.map_animations = {
             'water' : import_folder_big('graphics', 'ground', 'water',),
             'characters' : import_npc('graphics', 'npc', 'npc_1')      
@@ -70,33 +77,31 @@ class Level:
         print(self.map_animations['characters'])
 
 
-    def draw_background_normal_layers(self, tile_map):
-        #draw normal layers
 
+    def create_map(self, tile_map, player_start_pos):
+        for group in (self.all_sprites, self.obstacle_objects, self.interaction_objects, self.trail, self.star_bullet_group, self.transition_objects):
+            group.empty()
+
+        #ground laayers
         for x, y, image in tile_map.get_layer_by_name('ground').tiles():
             General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
                     image= image,
                     groups= [self.all_sprites],
                     z_layer= LAYERS['ground'])
             
+        #traail laayer            
         for x,y, image in tile_map.get_layer_by_name('trail').tiles():
             Trail(pos=(x*TILE_SIZE, y*TILE_SIZE), 
                     image= image,
                     groups= [self.all_sprites, self.trail],
                     z_layer= LAYERS['trail'])
-        '''   
-        for x, y, image in tile_map.get_layer_by_name('map_limit').tiles():
-            General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
-                    image= image,
-                    groups= [self.all_sprites,self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
-                    z_layer= LAYERS['ground'])
-        '''    
-    def draw_background_object_layers(self, tile_map, player_spawn_pos):
+
+
+        ###creaate all objects
+
         #tile_map = load_pygame(self.map_string)
-        tree_layer = tile_map.get_layer_by_name('tree')
-        bush_layer = tile_map.get_layer_by_name('bush')
+        nature_layer = tile_map.get_layer_by_name('nature')
         buildings_layer = tile_map.get_layer_by_name('buildings')
-        statue_layer=tile_map.get_layer_by_name('statue')
 
         map_limit_layer = tile_map.get_layer_by_name('map_limit')
 
@@ -106,9 +111,9 @@ class Level:
                     groups= [self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
                     z_layer= LAYERS['ground'])
             
-        water_layer = tile_map.get_layer_by_name('water')
 
-        for water in water_layer:
+
+        for water in tile_map.get_layer_by_name('water'):
             for x in range (int(water.x), int(water.x + water.width), TILE_SIZE):
                 for y in range (int(water.y), int(water.y + water.height), TILE_SIZE):
                     AnimatedSprites(pos = (x,y),
@@ -116,50 +121,56 @@ class Level:
                                     groups= [self.all_sprites, self.obstacle_objects],
                                     animation_speed= 4)
 
-        for tree in tree_layer:
-            if tree.name == ('tree_small'):
+        for nature_obj in nature_layer:
+            if nature_obj.name == ('tree_small'):
                 Tree(
-                    pos= (tree.x, tree.y), 
-                    image= tree.image, 
+                    pos= (nature_obj.x, nature_obj.y), 
+                    image= nature_obj.image, 
                     groups= [self.all_sprites, self.obstacle_objects],
                     item_type= 'tree_small')
                 
-            if tree.name == ('tree_big'):
+            if nature_obj.name == ('tree_big'):
                 Tree(
-                    pos= (tree.x, tree.y), 
-                    image= tree.image, 
+                    pos= (nature_obj.x, nature_obj.y), 
+                    image= nature_obj.image, 
                     groups= [self.all_sprites, self.obstacle_objects],
                     item_type= 'tree_big')
                 
-            if tree.name == ('transparent_tree'):
+            if nature_obj.name == ('transparent_tree'):
                 Tree(
-                    pos= (tree.x, tree.y), 
-                    image= tree.image, 
+                    pos= (nature_obj.x, nature_obj.y), 
+                    image= nature_obj.image, 
                     groups= [self.all_sprites],
                     item_type= 'big_tree')
 
-        for bush in bush_layer:
-            if bush.name == ('empty'):
+            if nature_obj.name == ('empty'):
                 Bush(
-                    pos = (bush.x, bush.y), 
-                    image = bush.image, 
+                    pos = (nature_obj.x, nature_obj.y), 
+                    image = nature_obj.image, 
                     groups = [self.all_sprites], 
                     item_type = 'Empty')
 
-            if bush.name == ('blueberry'):
+            if nature_obj.name == ('blueberry'):
                 Bush(
-                    pos = (bush.x, bush.y),
-                    image = bush.image, 
+                    pos = (nature_obj.x, nature_obj.y),
+                    image = nature_obj.image, 
                     groups = [self.all_sprites, self.interaction_objects], 
                     item_type = 'Blueberry')
 
-            if bush.name == ('raspberry'):
+            if nature_obj.name == ('raspberry'):
                 Bush(
-                    pos = (bush.x, bush.y),
-                    image =bush.image, 
+                    pos = (nature_obj.x, nature_obj.y),
+                    image =nature_obj.image, 
                     groups =[self.all_sprites, self.interaction_objects], 
                     item_type= 'Raspberry')
-        
+
+            if nature_obj.name == ('stone'):
+                Stone(pos = (nature_obj.x, nature_obj.y),
+                    image = nature_obj.image, 
+                    groups =[self.all_sprites, self.interaction_objects], 
+                    item_type= '')
+
+
         for building in buildings_layer:
             if building.name == ('tardis'):
                 Tardis(
@@ -175,38 +186,39 @@ class Level:
                     groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
                     item_type= '')
         
-        for stone in statue_layer:
-            if stone.name == ('stone'):
-                Stone(pos = (stone.x, stone.y),
-                    image = stone.image, 
-                    groups =[self.all_sprites, self.interaction_objects], 
-                    item_type= '')
+        
+
                 
         for obj in tile_map.get_layer_by_name('transition'):
             TransitionObjects(pos= (obj.x, obj.y),
                               size= (obj.width, obj.height),
-                              target= (obj.properties['destination'], obj.properties['location']),
+                              target_location= ( obj.properties['target_location'], obj.properties['destination']),
                               groups= [self.transition_objects]
                               )
 
-    def player_spawnpoint(self, tile_map):
-        for object in tile_map.get_layer_by_name('player'):
-            
-            if object.name == 'spawn':
-                self.player = Player(
-                    pos = (object.x, object.y), 
-                    groups = self.all_sprites, 
-                    obstacle_objects= self.obstacle_objects ,
-                    interaction_objects= self.interaction_objects, 
-                    trail= self.trail,
-                    data = self.data,
-                    path= ('graphics', 'character'),
-                    create_star_bullet= self.star_bullet_player)
+        #charaacter + npc
 
-            if object.name == 'trader':
-                pass
-    
-    
+        #___________________________
+
+        for object in tile_map.get_layer_by_name('character'):
+                    
+                    if object.name == 'player':
+                        if object.properties['position'] == player_start_pos:
+                            self.player = Player(
+                                pos = (object.x, object.y), 
+                                groups = self.all_sprites, 
+                                facing_direction= object.properties['direction'],
+                                obstacle_objects= self.obstacle_objects ,
+                                interaction_objects= self.interaction_objects, 
+                                trail= self.trail,
+                                data = self.data,
+                                path= ('graphics', 'character'),
+                                create_star_bullet= self.star_bullet_player)
+
+                    if object.name == 'trader':
+                        pass
+
+
     def star_bullet_player(self, pos, direction):#:, path):
         Star(pos= pos,
             direction = direction,
@@ -239,7 +251,7 @@ class Level:
         sprites = [sprite for sprite in self.transition_objects if sprite.rect.colliderect(self.player.hitbox_player)]
         if sprites:
             self.player.block()
-            self.transition_target = sprites[0].target
+            self.transition_target_location = sprites[0].target_location
             self.tint_mode = 'tint'
 
     def tint_screen(self, dt):
@@ -249,9 +261,9 @@ class Level:
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt
             if self.tint_progress >= 255:
-                self.tile_maps_import(self.tile_maps[self.transition_target[0]], self.transition_target[1])
+                self.create_map(self.tile_maps[self.transition_target_location[0]], self.transition_target_location[0])
                 self.tint_mode = 'untint'
-                self.transition_target = None
+                self.transition_target_location = None
 
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)
@@ -260,15 +272,15 @@ class Level:
     def run(self,dt):
         #print(self.player.status)
 
-
-		
-        self.display_surface.fill('black')
+        self.display_surface.fill('purple')
+        
         self.transition_check()
 
         self.bush_collision() # methode muss aufgerufen werden, damit coll. hier fkt
         
-        self.all_sprites.draw_all_objects(self.player)
-
         self.all_sprites.update(dt)
 
+        self.all_sprites.draw_all_objects(self.player)
+
+        
         self.tint_screen(dt)
