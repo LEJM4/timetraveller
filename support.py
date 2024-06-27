@@ -7,19 +7,6 @@ from pytmx.util_pygame import load_pygame
 from sys import exit
 
 
-def import_folder(path):
-    surface_list = []
-
-    #durchlauft alle Ordner zum angegebenen Pfad
-    for _, __, img_files in walk(path):
-        for image in img_files:
-            # erstellt den Pfad zur aktuellen Bilddatei
-            full_path = path + '/' + image
-            image_surf = pygame.image.load(full_path).convert_alpha()
-            surface_list.append(image_surf)
-
-    return surface_list
-
 def import_image(*path, alpha = True, format = 'png'):
 	full_path = join(*path) + f'.{format}'
 	surf = pygame.image.load(full_path).convert_alpha() if alpha else pygame.image.load(full_path).convert()
@@ -43,7 +30,7 @@ def import_tilemap(cols, rows, *path):
 
 
 
-def npc_image_importer(cols, row, *path):
+def character_image_importer(cols, row, *path):
 	frame_dict = import_tilemap(cols, row,*path)
 	new_dict ={}
 	for row, direction in enumerate(('down','left', 'right','up')):
@@ -57,7 +44,7 @@ def import_npc(*path):
 	for _, __, image_names in walk(join(*path)):
 		for image in image_names:
 			image_name = image.split('.')[0] #teilt ab "." den str in zwei haelften und nimmt nur diie erste
-			new_dict[image_name] = npc_image_importer(4,4,*path, image_name)
+			new_dict[image_name] = character_image_importer(4,4,*path, image_name)
 	return new_dict
 
 
