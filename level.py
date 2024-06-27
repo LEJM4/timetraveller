@@ -211,7 +211,7 @@ class Level:
                             self.player = Player(
                                 pos = (object.x, object.y), 
                                 groups = self.all_sprites, 
-                                facing_direction= object.properties['direction'],
+                                status= object.properties['direction'],
                                 obstacle_objects= self.obstacle_objects ,
                                 interaction_objects= self.interaction_objects, 
                                 trail= self.trail,

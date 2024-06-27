@@ -13,18 +13,18 @@ from settings import Settings
 
 class Game:
     def __init__(self):
-        pygame.init()
+        pygame.init() #initialisieren von Python
 
-        self.mouse_visible = False
-        pygame.mouse.set_visible(self.mouse_visible)
+        self.mouse_visible = False #mouse unsichtbar machen
+        pygame.mouse.set_visible(self.mouse_visible) #status der maus --> ob sichtbar oder nicht abhaengig von "self.mouse_visible" machen
 
         #import stuff
-        self.data = Data()
+        self.data = Data() 
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((self.settings.SCREEN_WIDTH,self.settings.SCREEN_HEIGHT))
-        pygame.display.set_caption('Time_traveller')
-        self.clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode((self.settings.SCREEN_WIDTH,self.settings.SCREEN_HEIGHT)) #Screen von settingsclass
+        pygame.display.set_caption('Time_traveller') #namen des fensters aendern
+        self.clock = pygame.time.Clock() #clock einfuehren
         
         
 

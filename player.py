@@ -6,8 +6,8 @@ from entity import Entity_M
 
 class Player(Entity_M):
 
-	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_star_bullet):
-		super().__init__( pos, groups, facing_direction, obstacle_objects, data, path)
+	def __init__(self, pos, groups, status, obstacle_objects, interaction_objects, trail, data, path, create_star_bullet):
+		super().__init__( pos, groups, status, obstacle_objects, data, path)
 
 		
 		#Parametergroups

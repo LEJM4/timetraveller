@@ -28,7 +28,7 @@ class Entity(pygame.sprite.Sprite):
         return 'left'
     
 class Entity_M(pygame.sprite.Sprite):
-    def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path):
+    def __init__(self, pos, groups,	status, obstacle_objects, data, path):
         super().__init__(groups)
         		# 
 
@@ -37,7 +37,7 @@ class Entity_M(pygame.sprite.Sprite):
 
         # graphic
         self.import_pictures_4_animation()
-        self.status = facing_direction
+        self.status = status
         self.frame_index = 0
         self.anmation_speed = 10
         self.z_layer = LAYERS['main']
@@ -53,8 +53,8 @@ class Entity_M(pygame.sprite.Sprite):
 
 
         # movement attributes
-        self.direction = pygame.math.Vector2()
-        self.pos = pygame.math.Vector2(self.rect.center)
+        self.direction = vector()
+        self.pos = vector(self.rect.center)
         self.change_speed = False
         self.speed = 100
 
