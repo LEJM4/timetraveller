@@ -28,7 +28,7 @@
 0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="11" name="map_limit" visible="0">
+ <objectgroup id="11" name="map_limit">
   <object id="15" gid="65" x="384" y="640" width="64" height="64"/>
   <object id="16" gid="65" x="448" y="640" width="64" height="64"/>
   <object id="17" gid="65" x="512" y="640" width="64" height="64"/>
@@ -63,9 +63,6 @@
   <object id="46" gid="65" x="576" y="576" width="64" height="64"/>
   <object id="48" gid="67" x="192.182" y="83.6364" width="64" height="20"/>
   <object id="49" gid="67" x="192.091" y="101.182" width="64" height="20"/>
-  <object id="50" gid="66" x="309.636" y="127.818" width="21" height="64"/>
-  <object id="51" gid="66" x="309.636" y="192" width="21" height="64"/>
-  <object id="52" gid="66" x="309.455" y="256.182" width="21" height="64"/>
   <object id="53" gid="67" x="320.004" y="340.004" width="64" height="20"/>
   <object id="54" gid="67" x="320.015" y="349.801" width="64" height="20"/>
   <object id="55" gid="67" x="256.026" y="340.026" width="64" height="20"/>
