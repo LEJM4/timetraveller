@@ -69,8 +69,8 @@
  <objectgroup id="11" name="transition">
   <object id="49" x="128.063" y="304.958" width="127.875" height="14.75">
    <properties>
-    <property name="destination" value="house_2"/>
-    <property name="target_location" value="lvl_1"/>
+    <property name="destination" value="lvl_1"/>
+    <property name="location" value="house_2"/>
    </properties>
   </object>
  </objectgroup>

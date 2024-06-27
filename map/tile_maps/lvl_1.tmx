@@ -948,14 +948,14 @@
  <objectgroup id="10" name="transition">
   <object id="1202" x="4864.36" y="1536" width="83.4545" height="3.27273">
    <properties>
-    <property name="destination" value="entrance_tardis"/>
-    <property name="target_location" value="tardis_room"/>
+    <property name="destination" value="tardis_room"/>
+    <property name="location" value="entrance_tardis"/>
    </properties>
   </object>
   <object id="1203" x="1866.96" y="2178" width="38.0435" height="2.95652">
    <properties>
-    <property name="destination" value="entrance_house_room"/>
-    <property name="target_location" value="house_room"/>
+    <property name="destination" value="house_room"/>
+    <property name="location" value="entrance_house_room"/>
    </properties>
   </object>
  </objectgroup>

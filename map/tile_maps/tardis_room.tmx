@@ -7,8 +7,8 @@
  <objectgroup id="12" name="transition">
   <object id="68" x="255.719" y="630.188" width="128.063" height="9.875">
    <properties>
-    <property name="destination" value="tardis"/>
-    <property name="target_location" value="lvl_1"/>
+    <property name="destination" value="lvl_1"/>
+    <property name="location" value="tardis"/>
    </properties>
   </object>
  </objectgroup>
