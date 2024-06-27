@@ -52,7 +52,7 @@ class Level:
         #"""
 
 		# transition / tint
-        self.transition_target_location = None
+        self.transition_destination = None
         self.tint_surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.tint_mode = 'untint'
         self.tint_progress = 0
@@ -196,7 +196,7 @@ class Level:
         for obj in tile_map.get_layer_by_name('transition'):
             TransitionObjects(pos= (obj.x, obj.y),
                               size= (obj.width, obj.height),
-                              target_location= ( obj.properties['target_location'], obj.properties['destination']),
+                              destination= ( obj.properties['destination'], obj.properties['location']),
                               groups= [self.transition_objects]
                               )
 
@@ -255,7 +255,7 @@ class Level:
         sprites = [sprite for sprite in self.transition_objects if sprite.rect.colliderect(self.player.hitbox_player)]
         if sprites:
             self.player.block()
-            self.transition_target_location = sprites[0].target_location
+            self.transition_destination = sprites[0].destination
             self.tint_mode = 'tint'
 
     def tint_screen(self, dt):
@@ -265,9 +265,9 @@ class Level:
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt
             if self.tint_progress >= 255:
-                self.create_map(self.tile_maps[self.transition_target_location[0]], self.transition_target_location[1])
+                self.create_map(self.tile_maps[self.transition_destination[0]], self.transition_destination[1])
                 self.tint_mode = 'untint'
-                self.transition_target_location = None
+                self.transition_destination = None
 
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)
