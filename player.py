@@ -91,20 +91,7 @@ class Player(Entity_M):
 
 		#print(self.status)
 
-	def move(self,dt):
-		# vector normalisieren
-		if self.direction.magnitude() > 0:
-			self.direction = self.direction.normalize()
 
-		# x movement
-		self.pos.x += self.direction.x * self.speed * dt
-		self.rect.centerx = self.pos.x
-		self.obstacle_collision('horizontal')
-
-		# y movement
-		self.pos.y += self.direction.y * self.speed * dt
-		self.rect.centery = self.pos.y
-		self.obstacle_collision('vertical')
 		
 
 	def animation_player(self,dt):
@@ -137,29 +124,7 @@ class Player(Entity_M):
 
 		self.image = current_animation[int(self.frame_index)]
 
-	def obstacle_collision(self, direction):
-		for obstacle in self.obstacle_objects.sprites():
-			if obstacle.hitbox.colliderect(self.hitbox_player):
 
-				if direction == 'horizontal':
-					if self.direction.x < 0:
-						self.hitbox_player.left = obstacle.hitbox.right
-
-					if self.direction.x > 0:
-						self.hitbox_player.right = obstacle.hitbox.left
-
-					self.rect.centerx = self.hitbox_player.centerx
-					self.pos.x = self.hitbox_player.centerx
-				
-				else:
-					if self.direction.y < 0:
-						self.hitbox_player.top = obstacle.hitbox.bottom
-					
-					if self.direction.y > 0:
-						self.hitbox_player.bottom = obstacle.hitbox.top
-						
-					self.rect.centery = self.hitbox_player.centery
-					self.pos.y = self.hitbox_player.centery
 
 
 	def collision_bush_update(self, type):
@@ -185,13 +150,7 @@ class Player(Entity_M):
 				self.speed = 100
 				self.change_speed = False
 
-	def block(self):
-		self.blocked = True
-		if self.blocked:
-			self.direction = vector(0,0)
 
-	def unblock(self):
-		self.blocked = False
 
 
 

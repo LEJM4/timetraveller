@@ -74,7 +74,7 @@ class Level:
             'water' : import_folder_big('graphics', 'ground', 'water',),
             'characters' : import_npc('graphics', 'npc', 'npc_1')      
         }
-        print(self.map_animations['characters'])
+        #print(self.map_animations['characters'])
 
 
 
