@@ -28,16 +28,17 @@ class Entity(pygame.sprite.Sprite):
         return 'left'
     
 class Entity_M(pygame.sprite.Sprite):
-    def __init__(self, pos, groups,	status, obstacle_objects, data, path):
+    def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path):
         super().__init__(groups)
         		# 
-
+        #status
+        self.status = 'move'
 		# 
         self.path = path
 
         # graphic
         self.import_pictures_4_animation()
-        self.status = status
+        self.facing_direction = facing_direction
         self.frame_index = 0
         self.animation_speed = 10
         self.z_layer = LAYERS['main']
@@ -48,7 +49,8 @@ class Entity_M(pygame.sprite.Sprite):
         self.data = data
 
         # general setup
-        self.image = self.animations[self.status][self.frame_index]
+        #self.image = self.animations[self.facing_direction][self.frame_index]
+        self.image =  self.frames[self.status][self.facing_direction][int(self.frame_index)]
         #self.image = self.status[self.get_state()][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
 
@@ -70,18 +72,21 @@ class Entity_M(pygame.sprite.Sprite):
         self.obstacle_objects = obstacle_objects
 
 
+        #states
+        #moving
+        self.moving = False
+
         #attack
         self.attacking = False
 
         #collect
-
         self.collecting = False
 	
     def import_pictures_4_animation(self):
         # alle animaatonen mithiilfe der funktiion "subfolder" laden
-        self.animations = import_sub_folders(*self.path)
+        #self.animations = import_sub_folders(*self.path)
 
-        #self.animations = import_spritesheets(*self.path)
+        self.frames = import_multiple_spritesheets(*self.path)
 
     def move(self,dt):
         # vector normalisieren
@@ -129,21 +134,21 @@ class Entity_M(pygame.sprite.Sprite):
     def unblock(self):
         self.blocked = False
 
-    def get_state(self):
-        moving = bool(self.direction)
-        if moving:
-            if self.direction.x != 0:
-                self.status = 'right' if self.direction.x > 0 else 'left'
-            if self.direction.y != 0:
-                self.status = 'down' if self.direction.y > 0 else 'up'
+    # def get_state(self):
+    #     moving = bool(self.direction)
+    #     if moving:
+    #         if self.direction.x != 0:
+    #             self.facing_direction = 'right' if self.direction.x > 0 else 'left'
+    #         if self.direction.y != 0:
+    #             self.facing_direction = 'down' if self.direction.y > 0 else 'up'
 
-            return f'{self.status}{"" if moving else "_idle"}'
+    #         return f'{self.facing_direction}{"" if moving else "_idle"}'
         
-        elif self.collecting:
-            return f'{self.status}_collect'
+    #     elif self.collecting:
+    #         return f'{self.facing_direction}_collect'
         
-        elif self.attacking:
-            return f'{self.status}_attack'
+    #     elif self.attacking:
+    #         return f'{self.facing_direction}_attack'
 
 
 

@@ -15,7 +15,7 @@ from support import *
 class Level:
     def __init__(self, data):
        # self.bu = import_image('graphcis', 'objects', 'projectile', '0')
-        self.bu = pygame.image.load('graphics/objects/projectile/left/0.png').convert_alpha()
+        self.bu = import_image('graphics','objects','projectile','left', '0') 
 
 
         #maps
@@ -72,7 +72,7 @@ class Level:
             
         self.map_animations = {
             'water' : import_folder_big('graphics', 'ground', 'water',),
-            'characters' : import_spritesheets('graphics', 'npc', 'npc_1')      
+            'characters' : import_multiple_spritesheets('graphics', 'npc', 'npc_1')      
         }
         #print(self.map_animations['characters'])
 
@@ -211,12 +211,12 @@ class Level:
                             self.player = Player(
                                 pos = (object.x, object.y), 
                                 groups = self.all_sprites, 
-                                status= object.properties['direction'],
+                                facing_direction= object.properties['direction'],
                                 obstacle_objects= self.obstacle_objects ,
                                 interaction_objects= self.interaction_objects, 
                                 trail= self.trail,
                                 data = self.data,
-                                path= ('graphics', 'character'),
+                                path= ('graphics', 'player'),
                                 create_star_bullet= self.star_bullet_player)
 
                     if object.name == 'trader':
