@@ -19,9 +19,7 @@ class Player(Entity_M):
 		self.projectile_shot = 	False
 
 
-		#collect
 
-		self.collecting = False
 
 
 
@@ -74,6 +72,9 @@ class Player(Entity_M):
 				#self.status = 'up_collect'
 
 
+
+
+
 	def status_player(self):
 
 		# idle 
@@ -97,7 +98,7 @@ class Player(Entity_M):
 	def animation_player(self,dt):
 		current_animation = self.animations[self.status]
 
-		self.frame_index += self.anmation_speed * dt
+		self.frame_index += self.animation_speed * dt
 
 
 
@@ -124,7 +125,34 @@ class Player(Entity_M):
 
 		self.image = current_animation[int(self.frame_index)]
 
+	def animation_player_2(self, dt):
+		self.frame_index += self.animation_speed * dt
+		self.image = self.status[self.get_state()][int(self.frame_index)]
 
+		if self.frame_index == len(self.status[self.get_state()]):
+			self.frame_index = 0
+
+			if self.attacking:
+				self.attacking = False
+			
+			if self.collecting:
+				self.collecting = False
+
+
+	def animation_leo(self, dt):
+		self.frame_index += self.animation_speed * dt
+
+
+		self.image = self.status[self.facing_direction][int(self.frame_index)]
+
+		if self.frame_index == len(self.status[self.facing_direction]):
+			self.frame_index = 0
+
+			if self.attacking:
+				self.attacking = False
+			
+			if self.collecting:
+				self.collecting = False
 
 
 	def collision_bush_update(self, type):

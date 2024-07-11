@@ -39,21 +39,22 @@ class Entity_M(pygame.sprite.Sprite):
         self.import_pictures_4_animation()
         self.status = status
         self.frame_index = 0
-        self.anmation_speed = 10
+        self.animation_speed = 10
         self.z_layer = LAYERS['main']
 
+        self.direction = vector()
 
         #imports
         self.data = data
 
         # general setup
         self.image = self.animations[self.status][self.frame_index]
+        #self.image = self.status[self.get_state()][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
 
 
 
         # movement attributes
-        self.direction = vector()
         self.pos = vector(self.rect.center)
         self.change_speed = False
         self.speed = 100
@@ -72,11 +73,15 @@ class Entity_M(pygame.sprite.Sprite):
         #attack
         self.attacking = False
 
+        #collect
 
+        self.collecting = False
 	
     def import_pictures_4_animation(self):
         # alle animaatonen mithiilfe der funktiion "subfolder" laden
         self.animations = import_sub_folders(*self.path)
+
+        #self.animations = import_spritesheets(*self.path)
 
     def move(self,dt):
         # vector normalisieren
@@ -123,6 +128,28 @@ class Entity_M(pygame.sprite.Sprite):
 
     def unblock(self):
         self.blocked = False
+
+    def get_state(self):
+        moving = bool(self.direction)
+        if moving:
+            if self.direction.x != 0:
+                self.status = 'right' if self.direction.x > 0 else 'left'
+            if self.direction.y != 0:
+                self.status = 'down' if self.direction.y > 0 else 'up'
+
+            return f'{self.status}{"" if moving else "_idle"}'
+        
+        elif self.collecting:
+            return f'{self.status}_collect'
+        
+        elif self.attacking:
+            return f'{self.status}_attack'
+
+
+
+
+
+
 
 class Characters:
 	def get_player_distance_direction(self):

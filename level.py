@@ -72,7 +72,7 @@ class Level:
             
         self.map_animations = {
             'water' : import_folder_big('graphics', 'ground', 'water',),
-            'characters' : import_npc('graphics', 'npc', 'npc_1')      
+            'characters' : import_spritesheets('graphics', 'npc', 'npc_1')      
         }
         #print(self.map_animations['characters'])
 

@@ -13,7 +13,7 @@ from settings import Settings
 
 class Game:
     def __init__(self):
-        pygame.init() #initialisieren von Python
+        pygame.init() #initialisieren von Pygame
 
         self.mouse_visible = False #mouse unsichtbar machen
         pygame.mouse.set_visible(self.mouse_visible) #status der maus --> ob sichtbar oder nicht abhaengig von "self.mouse_visible" machen

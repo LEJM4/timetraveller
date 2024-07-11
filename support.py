@@ -39,7 +39,7 @@ def character_image_importer(cols, row, *path):
 	return new_dict
 
 
-def import_npc(*path):
+def import_spritesheets(*path):
 	new_dict = {}
 	for _, __, image_names in walk(join(*path)):
 		for image in image_names:
@@ -59,6 +59,10 @@ def import_folder_big(*path):
 			surf = pygame.image.load(full_path).convert_alpha()
 			surf_list.append(surf)
 	return surf_list
+
+
+
+
 
 def import_sub_folders(*path):
 	frames = {}
@@ -81,7 +85,10 @@ def tmx_importer(*path):
 pygame.init()
 ds = pygame.display.set_mode((1100, 900))
 
-aa = (import_folder_big('graphics','character'))
+#aa = (character_image_importer(4, 7, 'graphics','character', 'move'))
+
+aa = (import_spritesheets('graphics','character','player'))
+
 print(aa)
 
 while True:
@@ -90,7 +97,7 @@ while True:
 			pygame.quit()
 			exit()
 	ds.fill((0,0,0))
-	ds.blit(aa[0], (0,0))
+	#ds.blit(aa[0], (0,0))
 	pygame.display.update()
 
 #'''
