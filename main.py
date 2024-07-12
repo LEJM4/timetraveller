@@ -8,7 +8,7 @@ import pygame, sys
 from level import Level
 from data import Data   
 from esc_menu import EscMenu
-from settings import Settings
+from settings import *
 
 
 class Game:
@@ -20,9 +20,9 @@ class Game:
 
         #import stuff
         self.data = Data() 
-        self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((self.settings.SCREEN_WIDTH,self.settings.SCREEN_HEIGHT)) #Screen von settingsclass
+
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #Screen von settingsclass
         pygame.display.set_caption('Time_traveller') #namen des fensters aendern
         self.clock = pygame.time.Clock() #clock einfuehren
         
@@ -44,7 +44,7 @@ class Game:
         pygame.draw.circle(surface = self.screen,
                 color  =  (0, 0, 139),
                 center = (mouse_x, mouse_y), 
-                radius = self.settings.SCREEN_HEIGHT // 120)
+                radius = SCREEN_HEIGHT // 120)
 
 
     def activate_esc_menu(self):

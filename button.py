@@ -2,9 +2,10 @@ import pygame
 from settings import font_path
 
 class Button:
-    def __init__(self, text, x_position, y_position, button_width, button_height, screen, collision_allowed):
+    def __init__(self, text, x_position, y_position, button_width, button_height, screen, border = False, collision_allowed = True, button_color = (50, 62, 79, 150), font_size = 0.78, text_color = (255, 255 ,255)):
         
         self.collision_allowed = collision_allowed
+        self.border = border
 
         #screen
         self.screen = screen
@@ -14,15 +15,15 @@ class Button:
         self.button_width = button_width #breite von button
         self.button_height = button_height #hoehe von button
 
-        self.button_color = pygame.Color(50, 62, 79, 150)  # rgba  a=200 für weniger transparenz
+        self.button_color = pygame.Color(button_color)  # rgba  a=200 für weniger transparenz
 
         self.button_rect = pygame.Rect(self.x_position, self.y_position, self.button_width, self.button_height)  
 
 
         #button text        
         self.text = text
-        self.font_size = int(0.78* self.button_height) #font
-        self.text_color_normal = (255, 255 ,255)  # weiss
+        self.font_size = int(font_size* self.button_height) #font
+        self.text_color_normal = text_color  # weiss
         self.font = pygame.font.Font(font_path, self.font_size)
 
         self.text_surf = self.font.render(self.text, True, self.text_color_normal)  #(zu rendernder text , glattere Kanten, textfarbe) 
@@ -46,6 +47,8 @@ class Button:
         # Button  und Text malen
         screen.blit(button_surface, (self.x_position, self.y_position))
         screen.blit(self.text_surf, self.text_rect)
+        if self.border:
+            self.button_border_and_size()
         
 
 

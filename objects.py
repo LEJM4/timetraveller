@@ -86,14 +86,15 @@ class Stone(PlantParent):
 
 
 class Star(pygame.sprite.Sprite):
-    def __init__(self, pos, direction, surf, groups, z_layer = LAYERS['main']):
+    def __init__(self, pos, direction, frames,animation_speed, groups, z_layer = LAYERS['main']):
         super().__init__(groups)
-        self.image = surf
+        self.image = frames
         self.rect = self.image.get_rect(center = pos)
         self.z_layer = z_layer
 
         self.pos = vector(self.rect.center)
         self.direction = direction
+        self.animation_speed = animation_speed
         self.speed = 400
     
     def animation(self, dt):

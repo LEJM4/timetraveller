@@ -1,9 +1,9 @@
 import pygame
-from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from settings import *
 from button import Button
 import sys
 import time
-from settings import Settings
+
 
 
 class EscMenu:
@@ -11,7 +11,7 @@ class EscMenu:
         #state
         #self.game_state_manager = game_state_manager
         
-        self.settings_class = Settings()
+
         #
         self.last_click_time = 0
         self.click_delay = 100 #200 milisek. zwischen clicks
@@ -35,9 +35,9 @@ class EscMenu:
         #button_settings
         self.button_width = SCREEN_WIDTH / 4.5
         self.button_height = SCREEN_HEIGHT / 8
-        self.space_between_buttons = SCREEN_HEIGHT/20
 
-        total_height = (3 * self.button_height) + (2 * self.space_between_buttons)  #gesamthoehe der anordnung
+
+        total_height = (3 * self.button_height) + (2 * space_between_buttons_y)  #gesamthoehe der anordnung
         self.first_y = (SCREEN_HEIGHT / 2) - (total_height / 2)   # wo muss der erste button hin
 
         #button in center
@@ -57,7 +57,7 @@ class EscMenu:
         
         self.settings_button = Button(text= "SETTINGS", 
                                 x_position=  self.button_pos_x, #pos x
-                                y_position= self.button_pos_y + self.button_height + self.space_between_buttons, #zweiter button
+                                y_position= self.button_pos_y + self.button_height + space_between_buttons_y, #zweiter button
                                 button_width= self.button_width,
                                 button_height= self.button_height,
                                 screen= self.screen,
@@ -65,7 +65,7 @@ class EscMenu:
         
         self.exit_button = Button(text= "HOME", 
                                 x_position=  self.button_pos_x, #pos x
-                                y_position= self.button_pos_y + 2* (self.button_height + self.space_between_buttons), # dritter button
+                                y_position= self.button_pos_y + 2* (self.button_height + space_between_buttons_y), # dritter button
                                 button_width= self.button_width,
                                 button_height= self.button_height,
                                 screen= self.screen,
@@ -103,7 +103,7 @@ class EscMenu:
         
         self.screen_button = Button(text= "SCREEN", 
                                 x_position=  self.button_pos_x, #pos x
-                                y_position= self.button_pos_y + self.button_height + self.space_between_buttons, #zweiter button
+                                y_position= self.button_pos_y + self.button_height + space_between_buttons_y, #zweiter button
                                 button_width= self.button_width,
                                 button_height= self.button_height,
                                 screen= self.screen,
@@ -111,7 +111,7 @@ class EscMenu:
         
         self.back_button = Button(text= "BACK", 
                                 x_position=  self.button_pos_x, #pos x
-                                y_position= self.button_pos_y + 2* (self.button_height + self.space_between_buttons), # dritter button
+                                y_position= self.button_pos_y + 2* (self.button_height + space_between_buttons_y), # dritter button
                                 button_width= self.button_width,
                                 button_height= self.button_height,
                                 screen= self.screen,
@@ -218,28 +218,28 @@ class EscMenu:
 
         if self.can_click():
             if self.small_screen_setting_button.button_is_pressed == True:
-                self.settings_class.SCREEN_WIDTH = 800
-                self.settings_class.SCREEN_HEIGHT = 600
-                self.settings_class.resolution_changed = True
+                self.SCREEN_WIDTH = 800
+                self.SCREEN_HEIGHT = 600
+                self.resolution_changed = True
                 print(f'Aenderung der Bildschirmgroesse zu {800,600}')
             
             if self.medium_screen_setting_button.button_is_pressed == True:
-                self.settings_class.SCREEN_WIDTH = 1280
-                self.settings_class.SCREEN_HEIGHT = 720
-                self.settings_class.resolution_changed = True            
+                self.SCREEN_WIDTH = 1280
+                self.SCREEN_HEIGHT = 720
+                self.resolution_changed = True            
                 print(f'Aenderung der Bildschirmgroesse zu {1280,720}')
 
 
             if self.large_screen_setting_button.button_is_pressed == True:
-                self.settings_class.new_SCREEN_WIDTH = 1920
-                self.settings_class.new_SCREEN_HEIGHT = 1080
-                self.settings_class.resolution_changed = True                
+                self.new_SCREEN_WIDTH = 1920
+                self.new_SCREEN_HEIGHT = 1080
+                self.resolution_changed = True                
                 print(f'Aenderung der Bildschirmgroesse zu {1920,1080}')
 
             if self.full_screen_setting_button.button_is_pressed == True:
-                self.settings_class.SCREEN_WIDTH = pygame.display.Info().current_w
-                self.settings_class.SCREEN_HEIGHT = pygame.display.Info().current_h
-                self.settings_class.resolution_changed = True
+                self.SCREEN_WIDTH = pygame.display.Info().current_w
+                self.SCREEN_HEIGHT = pygame.display.Info().current_h
+                self.resolution_changed = True
                 print(f'Aenderung der Bildschirmgroesse zu FULLSCREEN')
 
             if self.back_screen_setting_button.button_is_pressed == True:

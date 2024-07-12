@@ -226,8 +226,9 @@ class Level:
     def star_bullet_player(self, pos, direction):#:, path):
         Star(pos= pos,
             direction = direction,
-            surf= self.bu,
-            groups= [self.all_sprites , self.star_bullet_group])
+            frames= self.bu,
+            groups= [self.all_sprites , self.star_bullet_group],
+            animation_speed=4)
             
             #path = ('character', 'objects', 'projectile'))
 
