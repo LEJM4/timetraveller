@@ -39,12 +39,12 @@ def character_image_importer(cols, row, *path):
 	return new_dict
 
 
-def import_multiple_spritesheets(*path):
+def import_multiple_spritesheets(cols, rows, *path):
 	new_dict = {}
 	for _, __, image_names in walk(join(*path)):
 		for image in image_names:
 			image_name = image.split('.')[0] #teilt ab "." den str in zwei haelften und nimmt nur diie erste
-			new_dict[image_name] = character_image_importer(8,4,*path, image_name)
+			new_dict[image_name] = character_image_importer(cols, rows,*path, image_name)
 	return new_dict
 
 

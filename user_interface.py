@@ -1,14 +1,18 @@
 from button import Button
 from settings import *
-
+from support import *
 from sys import exit
-
+from geometrie import *
+from data import *
 class UserInterface:
     def __init__(self, screen, current_lvl: str):
         self.screen = screen
         self.current_lvl = current_lvl
-        self.circle_color = (30, 102, 79, 200)
+        self.circle_color = (20,145 , 242)
+        self.circle_color_2 = (30, 102, 79, 200)
 
+
+        self.check_mark = import_image('graphics', 'ui', 'check_mark_green')
         self.mission_buttons = [  #creates a list with all buttons
 
 
@@ -33,6 +37,7 @@ class UserInterface:
                    screen=screen, 
                    border = True,
                    collision_allowed=False,
+                   #button_color= 'grey',
                    font_size=0.65),
 
 
@@ -59,57 +64,52 @@ class UserInterface:
                    font_size=0.65) 
         ]
 
+        self.circles = [
+            Circle(screen=screen,
+                   color=self.circle_color,
+                   color_2=self.circle_color_2,
+                   center=(SCREEN_WIDTH // 4.02, int(button_pos['missions'][0][1]) + (button_size['missions'][1] // 2)),
+                   radius=button_size['missions'][1] // 4),
+            Circle(screen=screen,
+                   color=self.circle_color,
+                   color_2=self.circle_color_2,
+                   center=(SCREEN_WIDTH // 4.02, int(button_pos['missions'][1][1]) + (button_size['missions'][1] // 2)),
+                   radius=button_size['missions'][1] // 4),
+            Circle(screen=screen,
+                   color=self.circle_color,
+                   color_2=self.circle_color_2,
+                   center=(SCREEN_WIDTH // 4.02, int(button_pos['missions'][2][1]) + (button_size['missions'][1] // 2)),
+                   radius=button_size['missions'][1] // 4)
+        ]
+
 
     def display(self):
 
         for button in self.mission_buttons:
             button.draw(self.screen)
+        
+        for circle in self.circles:
+            circle.draw()
+
+        if lvl[1]: self.circles[0].change_color() 
+        if lvl[2]: self.circles[1].change_color() 
+        if lvl[3]: self.circles[2].change_color() 
 	    
 
-        
-        #top circle
-        pygame.draw.circle(surface=self.screen,
-                            color= self.circle_color,
-                            center= (SCREEN_WIDTH //4.02, (int(button_pos['missions'][0][1]) + (button_size['missions'][1] // 2))), #x = zufaellig gefunden --> y button pos 6 haelfte der hoehe des buttons
-                            radius=button_size['missions'][1] //4)
+"""
 
-        #middle circle
-        pygame.draw.circle(surface=self.screen,
-                            color= self.circle_color,
-                            center= (SCREEN_WIDTH //4.02, (int(button_pos['missions'][1][1]) + (button_size['missions'][1] // 2))), #x = zufaellig gefunden --> y button pos 6 haelfte der hoehe des buttons
-                            radius=button_size['missions'][1] //4)
-
-        #bottom circle
-        pygame.draw.circle(surface=self.screen,
-                            color= self.circle_color,
-                            center= (SCREEN_WIDTH //4.02, (int(button_pos['missions'][2][1]) + (button_size['missions'][1] // 2))), #x = zufaellig gefunden --> y button pos 6 haelfte der hoehe des buttons
-                            radius=button_size['missions'][1] //4)
-
-#'''
 pygame.init()
-ds = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+display_surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-#aa = (character_image_importer(4, 7, 'graphics','character', 'move'))
-ui = UserInterface(ds, 'lvl_1')
-#b = Button(text,0,0,SCREEN_WIDTH//3, SCREEN_HEIGHT//3, ds)
-#aa = (import_spritesheets('graphics','player'))
-
-#print(aa)
-
-#print(aa['move']['left'])
-
-#print(len(aa['move']['left']))
+ui = UserInterface(display_surface, 'lvl_1')
 
 
 while True:
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			pygame.quit()
-			exit()
-	ds.fill((0,88,0))
-	#pygame.draw.rect(ds, 'blue',(10,10, SCREEN_WIDTH //3.5, SCREEN_HEIGHT//3),200, 20)
-	ui.display()
-    #pygame.draw.rect(ds, 'blue',(0,0,0,0),200, 20)
-	pygame.display.update()
-
-#'''
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit
+        display_surface.fill((2,0,100))
+        ui.display()
+        pygame.display.update()
+#"""

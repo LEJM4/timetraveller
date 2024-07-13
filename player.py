@@ -2,7 +2,7 @@ import pygame
 from settings import *
 from support import *
 from entity import Entity_M
-
+from data import *
 
 class Player(Entity_M):
 
@@ -200,7 +200,8 @@ class Player(Entity_M):
 	def collision_bush_update(self, type):
 		
 		if type == 'blueberry':
-			self.data.blueberry += 1
+			self.da.blueberry += 1
+			lvl[1]= True
 
 
 		if type == 'raspberry':

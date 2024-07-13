@@ -10,6 +10,7 @@ from objects import *
 from settings import *
 
 from support import *
+from user_interface import UserInterface
 
 
 class Level:
@@ -28,6 +29,7 @@ class Level:
         #data 4 the berrys
         self.data = data
         
+        self.ui = UserInterface(self.display_surface, 'lvl_1')
 
 
         #groups
@@ -244,9 +246,12 @@ class Level:
                         if interaction_objects:
                             if (interaction_objects[0].item_type) == 'Blueberry':
                                 self.player.collision_bush_update('blueberry')
+                                self.data.blueberry += 1
+                                
                             
                             if (interaction_objects[0].item_type) == 'Raspberry':
                                 self.player.collision_bush_update('raspberry')
+                                self.data.raspberry += 1
 
                             if (interaction_objects[0].item_type) == 'Coin':
                                 self.player.collision_bush_update('coin')
@@ -287,5 +292,6 @@ class Level:
 
         self.all_sprites.draw_all_objects(self.player)
 
+        self.ui.display()
         
         self.tint_screen(dt)
