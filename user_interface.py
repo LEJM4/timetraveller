@@ -8,11 +8,13 @@ class UserInterface:
     def __init__(self, screen, current_lvl: str):
         self.screen = screen
         self.current_lvl = current_lvl
-        self.circle_color = (20,145 , 242)
-        self.circle_color_2 = (30, 102, 79, 200)
+        self.circle_color = (200, 200, 200, 200)
+        self.circle_color_2 = (30, 142, 0, 200)
 
 
         self.check_mark = import_image('graphics', 'ui', 'check_mark_green')
+
+        
         self.mission_buttons = [  #creates a list with all buttons
 
 
@@ -94,7 +96,7 @@ class UserInterface:
         if lvl[1]: self.circles[0].change_color() 
         if lvl[2]: self.circles[1].change_color() 
         if lvl[3]: self.circles[2].change_color() 
-	    
+
 
 """
 
