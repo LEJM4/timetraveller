@@ -1,7 +1,7 @@
 import pygame
 from pyautogui import size
 from pygame.math import Vector2 as vector 
-
+from data import *
             
 # screen
 #SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
@@ -25,12 +25,13 @@ space_between_buttons_y = SCREEN_HEIGHT/20
 button_size = {'missions': (SCREEN_WIDTH //4, SCREEN_HEIGHT //14),
                'esc_menu': (1,1)}
 
-button_pos = {'missions': [(20,20),(20, 25 + button_size['missions'][1],),(20, 30+ 2* button_size['missions'][1])]}
+button_pos = {'missions': [(20,20),(20, 25 + button_size['missions'][1],),(20, 30+ 2* button_size['missions'][1])],
+              'inventory': [(SCREEN_WIDTH // 6 * 1.5, SCREEN_HEIGHT // 1.18)]}
 
 
 
 
-print(button_pos['missions'])
+#print(button_pos['missions'])
 LAYERS = {
 	'water': 0,
 	'ground': 1,

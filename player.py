@@ -1,12 +1,12 @@
 import pygame
 from settings import *
 from support import *
-from entity import Entity_M
+from entity import Entity
 from data import *
 
-class Player(Entity_M):
+class Player(Entity):
 
-	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_star_bullet):
+	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_star_projectile):
 		super().__init__( pos, groups, facing_direction, obstacle_objects, data, path)
 
 		
@@ -15,7 +15,7 @@ class Player(Entity_M):
 		self.trail = trail
 
 		#
-		self.create_star_projectile = create_star_bullet
+		self.create_star_projectile = create_star_projectile
 		self.projectile_shot = 	False
 
 
@@ -93,37 +93,7 @@ class Player(Entity_M):
 		#print(self.status)
 
 
-	def update_status_and_facing_direction(self):
-
-		#idle / move
-		moving = bool(self.direction)
-		if moving:
-			self.status = 'move'
-			if self.direction.x != 0:
-				self.facing_direction = 'right' if self.direction.x > 0 else 'left'
-			if self.direction.y != 0:
-				self.facing_direction = 'down' if self.direction.y > 0 else 'up'
-		
-		else:
-			self.status = 'move'
-			if self.facing_direction.endswith('_idle'): 
-				self.facing_direction = self.facing_direction
-			else:
-				self.facing_direction += '_idle'
-
-		
-		#attack
-		if self.attacking:
-			self.status = 'attack'
-			self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if attacking
-
-		#collect
-		if self.collecting:
-			self.status = 'collect'
-			self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if collecting
-
- 
-		#return f"{self.facing_direction}{'' if moving else '_idle'}"	
+	
 
 	def animation_player(self,dt):
 		current_animation = self.frames[self.facing_direction]
@@ -169,32 +139,7 @@ class Player(Entity_M):
 				self.collecting = False
 
 
-	def animation_leo(self, dt):
 
-		self.frame_index += self.animation_speed * dt
-
-		if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
-			
-
-			projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
-
-			
-			self.create_star_projectile(projectile_start_pos, self.projectile_direction)
-			self.projectile_shot = True
-
-			
-		
-		if self.frame_index >= len(self.frames[self.status][self.facing_direction]):
-			self.frame_index = 0
-
-			if self.attacking:
-				self.attacking = False
-			
-			if self.collecting:
-				self.collecting = False
-		
-
-		self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
 
 
 	def collision_bush_update(self, type):

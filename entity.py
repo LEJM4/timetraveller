@@ -1,33 +1,8 @@
 from settings import *
 from support import *
 
+   
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos, frames , groups, facing_direction):
-        super().__init__(groups)
-        
-        #graphics
-        self.frame_index, self.frames = 0, frames
-        self.facing_direction = facing_direction
-
-        #sprite
-        self.image = self.frames['down'][self.frame_index]
-        self.rect = self.image.get_rect(center = pos)
-
-        #other
-        self.animation_speed = 6
-    
-    def animation(self,dt):
-        self.frame_index += self.animation_speed * dt #Zahl enspricht der schnelligkeit der Bilder fuer die Animation
-        if self.frame_index >= len(self.frames[self.current_state]):
-            self.frame_index = 0
-
-        self.image = self.frames[self.current_state()][int(self.frame_index)]
-
-    def current_state(self):
-        
-        return 'left'
-    
-class Entity_M(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path):
         super().__init__(groups)
         		# 
@@ -127,6 +102,69 @@ class Entity_M(pygame.sprite.Sprite):
                         
                     self.rect.centery = self.hitbox_player.centery
                     self.pos.y = self.hitbox_player.centery
+
+
+    def update_status_and_facing_direction(self):
+
+        #idle / move
+        moving = bool(self.direction)
+        if moving:
+            self.status = 'move'
+            if self.direction.x != 0:
+                self.facing_direction = 'right' if self.direction.x > 0 else 'left'
+            if self.direction.y != 0:
+                self.facing_direction = 'down' if self.direction.y > 0 else 'up'
+        
+        else:
+            self.status = 'move'
+            if self.facing_direction.endswith('_idle'): 
+                self.facing_direction = self.facing_direction
+            else:
+                self.facing_direction += '_idle'
+
+        
+        #attack
+        if self.attacking:
+            self.status = 'attack'
+            self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if attacking
+
+        #collect
+        if self.collecting:
+            self.status = 'collect'
+            self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if collecting
+
+
+        #return f"{self.facing_direction}{'' if moving else '_idle'}"
+
+
+
+    def animation_leo(self, dt):
+
+        self.frame_index += self.animation_speed * dt
+
+        if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
+            
+
+            projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
+
+            
+            self.create_star_projectile(projectile_start_pos, self.projectile_direction)
+            self.projectile_shot = True
+
+            
+        
+        if self.frame_index >= len(self.frames[self.status][self.facing_direction]):
+            self.frame_index = 0
+
+            if self.attacking:
+                self.attacking = False
+            
+            if self.collecting:
+                self.collecting = False
+        
+
+        self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+
 
     def block(self):
         self.blocked = True
