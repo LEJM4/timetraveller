@@ -5,7 +5,6 @@ from support import *
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path):
         super().__init__(groups)
-        		# 
         #status
         self.status = 'move'
 		# 

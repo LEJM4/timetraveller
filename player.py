@@ -18,14 +18,6 @@ class Player(Entity):
 		self.create_star_projectile = create_star_projectile
 		self.projectile_shot = 	False
 
-
-
-
-
-
-
-		
-
 	def input(self):
 		keys = pygame.key.get_pressed()
 
@@ -73,75 +65,6 @@ class Player(Entity):
 
 
 
-
-
-	def status_player(self):
-
-		# idle 
-		if self.direction.x == 0 and self.direction.y == 0:
-			self.facing_direction = self.facing_direction.split('_')[0] + '_idle'
-
-		#attack
-		if self.attacking:
-			self.facing_direction = self.facing_direction.split('_')[0] + '_attack'
-
-
-		# collect
-		if self.collecting:
-			self.facing_direction = self.facing_direction.split('_')[0] + '_collect'
-
-		#print(self.status)
-
-
-	
-
-	def animation_player(self,dt):
-		current_animation = self.frames[self.facing_direction]
-
-		self.frame_index += self.animation_speed * dt
-
-
-
-		if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
-			
-
-			projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
-
-			#projectile_start_pos = self.rect.center + self.projectile_direction * 80
-			
-			self.create_star_projectile(projectile_start_pos, self.projectile_direction)
-			self.projectile_shot = True
-			#pass
-			
-		
-		if self.frame_index >= len(current_animation):
-			self.frame_index = 0
-
-			if self.attacking:
-				self.attacking = False
-			
-			if self.collecting:
-				self.collecting = False
-
-		self.image = current_animation[int(self.frame_index)]
-
-	def animation_player_2(self, dt):
-		self.frame_index += self.animation_speed * dt
-		self.image = self.facing_direction[self.get_state()][int(self.frame_index)]
-
-		if self.frame_index == len(self.facing_direction[self.get_state()]):
-			self.frame_index = 0
-
-			if self.attacking:
-				self.attacking = False
-			
-			if self.collecting:
-				self.collecting = False
-
-
-
-
-
 	def collision_bush_update(self, type):
 		
 		if type == 'blueberry':
@@ -172,16 +95,9 @@ class Player(Entity):
 
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
 		self.input() #player input --> movement
-		#self.status_player() #status (idle or item use)
-
 		self.update_status_and_facing_direction() 
-
-
 		self.move(dt) #movement in dt
 		# self.block()
 		# self.unblock()
-		#self.animation_player(dt) #animation in dt
-
 		self.animation_leo(dt)
-
 		self.trail_collision()
