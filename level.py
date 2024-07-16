@@ -219,7 +219,7 @@ class Level:
                                 trail= self.trail,
                                 data = self.data,
                                 path= ('graphics', 'player'),
-                                create_star_bullet= self.star_bullet_player)
+                                create_star_projectile= self.star_bullet_player)
 
                     if object.name == 'trader':
                         pass
