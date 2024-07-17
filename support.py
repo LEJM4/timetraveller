@@ -35,7 +35,7 @@ def character_image_importer(cols, row, *path):
 	new_dict ={}
 	for row, direction in enumerate(('down','left', 'right','up')):
 		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
-		new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
+		#new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
 	return new_dict
 
 
