@@ -1,10 +1,13 @@
 from settings import *
 from support import *
+from timer import Timer
+from random import randint
 
    
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path):
+    def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path, speed = 100):
         super().__init__(groups)
+
         #status
         self.status = 'move'
 		# 
@@ -33,7 +36,7 @@ class Entity(pygame.sprite.Sprite):
         # movement attributes
         self.pos = vector(self.rect.center)
         self.change_speed = False
-        self.speed = 100
+        self.speed = speed
 
         self.blocked = False
 
@@ -45,7 +48,8 @@ class Entity(pygame.sprite.Sprite):
         #Parametergroups
         self.obstacle_objects = obstacle_objects
 
-
+        #weapons
+        self.projectile = True
         #states
         #moving
         self.moving = False
@@ -57,12 +61,8 @@ class Entity(pygame.sprite.Sprite):
         self.collecting = False
 	
     def import_pictures_4_animation(self):
-        #self.frames = import_multiple_spritesheets(8, 4, *self.path)
-        #'''
-        self.frames = {'attack': character_image_importer(4,4, 'graphics', 'player', 'attack'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-                       'collect': character_image_importer(7,4, 'graphics', 'player', 'collect'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-                       'move': character_image_importer(8,4, 'graphics', 'player', 'move')} #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-        #'''
+        self.frames = import_multiple_spritesheets(4, 4, *self.path)
+
     def move(self,dt):
         # vector normalisieren
         if self.direction.magnitude() > 0:
@@ -106,7 +106,9 @@ class Entity(pygame.sprite.Sprite):
     def update_status_and_facing_direction(self):
 
         #idle / move
+        
         moving = bool(self.direction)
+        
         if moving:
             self.status = 'move'
             if self.direction.x != 0:
@@ -115,12 +117,13 @@ class Entity(pygame.sprite.Sprite):
                 self.facing_direction = 'down' if self.direction.y > 0 else 'up'
         
         else:
-            self.status = 'move'
+            self.status = 'idle'
+            """
             if self.facing_direction.endswith('_idle'): 
                 self.facing_direction = self.facing_direction
             else:
                 self.facing_direction += '_idle'
-
+            """
         
         #attack
         if self.attacking:
@@ -140,15 +143,15 @@ class Entity(pygame.sprite.Sprite):
     def animation_leo(self, dt):
 
         self.frame_index += self.animation_speed * dt
+        if self.projectile:    
+            if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
+                
 
-        if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
-            
+                projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
 
-            projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
-
-            
-            self.create_star_projectile(projectile_start_pos, self.projectile_direction)
-            self.projectile_shot = True
+                
+                self.create_star_projectile(projectile_start_pos, self.projectile_direction)
+                self.projectile_shot = True
 
             
         

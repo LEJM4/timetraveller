@@ -2,7 +2,7 @@ import pygame
 from pyautogui import size
 from pygame.math import Vector2 as vector 
 from data import *
-            
+from support import *
 # screen
 #SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
 #print (SCREEN_WIDTH, SCREEN_HEIGHT)
