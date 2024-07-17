@@ -23,7 +23,7 @@ class Player(Entity):
 		#'''
 		self.frames = {'attack': character_image_importer(4,4, 'graphics', 'player', 'attack'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
 						'collect': character_image_importer(7,4, 'graphics', 'player', 'collect'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-						'idle': character_image_importer(2,4, 'graphics', 'player', 'idle'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
+						'idle': character_image_importer(1,4, 'graphics', 'player', 'idle'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
 						'move': character_image_importer(8,4, 'graphics', 'player', 'move')} #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
 		#'''
 
