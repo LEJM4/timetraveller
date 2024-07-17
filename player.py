@@ -18,6 +18,15 @@ class Player(Entity):
 		self.create_star_projectile = create_star_projectile
 		self.projectile_shot = 	False
 
+	def import_pictures_4_animation(self):
+		#self.frames = import_multiple_spritesheets(8, 4, *self.path)
+		#'''
+		self.frames = {'attack': character_image_importer(4,4, 'graphics', 'player', 'attack'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
+						'collect': character_image_importer(7,4, 'graphics', 'player', 'collect'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
+						'idle': character_image_importer(2,4, 'graphics', 'player', 'idle'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
+						'move': character_image_importer(8,4, 'graphics', 'player', 'move')} #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
+		#'''
+
 	def input(self):
 		keys = pygame.key.get_pressed()
 
@@ -44,17 +53,7 @@ class Player(Entity):
 		
 			#attack
 			if keys[pygame.K_SPACE]:
-				self.attacking = True
-				self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
-				self.frame_index = 0
-				self.projectile_shot = False
-				#self.create_star_bullet(self.rect.center, vector(1,0))
-				match self.facing_direction.split('_')[0]:
-					case 'left': self.projectile_direction = vector (-1,0)
-					case 'right': self.projectile_direction = vector (1,0)
-					case 'up': self.projectile_direction = vector (0,-1)
-					case 'down': self.projectile_direction = vector (0,1)
-				
+				self.attack()
 
 			#collect
 			if keys[pygame.K_e]:
@@ -63,6 +62,17 @@ class Player(Entity):
 				self.frame_index = 0
 				#self.status = 'up_collect'
 
+	def attack(self):
+		self.attacking = True
+		self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
+		self.frame_index = 0
+		self.projectile_shot = False
+		#self.create_star_bullet(self.rect.center, vector(1,0))
+		match self.facing_direction:
+			case 'left': self.projectile_direction = vector (-1,0)
+			case 'right': self.projectile_direction = vector (1,0)
+			case 'up': self.projectile_direction = vector (0,-1)
+			case 'down': self.projectile_direction = vector (0,1)
 
 
 	def collision_bush_update(self, type):
@@ -86,7 +96,7 @@ class Player(Entity):
 				self.change_speed = True
 				break
 			else:
-				self.speed = 100
+				self.speed = 400
 				self.change_speed = False
 
 
@@ -94,10 +104,11 @@ class Player(Entity):
 
 
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
-		self.input() #player input --> movement
-		self.update_status_and_facing_direction() 
-		self.move(dt) #movement in dt
-		# self.block()
-		# self.unblock()
+		if not self.blocked:
+			self.input() #player input --> movement
+			self.update_status_and_facing_direction() 
+			self.move(dt) #movement in dt
+			# self.block()
+			# self.unblock()
+			self.trail_collision()
 		self.animation_leo(dt)
-		self.trail_collision()

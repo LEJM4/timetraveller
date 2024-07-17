@@ -1,6 +1,7 @@
 import pygame 
 from pytmx.util_pygame import load_pygame
 from player import Player
+from zombie import Zombie_1
 from os.path import join
 
 #from entity import Entity, Player
@@ -220,6 +221,18 @@ class Level:
                                 data = self.data,
                                 path= ('graphics', 'player'),
                                 create_star_projectile= self.star_bullet_player)
+
+                    if object.name == 'zombie_1':
+                        if object.properties['position'] == player_start_pos:
+                            self.zombie = Zombie_1(
+                                pos = (object.x, object.y), 
+                                groups = self.all_sprites, 
+                                facing_direction= object.properties['direction'],
+                                obstacle_objects= self.obstacle_objects ,
+                                data = self.data,
+                                path= ('graphics', 'player'),
+                                player = self.player)
+                                #create_star_projectile= self.star_bullet_player)
 
                     if object.name == 'trader':
                         pass
