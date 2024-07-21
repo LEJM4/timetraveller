@@ -30,7 +30,7 @@ def import_tilemap(cols, rows, *path):
 
 
 
-def character_image_importer(cols, row, *path):
+def character_image_importer_vertical(cols, row, *path):
 	frame_dict = import_tilemap(cols, row,*path)
 	new_dict ={}
 	for row, direction in enumerate(('down','left', 'right','up')):
@@ -39,12 +39,15 @@ def character_image_importer(cols, row, *path):
 	return new_dict
 
 
-def import_multiple_spritesheets(cols, rows, *path):
+def import_multiple_spritesheets(cols, rows, *path, orientation= 'vertical'):
 	new_dict = {}
 	for _, __, image_names in walk(join(*path)):
 		for image in image_names:
 			image_name = image.split('.')[0] #teilt ab "." den str in zwei haelften und nimmt nur diie erste
-			new_dict[image_name] = character_image_importer(cols, rows,*path, image_name)
+			if orientation == 'vertical':
+				new_dict[image_name] = character_image_importer_vertical(cols, rows,*path, image_name)
+			elif orientation == 'horizontal':
+				new_dict[image_name] = character_image_importer_horizontal(cols, rows,*path, image_name)
 	return new_dict
 
 
@@ -80,21 +83,21 @@ def tmx_importer(*path):
 			tmx_dict[file.split('.')[0]] = load_pygame(join(folder_path, file))
 	return tmx_dict
 
+def character_image_importer_horizontal(cols, row, *path):
+	frame_dict = import_tilemap(cols, row,*path)
+	new_dict ={}
+	for cols, direction in enumerate(('down','left', 'right','up')):
+		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
+		#new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
+	return new_dict
 
 '''
 pygame.init()
 ds = pygame.display.set_mode((1100, 900))
 
-#aa = (character_image_importer(4, 7, 'graphics','character', 'move'))
-
-aa = (import_spritesheets('graphics','player'))
-
-#print(aa)
-
-print(aa['move']['left'])
-
-print(len(aa['move']['left']))
-
+path = 'graphics', 'npc', 'npc_1'
+frames = import_multiple_spritesheets(4, 4, *path)
+print(frames)
 
 while True:
 	for event in pygame.event.get():
@@ -106,5 +109,7 @@ while True:
 	pygame.display.update()
 
 #'''
+
+
 
 

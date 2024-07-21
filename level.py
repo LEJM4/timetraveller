@@ -223,16 +223,15 @@ class Level:
                                 create_star_projectile= self.star_bullet_player)
 
                     if object.name == 'zombie_1':
-                        if object.properties['position'] == player_start_pos:
-                            self.zombie = Zombie_1(
-                                pos = (object.x, object.y), 
-                                groups = self.all_sprites, 
-                                facing_direction= object.properties['direction'],
-                                obstacle_objects= self.obstacle_objects ,
-                                data = self.data,
-                                path= ('graphics', 'player'),
-                                player = self.player)
-                                #create_star_projectile= self.star_bullet_player)
+                        self.zombie = Zombie_1(
+                            pos = (object.x, object.y), 
+                            groups = self.all_sprites, 
+                            facing_direction= object.properties['direction'],
+                            obstacle_objects= self.obstacle_objects ,
+                            data = self.data,
+                            path= ('graphics', 'npc', 'npc_1'),
+                            player = self.player)
+                            #create_star_projectile= self.star_bullet_player)
 
                     if object.name == 'trader':
                         pass

@@ -87,6 +87,7 @@ class Zombie_1(Entity, Zombie):
         super().__init__(pos, groups, facing_direction, obstacle_objects, data, path, speed= 200)
         #OVERWRITES
         self.projectile = False
+        self.path = path
 
         #timers
         self.timers = {'walk_around': Timer(duration=  randint(3000,7000),
@@ -111,7 +112,9 @@ class Zombie_1(Entity, Zombie):
         self.distance_squared = 1
         
     def import_pictures_4_animation(self):
-         self.frames = {'attack': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'attack'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
+        self.frames = import_multiple_spritesheets(4, 4, *self.path)
+        ''' 
+        self.frames = {'attack': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'attack'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
                        'collect': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'hendrik'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
                        'idle': character_image_importer(1,4, 'graphics', 'npc', 'npc_1', 'hendrik'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
                        'move': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'hendrik')} #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
@@ -119,6 +122,7 @@ class Zombie_1(Entity, Zombie):
     
     def attack(self):
         self.attacking = True
+        print('the monster has attacked')
 
 
     def update_status_and_facing_direction(self):
@@ -163,7 +167,7 @@ class Zombie_1(Entity, Zombie):
             #self.status = 'idle'
             #self.direction = vector()
             self.walk_around()
-
+        #print(self.status)
     def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
         self.update_timers()
         self.update_status_and_facing_direction()
