@@ -27,6 +27,8 @@ class Zombie:
     def walk_around(self):
         target_pos = self.set_random_target()
         direction = (vector(target_pos) - vector(self.rect.center)).normalize()
+        if direction.length() > 0:
+            direction = direction.normalize()
         timer = self.timers['walk_around']
         if target_pos == None: self.set_random_target()
         if timer:
@@ -49,9 +51,6 @@ class Zombie:
         if timer:
             self.direction = direction
 
-    def update_timers(self):
-        for timer in self.timers.values():
-            timer.update()
 
     def get_player_direction(self):
         enemy_pos = vector(self.rect.center)
@@ -85,8 +84,14 @@ class Zombie:
 class Zombie_1(Entity, Zombie):
     def __init__(self, pos, groups, facing_direction, obstacle_objects, data, path, player):
         super().__init__(pos, groups, facing_direction, obstacle_objects, data, path, speed= 200)
+        
         #OVERWRITES
         self.projectile = False
+        self.health = 3
+        self.current_wepon = 'hand'
+
+
+        #
         self.path = path
 
         #timers
@@ -97,7 +102,11 @@ class Zombie_1(Entity, Zombie):
                         'look_around': Timer(duration=  randint(2000,7000),
                                             repeat = True,
                                             autostart= True,
-                                            func =None)}
+                                            func =None),
+                        'hit_timer':    Timer(duration= 2,
+                                            repeat = False,
+                                            autostart= False,
+                                            func = self.reset_vulnerability)}
 
         self.player = player
         self.notice_radius = 500
@@ -122,7 +131,7 @@ class Zombie_1(Entity, Zombie):
     
     def attack(self):
         self.attacking = True
-        print('the monster has attacked')
+        #print('the monster has attacked')
 
 
     def update_status_and_facing_direction(self):
@@ -139,22 +148,11 @@ class Zombie_1(Entity, Zombie):
         
         else:
             self.status = 'idle'
-            """
-            if self.facing_direction.endswith('_idle'): 
-                self.facing_direction = self.facing_direction
-            else:
-                self.facing_direction += '_idle'
-            """
-        
+
         #attack
         if self.attacking:
             self.status = 'attack'
-            self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if attacking
 
-        #collect
-        if self.collecting:
-            self.status = 'collect'
-            self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if collecting
 
            
         if self.check_distance(self.notice_radius):
@@ -168,8 +166,157 @@ class Zombie_1(Entity, Zombie):
             #self.direction = vector()
             self.walk_around()
         #print(self.status)
+
+    def animation_leo(self, dt):
+        self.frame_index += self.animation_speed * dt
+
+        if int(self.frame_index) == 1 and self.attacking:
+            if self.check_distance(self.attack_radius):
+                self.player.damage(self.current_wepon)
+                print(self.player.health)
+
+
+
+
+        
+        if self.frame_index >= len(self.frames[self.status][self.facing_direction]):
+            self.frame_index = 0
+
+            if self.attacking:
+                self.attacking = False
+            
+
+        
+
+        self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+
     def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
-        self.update_timers()
+        self.update_timer()
+        self.update_status_and_facing_direction()
+
+        self.move(dt) #movement in dt
+
+        self.animation_leo(dt)
+
+
+
+class Zombie_2(Entity, Zombie):
+    def __init__(self, pos, groups, facing_direction, obstacle_objects, data, path, player, create_projectile):
+        super().__init__(pos, groups, facing_direction, obstacle_objects, data, path, speed= 200)
+        
+        #OVERWRITES
+        self.projectile = False
+        self.health = 3
+        self.current_weapon = 'pistol'
+
+        self.create_star_projectile = create_projectile
+
+
+        #
+        self.path = path
+
+        #timers
+        self.timers = {'walk_around': Timer(duration=  randint(3000,7000),
+                                            repeat = True,
+                                            autostart= True,
+                                            func =None),
+                        'look_around': Timer(duration=  randint(2000,7000),
+                                            repeat = True,
+                                            autostart= True,
+                                            func =None),
+                        'hit_timer':    Timer(duration= 2,
+                                            repeat = False,
+                                            autostart= False,
+                                            func = self.reset_vulnerability)}
+
+        self.player = player
+        self.notice_radius = 500
+        self.walk_radius = 400
+        self.attack_radius = 300
+
+        self.projectile_shot = 	False
+
+        self.chase = False
+
+        #print(self.distance)
+        self.target_pos =  None
+        self.distance_squared = 1
+        
+    def import_pictures_4_animation(self):
+        self.frames = import_multiple_spritesheets(4, 4, *self.path)
+
+    def attack(self):
+        self.attacking = True
+        self.projectile_shot = False
+
+        #print('the monster has attacked')
+
+
+    def update_status_and_facing_direction(self):
+        #idle / move
+
+        moving = bool(self.direction)
+        
+        if moving:
+            self.status = 'move'
+            if self.direction.x != 0:
+                self.facing_direction = 'right' if self.direction.x > 0 else 'left'
+            if self.direction.y != 0:
+                self.facing_direction = 'down' if self.direction.y > 0 else 'up'
+        
+        else:
+            self.status = 'idle'
+
+        #attack
+        if self.attacking:
+            self.status = 'attack'
+
+
+           
+        if self.check_distance(self.notice_radius):
+            self.face_player()
+            if self.check_distance(self.walk_radius) and not self.check_distance(self.attack_radius):
+                self.chase_player()
+            if self.check_distance(self.attack_radius):
+                self.attack()
+        else:
+            #self.status = 'idle'
+            #self.direction = vector()
+            self.walk_around()
+        #print(self.status)
+
+
+    def animation_leo(self, dt):
+
+        self.frame_index += self.animation_speed * dt
+        if self.current_weapon == 'pistol':    
+            if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
+                self.projectile_direction = self.get_player_direction()
+                
+
+                projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
+
+                
+                self.create_star_projectile(projectile_start_pos, self.projectile_direction)
+                self.projectile_shot = True
+
+            
+        
+        if self.frame_index >= len(self.frames[self.status][self.facing_direction]):
+            self.frame_index = 0
+
+            if self.attacking:
+                self.attacking = False
+            
+            if self.collecting:
+                self.collecting = False
+        
+
+        self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+
+
+    def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
+        self.update_timer()
         self.update_status_and_facing_direction()
 
         self.move(dt) #movement in dt

@@ -8,9 +8,16 @@ class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path, speed = 100):
         super().__init__(groups)
 
+        #GAME-SETTINGS
         #status
         self.status = 'move'
-		# 
+        self.direction = vector()
+        self.timers = {'hit_timer':    Timer(duration= 400,
+                                            repeat = False,
+                                            autostart= False,
+                                            func = self.reset_vulnerability)}
+        
+        # 
         self.path = path
 
         # graphic
@@ -20,7 +27,6 @@ class Entity(pygame.sprite.Sprite):
         self.animation_speed = 10
         self.z_layer = LAYERS['main']
 
-        self.direction = vector()
 
         #imports
         self.data = data
@@ -33,7 +39,8 @@ class Entity(pygame.sprite.Sprite):
 
 
 
-        # movement attributes
+        # entity attributes
+        self.health = 3 
         self.pos = vector(self.rect.center)
         self.change_speed = False
         self.speed = speed
@@ -49,7 +56,10 @@ class Entity(pygame.sprite.Sprite):
         self.obstacle_objects = obstacle_objects
 
         #weapons
-        self.projectile = True
+        self.current_wepon = None
+
+
+
         #states
         #moving
         self.moving = False
@@ -59,6 +69,9 @@ class Entity(pygame.sprite.Sprite):
 
         #collect
         self.collecting = False
+
+        #bool
+        self.is_vulnerable = True
 	
     def import_pictures_4_animation(self):
         self.frames = import_multiple_spritesheets(4, 4, *self.path)
@@ -143,7 +156,7 @@ class Entity(pygame.sprite.Sprite):
     def animation_leo(self, dt):
 
         self.frame_index += self.animation_speed * dt
-        if self.projectile:    
+        if self.current_wepon == 'pistol':    
             if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
                 
 
@@ -167,6 +180,26 @@ class Entity(pygame.sprite.Sprite):
 
         self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
 
+    def damage(self, weapon: str):
+        vulnerable_timer = Timer(duration= 400,
+                                 repeat = False,
+                                 autostart= False,
+                                 func = self.reset_vulnerability)
+        if self.is_vulnerable:
+            self.health -= weapon_dict[weapon]
+            self.is_vulnerable = False
+            self.timers['hit_timer'].activate()
+        print(self.is_vulnerable)
+        
+
+    def reset_vulnerability(self):
+        self.is_vulnerable = True
+        print('timer works')
+        print(self.is_vulnerable)
+
+    def update_timer(self):
+        for timer in self.timers.values():
+            timer.update()
 
     def block(self):
         self.blocked = True

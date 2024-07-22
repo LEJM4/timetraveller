@@ -6,8 +6,12 @@ from data import *
 
 class Player(Entity):
 
-	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_star_projectile):
+	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_projectile):
 		super().__init__( pos, groups, facing_direction, obstacle_objects, data, path)
+		
+        #OVERWRITES
+		self.health = 5
+		self.current_wepon = 'pistol'
 
 		
 		#Parametergroups
@@ -15,7 +19,7 @@ class Player(Entity):
 		self.trail = trail
 
 		#
-		self.create_star_projectile = create_star_projectile
+		self.create_star_projectile = create_projectile
 		self.projectile_shot = 	False
 
 	def import_pictures_4_animation(self):
@@ -111,4 +115,5 @@ class Player(Entity):
 			# self.block()
 			# self.unblock()
 			self.trail_collision()
+		self.update_timer()
 		self.animation_leo(dt)

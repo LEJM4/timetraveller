@@ -29,7 +29,10 @@ button_pos = {'missions': [(20,20),(20, 25 + button_size['missions'][1],),(20, 3
               'inventory': [(SCREEN_WIDTH // 6 * 1.5, SCREEN_HEIGHT // 1.18)]}
 
 
-
+#WEAPONS
+weapon_dict = {'hand': 1,
+               'sword':2,
+               'pistol': 3}
 
 #print(button_pos['missions'])
 LAYERS = {

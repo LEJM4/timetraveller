@@ -1,7 +1,7 @@
 import pygame 
 from pytmx.util_pygame import load_pygame
 from player import Player
-from zombie import Zombie_1
+from zombie import Zombie_1, Zombie_2
 from os.path import join
 
 #from entity import Entity, Player
@@ -41,9 +41,10 @@ class Level:
         self.interaction_objects = pygame.sprite.Group()
         self.trail = pygame.sprite.Group()
 
-        self.star_bullet_group = pygame.sprite.Group()
+        self.projectile_group = pygame.sprite.Group()
 
         self.transition_objects = pygame.sprite.Group()
+        self.enemy_group = pygame.sprite.Group()
 
         self.tile_maps_import()
         self.create_map(self.tile_maps['lvl_1'], 'meadow')
@@ -82,7 +83,7 @@ class Level:
 
 
     def create_map(self, tile_map, player_start_pos):
-        for group in (self.all_sprites, self.obstacle_objects, self.interaction_objects, self.trail, self.star_bullet_group, self.transition_objects):
+        for group in (self.all_sprites, self.obstacle_objects, self.interaction_objects, self.trail, self.projectile_group, self.transition_objects):
             group.empty()
 
         #ground laayers
@@ -220,18 +221,29 @@ class Level:
                                 trail= self.trail,
                                 data = self.data,
                                 path= ('graphics', 'player'),
-                                create_star_projectile= self.star_bullet_player)
+                                create_projectile= self.star_bullet_player)
 
                     if object.name == 'zombie_1':
                         self.zombie = Zombie_1(
                             pos = (object.x, object.y), 
-                            groups = self.all_sprites, 
+                            groups = [self.all_sprites, self.enemy_group], 
                             facing_direction= object.properties['direction'],
                             obstacle_objects= self.obstacle_objects ,
                             data = self.data,
                             path= ('graphics', 'npc', 'npc_1'),
                             player = self.player)
-                            #create_star_projectile= self.star_bullet_player)
+                            #create_star_projectile= self.star_bullet_player)     
+
+                    if object.name == 'zombie_2':
+                        self.zombie = Zombie_2(
+                            pos = (object.x, object.y), 
+                            groups = [self.all_sprites, self.enemy_group], 
+                            facing_direction= object.properties['direction'],
+                            obstacle_objects= self.obstacle_objects ,
+                            data = self.data,
+                            path= ('graphics', 'npc', 'npc_1'),
+                            player = self.player,
+                            create_projectile= self.star_bullet_player)
 
                     if object.name == 'trader':
                         pass
@@ -241,10 +253,16 @@ class Level:
         Star(pos= pos,
             direction = direction,
             frames= self.bu,
-            groups= [self.all_sprites , self.star_bullet_group],
+            groups= [self.all_sprites , self.projectile_group],
             animation_speed=4)
             
             #path = ('character', 'objects', 'projectile'))
+
+    def projectile_collision(self):
+        #projectiles = [projectile for projectile in self.projectile_group if projectile.rect.colliderect(self.player.hitbox_player)]
+        # if pygame.sprite.spritecollide(self.player, self.projectile_group, True):
+        #     self.player.damage('pistol')
+        pass
 
     def bush_collision(self):
         keys = pygame.key.get_pressed()
@@ -299,6 +317,7 @@ class Level:
         self.transition_check()
 
         self.bush_collision() # methode muss aufgerufen werden, damit coll. hier fkt
+        self.projectile_collision()
         
         self.all_sprites.update(dt)
 
