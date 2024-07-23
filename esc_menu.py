@@ -3,7 +3,7 @@ from settings import *
 from button import Button
 import sys
 import time
-
+from settings import SCREEN_WIDTH; SCREEN_HEIGHT
 
 
 class EscMenu:
@@ -218,29 +218,42 @@ class EscMenu:
 
         if self.can_click():
             if self.small_screen_setting_button.button_is_pressed == True:
-                self.SCREEN_WIDTH = 800
-                self.SCREEN_HEIGHT = 600
+                new_SCREEN_WIDTH = 800
+                new_SCREEN_HEIGHT = 600
                 self.resolution_changed = True
                 print(f'Aenderung der Bildschirmgroesse zu {800,600}')
+                self.screen = pygame.display.set_mode((new_SCREEN_WIDTH, new_SCREEN_HEIGHT), pygame.FULLSCREEN)
+                SCREEN_WIDTH = new_SCREEN_WIDTH
+                SCREEN_HEIGHT = new_SCREEN_HEIGHT
+                
             
             if self.medium_screen_setting_button.button_is_pressed == True:
-                self.SCREEN_WIDTH = 1280
-                self.SCREEN_HEIGHT = 720
+                new_SCREEN_WIDTH = 1280
+                new_SCREEN_HEIGHT = 720
                 self.resolution_changed = True            
                 print(f'Aenderung der Bildschirmgroesse zu {1280,720}')
+                self.screen = pygame.display.set_mode((new_SCREEN_WIDTH, new_SCREEN_HEIGHT), pygame.FULLSCREEN)
+                SCREEN_WIDTH = new_SCREEN_WIDTH
+                SCREEN_HEIGHT = new_SCREEN_HEIGHT
 
 
             if self.large_screen_setting_button.button_is_pressed == True:
-                self.new_SCREEN_WIDTH = 1920
-                self.new_SCREEN_HEIGHT = 1080
+                new_SCREEN_WIDTH = 1920
+                new_SCREEN_HEIGHT = 1080
                 self.resolution_changed = True                
                 print(f'Aenderung der Bildschirmgroesse zu {1920,1080}')
+                self.screen = pygame.display.set_mode((new_SCREEN_WIDTH, new_SCREEN_HEIGHT), pygame.FULLSCREEN)
+                SCREEN_WIDTH = new_SCREEN_WIDTH
+                SCREEN_HEIGHT = new_SCREEN_HEIGHT
 
             if self.full_screen_setting_button.button_is_pressed == True:
-                self.SCREEN_WIDTH = pygame.display.Info().current_w
-                self.SCREEN_HEIGHT = pygame.display.Info().current_h
+                new_SCREEN_WIDTH = pygame.display.Info().current_w
+                new_SCREEN_HEIGHT = pygame.display.Info().current_h
                 self.resolution_changed = True
                 print(f'Aenderung der Bildschirmgroesse zu FULLSCREEN')
+                self.screen = pygame.display.set_mode((new_SCREEN_WIDTH, new_SCREEN_HEIGHT), pygame.FULLSCREEN)
+                SCREEN_WIDTH = new_SCREEN_WIDTH
+                SCREEN_HEIGHT = new_SCREEN_HEIGHT
 
             if self.back_screen_setting_button.button_is_pressed == True:
                 self.settings_screen = False

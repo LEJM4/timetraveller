@@ -4,8 +4,8 @@ from support import *
 from geometrie import *
 from data import *
 class UserInterface:
-    def __init__(self, screen, current_lvl: str):
-        self.screen = screen
+    def __init__(self, current_lvl: str):
+        self.screen = pygame.display.get_surface() 
         self.current_lvl = current_lvl
         self.circle_color = (200, 200, 200, 200)
         self.circle_color_2 = (30, 142, 0, 200)
@@ -23,7 +23,7 @@ class UserInterface:
                    y_position=int(button_pos['missions'][0][1]) -10, 
                    button_width=int(button_size['missions'][0]) + 20, #button erst 10 nach links -> um wiedeer die 10 rechts abzudecken insgesamt 20 --> 
                    button_height= 3* (button_size['missions'][1]) + 3 *int(button_size['missions'][0] / 40) + 10, #3 * hoehe button + 3* border (siehe class button) + 10 --> abstand zwischen den einzelnen butten --> settings class
-                   screen=screen,
+                   screen=self.screen,
                    border = True,
                    collision_allowed=False,
                    button_color = (50, 62, 79, 200)),
@@ -35,7 +35,7 @@ class UserInterface:
                    y_position=int(button_pos['missions'][0][1]), #from settings dict
                    button_width=int(button_size['missions'][0]), #from settings dict
                    button_height=button_size['missions'][1],#from settings dict
-                   screen=screen, 
+                   screen=self.screen, 
                    border = True,
                    collision_allowed=False,
                    #button_color= 'grey',
@@ -48,7 +48,7 @@ class UserInterface:
                    y_position=int(button_pos['missions'][1][1]), 
                    button_width=int(button_size['missions'][0]), 
                    button_height=button_size['missions'][1],
-                   screen=screen,
+                   screen=self.screen,
                    border = True,
                    collision_allowed=False,
                    font_size=0.65),
@@ -59,24 +59,24 @@ class UserInterface:
                    y_position=int(button_pos['missions'][2][1]), 
                    button_width=int(button_size['missions'][0]), 
                    button_height=button_size['missions'][1],
-                   screen=screen,
+                   screen=self.screen,
                    border = True,
                    collision_allowed=False,
                    font_size=0.65) 
         ]
 
         self.circles = [
-            Circle(screen=screen,
+            Circle(screen=self.screen,
                    color=self.circle_color,
                    color_2=self.circle_color_2,
                    center=(SCREEN_WIDTH // 4.02, int(button_pos['missions'][0][1]) + (button_size['missions'][1] // 2)),
                    radius=button_size['missions'][1] // 4),
-            Circle(screen=screen,
+            Circle(screen=self.screen,
                    color=self.circle_color,
                    color_2=self.circle_color_2,
                    center=(SCREEN_WIDTH // 4.02, int(button_pos['missions'][1][1]) + (button_size['missions'][1] // 2)),
                    radius=button_size['missions'][1] // 4),
-            Circle(screen=screen,
+            Circle(screen=self.screen,
                    color=self.circle_color,
                    color_2=self.circle_color_2,
                    center=(SCREEN_WIDTH // 4.02, int(button_pos['missions'][2][1]) + (button_size['missions'][1] // 2)),

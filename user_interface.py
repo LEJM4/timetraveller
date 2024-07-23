@@ -4,7 +4,7 @@ from support import *
 class Overlay:
 	def __init__(self,player):
 		self.player = player
-		self.display_surface = pygame.display.get_surface()
+		self.screen = pygame.display.get_surface()
 		self.full_heart = import_image('graphics', 'ui', 'full_heart')
 		self.half_heart = import_image('graphics', 'ui', 'half_heart')
 		self.empty_heart = import_image('graphics', 'ui', 'empty_heart')
@@ -14,13 +14,13 @@ class Overlay:
 		for heart in range(hit_points['player']):
 			x = SCREEN_WIDTH - (SCREEN_WIDTH// 20) - heart * (self.full_heart.get_width() + 4)
 			y = 10
-			self.display_surface.blit(self.empty_heart,(x,y))
+			self.screen.blit(self.empty_heart,(x,y))
 
 
 		for heart in range(self.player.health):
 			x = SCREEN_WIDTH - (SCREEN_WIDTH// 20) - heart * (self.full_heart.get_width() + 4)
 			y = 10
-			self.display_surface.blit(self.full_heart,(x,y))
+			self.screen.blit(self.full_heart,(x,y))
 
 
 """

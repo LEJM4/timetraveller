@@ -25,19 +25,20 @@ class Zombie:
         return target_pos
 
     def walk_around(self):
-        target_pos = self.set_random_target()
-        direction = (vector(target_pos) - vector(self.rect.center))
-        if direction.length() > 0:
-            direction = direction.normalize()
-        timer = self.timers['walk_around']
-        if target_pos == None: self.set_random_target()
-        if timer:
-            self.direction = direction
-            if (target_pos - vector(self.rect.center)).length_squared() < 10**2:
-                            target_pos = self.set_random_target()
+        pass
+        # target_pos = self.set_random_target()
+        # direction = (vector(target_pos) - vector(self.rect.center))
+        # if direction.length() > 0:
+        #     direction = direction.normalize()
+        # timer = self.timers['walk_around']
+        # if target_pos == None: self.set_random_target()
+        # if timer:
+        #     self.direction = direction
+        #     if (target_pos - vector(self.rect.center)).length_squared() < 10**2:
+        #                     target_pos = self.set_random_target()
         
-        else:
-             self.set_random_target()
+        # else:
+        #      self.set_random_target()
 
     def walk_around_2(self):
         self.timers['look_around'].activate() 

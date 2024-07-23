@@ -69,7 +69,8 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.esc_pressed = not self.esc_pressed #macht immer das gegenteil von dem Zustand 
-                        self.activate_esc_menu()
+                        if self.esc_pressed:
+                            self.activate_esc_menu()
                         
 
 

@@ -30,7 +30,7 @@ class Level:
         #data 4 the berrys
         self.data = data
         
-        self.ui = UserInterface(self.display_surface, 'lvl_1')
+        self.ui = UserInterface('lvl_1')
 
 
         #groups
