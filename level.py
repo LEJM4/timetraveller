@@ -11,7 +11,8 @@ from objects import *
 from settings import *
 
 from support import *
-from user_interface import UserInterface
+from missions import UserInterface
+from user_interface import Overlay
 
 
 class Level:
@@ -21,7 +22,6 @@ class Level:
 
 
         #maps
-
 
 
         #display_surface
@@ -54,6 +54,9 @@ class Level:
                                            player_spawn_pos= 'lvl')
         self.player_spawnpoint(tile_map= self.tile_maps['lvl'])
         #"""
+
+        self.overlay = Overlay(self.player)
+
 
 		# transition / tint
         self.transition_destination = None
@@ -244,6 +247,10 @@ class Level:
                             path= ('graphics', 'npc', 'npc_1'),
                             player = self.player,
                             create_projectile= self.star_bullet_player)
+                        
+                        #print(object.properties['health'])
+                        # print(object.properties['health'] = 2)
+
 
                     if object.name == 'trader':
                         pass
@@ -259,9 +266,21 @@ class Level:
             #path = ('character', 'objects', 'projectile'))
 
     def projectile_collision(self):
+        for obj in self.obstacle_objects.sprites():
+            pygame.sprite.spritecollide(obj, self.projectile_group, True)
+
+        for projectile in self.projectile_group.sprites(): #.sprites() gibt eine liste von sprites zurueck
+            monster_sprites = pygame.sprite.spritecollide(projectile, self.enemy_group, False, pygame.sprite.collide_mask)
+            if monster_sprites:
+                projectile.kill()
+                for sprite in monster_sprites:
+                    sprite.damage('pistol')
+            
+            pygame.sprite.spritecollide(obj, self.projectile_group, True)
         #projectiles = [projectile for projectile in self.projectile_group if projectile.rect.colliderect(self.player.hitbox_player)]
-        # if pygame.sprite.spritecollide(self.player, self.projectile_group, True):
-        #     self.player.damage('pistol')
+        if pygame.sprite.spritecollide(self.player, self.projectile_group, True , pygame.sprite.collide_mask):
+           self.player.damage('pistol')
+            #pass
         pass
 
     def bush_collision(self):
@@ -324,5 +343,6 @@ class Level:
         self.all_sprites.draw_all_objects(self.player)
 
         self.ui.display()
+        self.overlay.display()
         
         self.tint_screen(dt)

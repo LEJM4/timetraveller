@@ -992,6 +992,7 @@
   <object id="1841" name="zombie_2" x="4406" y="2052">
    <properties>
     <property name="direction" value="down"/>
+    <property name="health" type="int" value="1"/>
     <property name="position" value="meadow"/>
    </properties>
    <point/>

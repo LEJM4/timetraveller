@@ -10,7 +10,7 @@ class Player(Entity):
 		super().__init__( pos, groups, facing_direction, obstacle_objects, data, path)
 		
         #OVERWRITES
-		self.health = 5
+		self.health = hit_points['player']
 		self.current_wepon = 'pistol'
 
 		
@@ -117,3 +117,6 @@ class Player(Entity):
 			self.trail_collision()
 		self.update_timer()
 		self.animation_leo(dt)
+		self.blink_mask()
+
+		self.check_death()

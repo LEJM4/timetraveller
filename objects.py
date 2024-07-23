@@ -90,6 +90,8 @@ class Star(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = frames
         self.rect = self.image.get_rect(center = pos)
+        self.mask = pygame.mask.from_surface(self.image)
+
         self.z_layer = z_layer
 
         self.pos = vector(self.rect.center)

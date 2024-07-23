@@ -32,7 +32,11 @@ button_pos = {'missions': [(20,20),(20, 25 + button_size['missions'][1],),(20, 3
 #WEAPONS
 weapon_dict = {'hand': 1,
                'sword':2,
-               'pistol': 3}
+               'pistol': 1}
+
+hit_points = {'player': 5,
+              'zombie_1': 6,
+              'zombie_2' : 4}
 
 #print(button_pos['missions'])
 LAYERS = {

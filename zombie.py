@@ -26,7 +26,7 @@ class Zombie:
 
     def walk_around(self):
         target_pos = self.set_random_target()
-        direction = (vector(target_pos) - vector(self.rect.center)).normalize()
+        direction = (vector(target_pos) - vector(self.rect.center))
         if direction.length() > 0:
             direction = direction.normalize()
         timer = self.timers['walk_around']
@@ -87,7 +87,7 @@ class Zombie_1(Entity, Zombie):
         
         #OVERWRITES
         self.projectile = False
-        self.health = 3
+        self.health = hit_points['zombie_1']
         self.current_wepon = 'hand'
 
 
@@ -189,6 +189,7 @@ class Zombie_1(Entity, Zombie):
         
 
         self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
         self.update_timer()
@@ -197,6 +198,9 @@ class Zombie_1(Entity, Zombie):
         self.move(dt) #movement in dt
 
         self.animation_leo(dt)
+        self.blink_mask()
+
+        self.check_death()
 
 
 
@@ -206,7 +210,7 @@ class Zombie_2(Entity, Zombie):
         
         #OVERWRITES
         self.projectile = False
-        self.health = 3
+        self.health = hit_points['zombie_2']
         self.current_weapon = 'pistol'
 
         self.create_star_projectile = create_projectile
@@ -294,7 +298,7 @@ class Zombie_2(Entity, Zombie):
                 self.projectile_direction = self.get_player_direction()
                 
 
-                projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
+                projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 1.5)
 
                 
                 self.create_star_projectile(projectile_start_pos, self.projectile_direction)
@@ -313,6 +317,7 @@ class Zombie_2(Entity, Zombie):
         
 
         self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+        self.mask = pygame.mask.from_surface(self.image)
 
 
     def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
@@ -322,3 +327,6 @@ class Zombie_2(Entity, Zombie):
         self.move(dt) #movement in dt
 
         self.animation_leo(dt)
+        self.blink_mask()
+
+        self.check_death()

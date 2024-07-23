@@ -2,7 +2,7 @@ from settings import *
 from support import *
 from timer import Timer
 from random import randint
-
+from math import sin
    
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path, speed = 100):
@@ -36,6 +36,8 @@ class Entity(pygame.sprite.Sprite):
         self.image =  self.frames[self.status][self.facing_direction][int(self.frame_index)]
         #self.image = self.status[self.get_state()][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
+        self.mask = pygame.mask.from_surface(self.image)
+        
 
 
 
@@ -50,7 +52,6 @@ class Entity(pygame.sprite.Sprite):
 
         # collision
         self.hitbox_player = self.rect
-        self.player_mask = pygame.mask.from_surface(self.image)
 
         #Parametergroups
         self.obstacle_objects = obstacle_objects
@@ -159,8 +160,13 @@ class Entity(pygame.sprite.Sprite):
         if self.current_wepon == 'pistol':    
             if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
                 
+                match self.facing_direction:
+                    case 'left': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2.4)
+                    case 'right': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2.37)
+                    case 'up': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2)
+                    case 'down': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2)
 
-                projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 50)
+                     
 
                 
                 self.create_star_projectile(projectile_start_pos, self.projectile_direction)
@@ -179,18 +185,32 @@ class Entity(pygame.sprite.Sprite):
         
 
         self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+        self.mask = pygame.mask.from_surface(self.image)
 
     def damage(self, weapon: str):
-        vulnerable_timer = Timer(duration= 400,
-                                 repeat = False,
-                                 autostart= False,
-                                 func = self.reset_vulnerability)
         if self.is_vulnerable:
             self.health -= weapon_dict[weapon]
             self.is_vulnerable = False
             self.timers['hit_timer'].activate()
         print(self.is_vulnerable)
-        
+    
+    def wave_value(self):
+        value = sin(pygame.time.get_ticks())
+        if value >= 0:
+            return True
+        else:
+            return False
+    def blink_mask(self):
+        if not self.is_vulnerable:
+            if self.wave_value():
+                mask = pygame.mask.from_surface(self.image)
+                white_surf = mask.to_surface()
+                white_surf.set_colorkey((0,0,0)) #entfernt all schwarzen pixel von der maske --> maske ist schwarz und weiss 
+                self.image = white_surf
+
+    def check_death(self):
+        if self.health <= 0:
+             self.kill()
 
     def reset_vulnerability(self):
         self.is_vulnerable = True
