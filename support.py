@@ -5,8 +5,11 @@ from os.path import join
 from os import walk
 from pytmx.util_pygame import load_pygame
 from sys import exit
+from pygame.math import Vector2 as vector 
 
 
+
+# image and map stuff
 def import_image(*path, alpha = True, format = 'png'):
 	full_path = join(*path) + f'.{format}'
 	surf = pygame.image.load(full_path).convert_alpha() if alpha else pygame.image.load(full_path).convert()
@@ -25,9 +28,6 @@ def import_tilemap(cols, rows, *path):
 			cutout_surf.blit(surf, (0,0), cutout_rect)
 			frames[(col, row)] = cutout_surf
 	return frames
-
-
-
 
 
 def character_image_importer_vertical(cols, row, *path):
@@ -51,9 +51,6 @@ def import_multiple_spritesheets(cols, rows, *path, orientation= 'vertical'):
 	return new_dict
 
 
-
-
-
 def import_folder_big(*path):
 	surf_list = []
 	for folder_path, sub_folders, image_names in walk(join(*path)):
@@ -62,8 +59,6 @@ def import_folder_big(*path):
 			surf = pygame.image.load(full_path).convert_alpha()
 			surf_list.append(surf)
 	return surf_list
-
-
 
 
 
@@ -112,4 +107,15 @@ while True:
 
 
 
-
+#map 
+def check_distance(radius, target, entity):
+	distance_vector = (vector(target.rect.center) - vector(entity.rect.center)) 
+	#distance_vector = vector vom spieler - vector vom zombie
+	# moeglich waere auch:
+	# distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)).magnitude() 
+	#magnitude : https://pyga.me/docs/ref/math.html#pygame.math.Vector2.magnitude
+	# quadriert und zieht die Wurzel --> wurzel ziehen ist fuer computer bloed zu rechnen --> deshalb quadrieren
+	# (Danke "dezer_ted")
+	distance_squared = distance_vector.length_squared()
+	radius_squared = radius**2
+	return distance_squared < radius_squared

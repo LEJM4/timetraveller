@@ -6,12 +6,15 @@ from data import *
 
 class Player(Entity):
 
-	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, create_projectile):
+	def __init__(self, pos, groups, facing_direction, obstacle_objects, interaction_objects, trail, data, path, id, create_projectile):
 		super().__init__( pos, groups, facing_direction, obstacle_objects, data, path)
 		
         #OVERWRITES
 		self.health = hit_points['player']
 		self.current_wepon = 'pistol'
+
+		
+		self.entity_id = id
 
 		
 		#Parametergroups

@@ -22,9 +22,14 @@ class Timer:
 
 	def update(self):
 		if self.active:
+			#print(self.duration)
 			current_time = get_ticks()
+			#print(current_time)
 			if current_time - self.start_time >= self.duration:
-				if self.func: self.func()
+				if self.func:
+					self.func()
+					print('funktion ausgefuehrt')
 				self.deactivate()
+				print('deactoveasfdsfs<sdsdff')
 
 #timer code from "clear code"

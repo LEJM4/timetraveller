@@ -3,7 +3,7 @@ from pytmx.util_pygame import load_pygame
 from player import Player
 from zombie import Zombie_1, Zombie_2
 from os.path import join
-
+from game_data import *
 #from entity import Entity, Player
 
 from camera import Camera
@@ -14,11 +14,14 @@ from support import *
 from missions import UserInterface
 from user_interface import Overlay
 
+from dialog import *
 
 class Level:
     def __init__(self, data):
        # self.bu = import_image('graphcis', 'objects', 'projectile', '0')
         self.bu = import_image('graphics','objects','projectile','left', '0') 
+
+        self.dialog_tree = None
 
 
         #maps
@@ -40,6 +43,7 @@ class Level:
         self.obstacle_objects = pygame.sprite.Group()
         self.interaction_objects = pygame.sprite.Group()
         self.trail = pygame.sprite.Group()
+        self.dialog_sprites = pygame.sprite.Group()
 
         self.projectile_group = pygame.sprite.Group()
 
@@ -55,7 +59,7 @@ class Level:
         self.player_spawnpoint(tile_map= self.tile_maps['lvl'])
         #"""
 
-        self.overlay = Overlay(self.player)
+        self.overlay = Overlay()
 
 
 		# transition / tint
@@ -82,7 +86,7 @@ class Level:
             'characters' : import_multiple_spritesheets('graphics', 'npc', 'npc_1')      
         }
         #print(self.map_animations['characters'])
-
+        self.fonts = {'dialog': pygame.font.Font(join('fonts', 'Enchanted Land.otf'), 30)}
 
 
     def create_map(self, tile_map, player_start_pos):
@@ -224,6 +228,7 @@ class Level:
                                 trail= self.trail,
                                 data = self.data,
                                 path= ('graphics', 'player'),
+                                id= object.properties['entity_id'],
                                 create_projectile= self.star_bullet_player)
 
                     if object.name == 'zombie_1':
@@ -234,7 +239,8 @@ class Level:
                             obstacle_objects= self.obstacle_objects ,
                             data = self.data,
                             path= ('graphics', 'npc', 'npc_1'),
-                            player = self.player)
+                            player = self.player,
+                            id = object.properties['entity_id'])
                             #create_star_projectile= self.star_bullet_player)     
 
                     if object.name == 'zombie_2':
@@ -246,7 +252,8 @@ class Level:
                             data = self.data,
                             path= ('graphics', 'npc', 'npc_1'),
                             player = self.player,
-                            create_projectile= self.star_bullet_player)
+                            create_projectile= self.star_bullet_player,
+                            id = object.properties['entity_id'])
                         
                         #print(object.properties['health'])
                         # print(object.properties['health'] = 2)
@@ -254,6 +261,14 @@ class Level:
 
                     if object.name == 'trader':
                         pass
+
+                    if object.name == 'robo':
+                        self.robo = Robo(pos =(object.x, object.y),
+                                         groups = [self.all_sprites, self.dialog_sprites],
+                                         player = self.player,
+                                         character_data= Character_DATA[object.properties['character_id']],
+                                         create_dialog= self.create_dialog
+                                        )
 
 
     def star_bullet_player(self, pos, direction):#:, path):
@@ -328,8 +343,32 @@ class Level:
         self.tint_surf.set_alpha(self.tint_progress)
         self.display_surface.blit(self.tint_surf, (0,0))
 
+    def input(self):
+        if not self.dialog_tree:
+            keys = pygame.key.get_just_pressed()
+            if keys[pygame.K_RETURN]:
+                for object in self.dialog_sprites:
+                    print(object)
+                    if check_distance(200, self.player, object):
+                        if object.character_data['can_talk']:
+                            self.player.block()
+                            self.create_dialog(object)
+
+    def create_dialog(self, object):
+        if not self.dialog_tree:
+            self.dialog_tree = DialogTree(object, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog)
+
+
+    def end_dialog(self, character):
+        #print(Character_DATA[character.character_data]['dialog'][1])
+        Character_DATA['robo']['can_talk'] = False
+        character.character_data['can_talk'] = False
+        self.dialog_tree = None
+        self.player.unblock()
+
     def run(self,dt):
         #print(self.player.status)
+        self.input()
 
         self.display_surface.fill('purple')
         
@@ -346,3 +385,5 @@ class Level:
         self.overlay.display()
         
         self.tint_screen(dt)
+
+        if self.dialog_tree: self.dialog_tree.update()

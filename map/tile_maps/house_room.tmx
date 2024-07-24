@@ -50,6 +50,7 @@
   <object id="47" name="player" x="192" y="256">
    <properties>
     <property name="direction" value="up"/>
+    <property name="entity_id" value="player"/>
     <property name="position" value="entrance_house_room"/>
    </properties>
    <point/>

@@ -1,9 +1,10 @@
 from settings import *
 from support import *
+from game_data import *
 
 class Overlay:
-	def __init__(self,player):
-		self.player = player
+	def __init__(self):
+		self.health = 6
 		self.screen = pygame.display.get_surface()
 		self.full_heart = import_image('graphics', 'ui', 'full_heart')
 		self.half_heart = import_image('graphics', 'ui', 'half_heart')
@@ -11,13 +12,13 @@ class Overlay:
 		#pygame.transform.scale(self.health_surf,)
 
 	def display(self):
-		for heart in range(hit_points['player']):
-			x = SCREEN_WIDTH - (SCREEN_WIDTH// 20) - heart * (self.full_heart.get_width() + 4)
+		for empty_heart in range(self.health):
+			x = SCREEN_WIDTH - (SCREEN_WIDTH// 20) - empty_heart * (self.full_heart.get_width() + 4)
 			y = 10
 			self.screen.blit(self.empty_heart,(x,y))
 
 
-		for heart in range(self.player.health):
+		for heart in range(LIFE_DATA['player']['health']):
 			x = SCREEN_WIDTH - (SCREEN_WIDTH// 20) - heart * (self.full_heart.get_width() + 4)
 			y = 10
 			self.screen.blit(self.full_heart,(x,y))

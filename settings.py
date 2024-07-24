@@ -45,7 +45,7 @@ LAYERS = {
     'trail': 2,
     'gras':3,
 	'main': 4,
-    'player':5
+    'top':5
     }
 #a = pygame.display.get_desktop_sizes()
 #print(a)
