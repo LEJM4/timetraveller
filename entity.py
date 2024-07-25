@@ -4,6 +4,7 @@ from timer import Timer
 from random import randint
 from math import sin
 from game_data import *
+from data import *
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	facing_direction, obstacle_objects, data, path, speed = 100):
@@ -43,9 +44,7 @@ class Entity(pygame.sprite.Sprite):
 
 
         # entity attributes
-        self.health = 3 
         self.pos = vector(self.rect.center)
-        self.change_speed = False
         self.speed = speed
 
         self.blocked = False
@@ -211,6 +210,7 @@ class Entity(pygame.sprite.Sprite):
 
     def check_death(self):
         if LIFE_DATA[self.entity_id]['health'] <= 0:
+             player_inventory['corps'] += 1
              self.kill()
 
     def reset_vulnerability(self):

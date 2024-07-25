@@ -95,8 +95,11 @@ class Zombie_1(Entity, Zombie):
         self.entity_id = id
         self.health = LIFE_DATA[id]['health']
         self.current_wepon = 'hand'
+        self.animation_speed = 4
 
+        
         self.last_pos = 0.0
+
         #
         self.path = path
 
@@ -220,6 +223,7 @@ class Zombie_2(Entity, Zombie):
         self.projectile = False
         self.health = hit_points['zombie_2']
         self.current_weapon = 'pistol'
+        self.animation_speed = 4
 
         self.create_star_projectile = create_projectile
 

@@ -1,8 +1,8 @@
 from button import Button
-from settings import *
 from support import *
 from geometrie import *
 from data import *
+
 class UserInterface:
     def __init__(self, current_lvl: str):
         self.screen = pygame.display.get_surface() 
@@ -12,6 +12,7 @@ class UserInterface:
 
 
         self.check_mark = import_image('graphics', 'ui', 'check_mark_green')
+        self.missions_completed = 0
 
         
         self.mission_buttons = [  #creates a list with all buttons
@@ -86,12 +87,20 @@ class UserInterface:
 
     def display(self):
 
-        for button in self.mission_buttons:
+       for button in self.mission_buttons:
             button.draw(self.screen)
         
-        for circle in self.circles:
+       for circle in self.circles:
             circle.draw()
 
-        if lvl[1]: self.circles[0].change_color() 
-        if lvl[2]: self.circles[1].change_color() 
-        if lvl[3]: self.circles[2].change_color() 
+       if lvl[1]:
+             self.circles[0].change_color()
+             self.missions_completed += 1
+
+       if lvl[2]:
+             self.circles[1].change_color() 
+             self.missions_completed += 1
+
+       if lvl[3]:
+              self.circles[2].change_color() 
+              self.missions_completed += 1

@@ -8,14 +8,17 @@ lvl = {1: False,
        2: False,
        3: False}
 
-d = Data()
-blueberry = 0
-raspberry= 0
-coin = 0
-if d.blueberry == 1:
-    lvl[1] = True
-if blueberry == 1:
-    lvl[2] = True
+player_inventory = {
+    'blueberry': 0,
+    'coins': 0,
+    'corps': 0,
+    'raspberry': 0,
+}
+
+
+
+missions_text = {'lvl_1': ['Sammle 10 Beeren.' , 'Sprich mit dem Computer.', 'Töte alle Gegner.'],
+           'lvl_2': ['__', '__', '__']}
 
 
 

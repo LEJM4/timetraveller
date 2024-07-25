@@ -15,6 +15,7 @@ class Player(Entity):
 
 		
 		self.entity_id = id
+		self.speed = 500
 
 		
 		#Parametergroups
@@ -81,30 +82,9 @@ class Player(Entity):
 			case 'up': self.projectile_direction = vector (0,-1)
 			case 'down': self.projectile_direction = vector (0,1)
 
-
-	def collision_bush_update(self, type):
-		
-		if type == 'blueberry':
-			self.data.blueberry += 1
-			lvl[1]= True
-
-
-		if type == 'raspberry':
-			self.data.raspberry += 1
-
-		if type == 'coin':
-			self.data.coin += 1
 	
 	
-	def trail_collision(self):
-		for trail in self.trail.sprites():
-			if trail.hitbox.colliderect(self.hitbox_player):
-				self.speed = 200
-				self.change_speed = True
-				break
-			else:
-				self.speed = 400
-				self.change_speed = False
+
 
 
 
@@ -117,7 +97,6 @@ class Player(Entity):
 			self.move(dt) #movement in dt
 			# self.block()
 			# self.unblock()
-			self.trail_collision()
 		self.update_timer()
 		self.animation_leo(dt)
 		self.blink_mask()

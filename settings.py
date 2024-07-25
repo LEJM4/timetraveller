@@ -13,8 +13,6 @@ SCALE_FACTOR = 4
 TILE_SIZE = 64 #Tile_Pixel = 64x64
 
 
-missions_text = {'lvl_1': ['Sammle 10 Beeren.' , 'Sprich mit dem Computer.', 'Besuche den großen Baum.'],
-           'lvl_2': ['__', '__', '__']}
 
 
 

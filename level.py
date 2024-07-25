@@ -52,12 +52,7 @@ class Level:
 
         self.tile_maps_import()
         self.create_map(self.tile_maps['lvl_1'], 'meadow')
-        """
-        self.draw_background_normal_layers(tile_map = self.tile_maps['lvl'])
-        self.draw_background_object_layers(tile_map= self.tile_maps['lvl'],
-                                           player_spawn_pos= 'lvl')
-        self.player_spawnpoint(tile_map= self.tile_maps['lvl'])
-        #"""
+
 
         self.overlay = Overlay()
 
@@ -72,41 +67,49 @@ class Level:
 
     def tile_maps_import(self):
         self.tile_maps = tmx_importer('map', 'tile_maps')
-        '''
-        self.tile_maps = {
-            'start': load_pygame(join('map', 'tile_maps', 'test_lvl.tmx')),
-            'a': load_pygame(join('map', 'tile_maps', 'unbenannt.tmx')),
-            'tardis':load_pygame(join('map', 'tile_maps', 'tardis_room.tmx')),
-            'lvl': load_pygame(join('map', 'tile_maps', 'lvl_1.tmx')),}
 
-        #'''
             
         self.map_animations = {
             'water' : import_folder_big('graphics', 'ground', 'water',),
             'characters' : import_multiple_spritesheets('graphics', 'npc', 'npc_1')      
         }
-        #print(self.map_animations['characters'])
+
         self.fonts = {'dialog': pygame.font.Font(join('fonts', 'Enchanted Land.otf'), 30)}
 
 
     def create_map(self, tile_map, player_start_pos):
+        #alle gruppen leeren
         for group in (self.all_sprites, self.obstacle_objects, self.interaction_objects, self.trail, self.projectile_group, self.transition_objects):
             group.empty()
+        
+        tile_layer_names = {layer.name for layer in tile_map.visible_layers}
+        object_layer_names = {layer.name for layer in tile_map.objectgroups}
+
 
         #ground laayers
-        for x, y, image in tile_map.get_layer_by_name('ground').tiles():
-            General(pos=(x*TILE_SIZE, y*TILE_SIZE), 
-                    image= image,
-                    groups= [self.all_sprites],
-                    z_layer= LAYERS['ground'])
+        if 'ground' in tile_layer_names:
+            for x, y, image in tile_map.get_layer_by_name('ground').tiles():
+                General(pos=(x * TILE_SIZE, y * TILE_SIZE),
+                        image=image,
+                        groups=[self.all_sprites],
+                        z_layer=LAYERS['ground'])
             
-        #traail laayer            
-        for x,y, image in tile_map.get_layer_by_name('trail').tiles():
-            Trail(pos=(x*TILE_SIZE, y*TILE_SIZE), 
-                    image= image,
-                    groups= [self.all_sprites, self.trail],
-                    z_layer= LAYERS['trail'])
+        #trail laayer            
+        if 'trail' in tile_layer_names:
+            for x, y, image in tile_map.get_layer_by_name('trail').tiles():
+                Trail(pos=(x * TILE_SIZE, y * TILE_SIZE),
+                        image=image,
+                        groups=[self.all_sprites, self.trail],
+                        z_layer=LAYERS['trail'])
 
+        #map_limit
+        if 'map_limit' in tile_layer_names:
+            map_limit_layer = tile_map.get_layer_by_name('map_limit')
+            for tile in map_limit_layer:
+                General(pos=(tile.x, tile.y),
+                        image=tile.image,
+                        groups=[self.obstacle_objects],  # #nicht zu "all_sprites"--> damit diese nicht gemalt werden
+                        z_layer=LAYERS['ground'])
 
         ###creaate all objects
 
@@ -114,161 +117,132 @@ class Level:
         nature_layer = tile_map.get_layer_by_name('nature')
         buildings_layer = tile_map.get_layer_by_name('buildings')
 
-        map_limit_layer = tile_map.get_layer_by_name('map_limit')
-
-        for tile in map_limit_layer:
-            General(pos=(tile.x, tile.y), 
-                    image= tile.image,
-                    groups= [self.obstacle_objects], #nicht zu "all_sprites"--> damit diese nicht gemalt werden
-                    z_layer= LAYERS['ground'])
+        #water layer
+        if 'water' in tile_layer_names:
+            for water in tile_map.get_layer_by_name('water'):
+                for x in range(int(water.x), int(water.x + water.width), TILE_SIZE):
+                    for y in range(int(water.y), int(water.y + water.height), TILE_SIZE):
+                        AnimatedSprites(pos=(x, y),
+                                        frame_list=self.map_animations['water'],
+                                        groups=[self.all_sprites, self.obstacle_objects],
+                                        animation_speed=4)
             
+        #nature layer
+        if 'nature' in object_layer_names:
+            nature_layer = tile_map.get_layer_by_name('nature')
+            for nature_obj in nature_layer:
+                if nature_obj.name == 'tree_small':
+                    Tree(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites, self.obstacle_objects],
+                            item_type='tree_small')
+                elif nature_obj.name == 'tree_big':
+                    Tree(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites, self.obstacle_objects],
+                            item_type='tree_big')
+                elif nature_obj.name == 'transparent_tree':
+                    Tree(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites],
+                            item_type='big_tree')
+                elif nature_obj.name == 'empty':
+                    Bush(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites],
+                            item_type='Empty')
+                elif nature_obj.name == 'blueberry':
+                    Bush(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites, self.interaction_objects],
+                            item_type='Blueberry')
+                elif nature_obj.name == 'raspberry':
+                    Bush(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites, self.interaction_objects],
+                            item_type='Raspberry')
+                elif nature_obj.name == 'stone':
+                    Stone(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites, self.interaction_objects],
+                            item_type='')
 
-
-        for water in tile_map.get_layer_by_name('water'):
-            for x in range (int(water.x), int(water.x + water.width), TILE_SIZE):
-                for y in range (int(water.y), int(water.y + water.height), TILE_SIZE):
-                    AnimatedSprites(pos = (x,y),
-                                    frame_list = self.map_animations['water'],
-                                    groups= [self.all_sprites, self.obstacle_objects],
-                                    animation_speed= 4)
-
-        for nature_obj in nature_layer:
-            if nature_obj.name == ('tree_small'):
-                Tree(
-                    pos= (nature_obj.x, nature_obj.y), 
-                    image= nature_obj.image, 
-                    groups= [self.all_sprites, self.obstacle_objects],
-                    item_type= 'tree_small')
-                
-            if nature_obj.name == ('tree_big'):
-                Tree(
-                    pos= (nature_obj.x, nature_obj.y), 
-                    image= nature_obj.image, 
-                    groups= [self.all_sprites, self.obstacle_objects],
-                    item_type= 'tree_big')
-                
-            if nature_obj.name == ('transparent_tree'):
-                Tree(
-                    pos= (nature_obj.x, nature_obj.y), 
-                    image= nature_obj.image, 
-                    groups= [self.all_sprites],
-                    item_type= 'big_tree')
-
-            if nature_obj.name == ('empty'):
-                Bush(
-                    pos = (nature_obj.x, nature_obj.y), 
-                    image = nature_obj.image, 
-                    groups = [self.all_sprites], 
-                    item_type = 'Empty')
-
-            if nature_obj.name == ('blueberry'):
-                Bush(
-                    pos = (nature_obj.x, nature_obj.y),
-                    image = nature_obj.image, 
-                    groups = [self.all_sprites, self.interaction_objects], 
-                    item_type = 'Blueberry')
-
-            if nature_obj.name == ('raspberry'):
-                Bush(
-                    pos = (nature_obj.x, nature_obj.y),
-                    image =nature_obj.image, 
-                    groups =[self.all_sprites, self.interaction_objects], 
-                    item_type= 'Raspberry')
-
-            if nature_obj.name == ('stone'):
-                Stone(pos = (nature_obj.x, nature_obj.y),
-                    image = nature_obj.image, 
-                    groups =[self.all_sprites, self.interaction_objects], 
-                    item_type= '')
-
-
-        for building in buildings_layer:
-            if building.name == ('tardis'):
-                Tardis(
-                    pos = (building.x, building.y),
-                    image = building.image, 
-                    groups =[self.all_sprites, self.interaction_objects], 
-                    item_type= '')
+        #building layer
+        if 'buildings' in object_layer_names:
+            buildings_layer = tile_map.get_layer_by_name('buildings')
+            for building in buildings_layer:
+                if building.name == 'tardis':
+                    Tardis(pos=(building.x, building.y),
+                            image=building.image,
+                            groups=[self.all_sprites, self.interaction_objects],
+                            item_type='')
+                elif building.name in ['house_1', 'house_2', 'house_3']:
+                    House(pos=(building.x, building.y),
+                            image=building.image,
+                            groups=[self.all_sprites, self.interaction_objects, self.obstacle_objects],
+                            item_type='')
+                else:
+                    General(pos=(building.x, building.y),
+                            image=building.image,
+                            groups=[self.all_sprites])
             
-            if building.name == ('house_1') or building.name == ('house_2') or building.name == ('house_3'):
-                House(
-                    pos = (building.x, building.y),
-                    image = building.image, 
-                    groups =[self.all_sprites, self.interaction_objects, self.obstacle_objects], 
-                    item_type= '')
-            else:
-                General(pos = (building.x, building.y),
-                    image = building.image, 
-                    groups =[self.all_sprites])
-        
-        
+        #transition
+        if 'transition' in object_layer_names:
+            transition_layer = tile_map.get_layer_by_name('transition')
+            for obj in transition_layer:
+                TransitionObjects(pos=(obj.x, obj.y),
+                                    size=(obj.width, obj.height),
+                                    destination=(obj.properties['destination'], obj.properties['location']),
+                                    groups=[self.transition_objects])
 
-                
-        for obj in tile_map.get_layer_by_name('transition'):
-            TransitionObjects(pos= (obj.x, obj.y),
-                              size= (obj.width, obj.height),
-                              destination= ( obj.properties['destination'], obj.properties['location']),
-                              groups= [self.transition_objects]
-                              )
+    
+    # characters Layer
+        if 'character' in object_layer_names:
+            character_layer = tile_map.get_layer_by_name('character')
+            for object in character_layer:
+                if object.name == 'player':
+                    if object.properties['position'] == player_start_pos:
+                        self.player = Player(pos=(object.x, object.y),
+                                                groups=self.all_sprites,
+                                                facing_direction=object.properties['direction'],
+                                                obstacle_objects=self.obstacle_objects,
+                                                interaction_objects=self.interaction_objects,
+                                                trail=self.trail,
+                                                data=self.data,
+                                                path=('graphics', 'player'),
+                                                id=object.properties['entity_id'],
+                                                create_projectile=self.star_bullet_player)
 
-        #charaacter + npc
+                elif object.name == 'zombie_1':
+                    self.zombie = Zombie_1(pos=(object.x, object.y),
+                                            groups=[self.all_sprites, self.enemy_group],
+                                            facing_direction=object.properties['direction'],
+                                            obstacle_objects=self.obstacle_objects,
+                                            data=self.data,
+                                            path=('graphics', 'npc', 'npc_1'),
+                                            player=self.player,
+                                            id=object.properties['entity_id'])
 
-        #___________________________
+                elif object.name == 'zombie_2':
+                    self.zombie = Zombie_2(pos=(object.x, object.y),
+                                            groups=[self.all_sprites, self.enemy_group],
+                                            facing_direction=object.properties['direction'],
+                                            obstacle_objects=self.obstacle_objects,
+                                            data=self.data,
+                                            path=('graphics', 'npc', 'npc_1'),
+                                            player=self.player,
+                                            create_projectile=self.star_bullet_player,
+                                            id=object.properties['entity_id'])
 
-        for object in tile_map.get_layer_by_name('character'):
-                    
-                    if object.name == 'player':
-                        if object.properties['position'] == player_start_pos:
-                            self.player = Player(
-                                pos = (object.x, object.y), 
-                                groups = self.all_sprites, 
-                                facing_direction= object.properties['direction'],
-                                obstacle_objects= self.obstacle_objects ,
-                                interaction_objects= self.interaction_objects, 
-                                trail= self.trail,
-                                data = self.data,
-                                path= ('graphics', 'player'),
-                                id= object.properties['entity_id'],
-                                create_projectile= self.star_bullet_player)
+                elif object.name == 'trader':
+                    pass
 
-                    if object.name == 'zombie_1':
-                        self.zombie = Zombie_1(
-                            pos = (object.x, object.y), 
-                            groups = [self.all_sprites, self.enemy_group], 
-                            facing_direction= object.properties['direction'],
-                            obstacle_objects= self.obstacle_objects ,
-                            data = self.data,
-                            path= ('graphics', 'npc', 'npc_1'),
-                            player = self.player,
-                            id = object.properties['entity_id'])
-                            #create_star_projectile= self.star_bullet_player)     
-
-                    if object.name == 'zombie_2':
-                        self.zombie = Zombie_2(
-                            pos = (object.x, object.y), 
-                            groups = [self.all_sprites, self.enemy_group], 
-                            facing_direction= object.properties['direction'],
-                            obstacle_objects= self.obstacle_objects ,
-                            data = self.data,
-                            path= ('graphics', 'npc', 'npc_1'),
-                            player = self.player,
-                            create_projectile= self.star_bullet_player,
-                            id = object.properties['entity_id'])
-                        
-                        #print(object.properties['health'])
-                        # print(object.properties['health'] = 2)
-
-
-                    if object.name == 'trader':
-                        pass
-
-                    if object.name == 'robo':
-                        self.robo = Robo(pos =(object.x, object.y),
-                                         groups = [self.all_sprites, self.dialog_sprites],
-                                         player = self.player,
-                                         character_data= Character_DATA[object.properties['character_id']],
-                                         create_dialog= self.create_dialog
-                                        )
+                elif object.name == 'robo':
+                    self.robo = Robo(pos=(object.x, object.y),
+                                        groups=[self.all_sprites, self.dialog_sprites],
+                                        player=self.player,
+                                        character_data=Character_DATA[object.properties['character_id']],
+                                        create_dialog=self.create_dialog)
 
 
     def star_bullet_player(self, pos, direction):#:, path):
@@ -279,6 +253,7 @@ class Level:
             animation_speed=4)
             
             #path = ('character', 'objects', 'projectile'))
+
 
     def projectile_collision(self):
         for obj in self.obstacle_objects.sprites():
@@ -298,28 +273,41 @@ class Level:
             #pass
         pass
 
+
+    def trail_collision(self):
+        for trail in self.trail.sprites():
+            if trail.hitbox.colliderect(self.player.hitbox_player):
+                self.player.speed = 200
+                #self.change_speed = True
+                break
+            else:
+                self.speed = 400
+                #self.change_speed = False
+
+
     def bush_collision(self):
         keys = pygame.key.get_pressed()
-        #pic item
-        if keys[pygame.K_e]:
-            if self.player.direction.magnitude() == 0:
-                if self.interaction_objects:
-                    interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, False) #(sprite: _HasRect, group: -> hier "interaction_objects", dookill = True --> boolean)
-                    if pygame.sprite.spritecollide(self.player, self.interaction_objects, True, pygame.sprite.collide_mask):
-                        
-                        if interaction_objects:
-                            if (interaction_objects[0].item_type) == 'Blueberry':
-                                self.player.collision_bush_update('blueberry')
-                                self.data.blueberry += 1
-                                
-                            
-                            if (interaction_objects[0].item_type) == 'Raspberry':
-                                self.player.collision_bush_update('raspberry')
-                                self.data.raspberry += 1
+        if keys[pygame.K_e] and self.player.status == 'collect' and self.interaction_objects: #ueberprueft ob Taste: e -> status muss "collect" sein , und das obj muss in "interaction_objects" sein
+            interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True, pygame.sprite.collide_mask) #(object, mit dem object collidiert, DOKILL?, mask_collision)
+            #interaction_objects = liste von sprite objekten --> von denen benoetigt man das erste element --> deshalb index [0] 
+            if interaction_objects: 
+                item = interaction_objects[0]
+                item_type = item.item_type.lower() #item uebergeben
 
-                            if (interaction_objects[0].item_type) == 'Coin':
-                                self.player.collision_bush_update('coin')
-                            print('Collision in lvl.py + Remove object')
+                if item_type in ['blueberry', 'raspberry', 'coin']: #item type ueberpruefen
+                    self.update_inventory_values(item_type)
+
+
+    def update_inventory_values(self, item):
+        if item == 'blueberry':
+            player_inventory[item] += 1
+        
+        elif item == 'blueberry':
+            player_inventory[item] += 1
+        
+        elif item == 'blueberry':
+            player_inventory[item] += 1
+
 
     def transition_check(self):
         sprites = [sprite for sprite in self.transition_objects if sprite.rect.colliderect(self.player.hitbox_player)]
@@ -327,6 +315,7 @@ class Level:
             self.player.block()
             self.transition_destination = sprites[0].destination
             self.tint_mode = 'tint'
+
 
     def tint_screen(self, dt):
         if self.tint_mode == 'untint':
@@ -343,6 +332,7 @@ class Level:
         self.tint_surf.set_alpha(self.tint_progress)
         self.display_surface.blit(self.tint_surf, (0,0))
 
+
     def input(self):
         if not self.dialog_tree:
             keys = pygame.key.get_just_pressed()
@@ -353,6 +343,7 @@ class Level:
                         if object.character_data['can_talk']:
                             self.player.block()
                             self.create_dialog(object)
+
 
     def create_dialog(self, object):
         if not self.dialog_tree:
@@ -366,24 +357,40 @@ class Level:
         self.dialog_tree = None
         self.player.unblock()
 
+
+    def update_missions(self):
+        if player_inventory['blueberry'] + player_inventory['raspberry'] >= 1:
+            lvl[1] = True
+        
+        if Character_DATA['robo']['can_talk'] == False:
+            lvl[2] = True
+            
+        if player_inventory['corps'] == 2:
+            lvl[3] = True
+
     def run(self,dt):
-        #print(self.player.status)
-        self.input()
-
         self.display_surface.fill('purple')
+
+
+        # ingame activity
+        self.input() #input ueberpruefen
+        self.transition_check() #transition ueberpruefen
+        self.bush_collision()  #bush_collision ueberpruefen
+        self.projectile_collision() #projectile_collision ueberpruefen
+        #self.trail_collision() #trail_collision ueberpruefen
+
         
-        self.transition_check()
+        #update
+        self.all_sprites.update(dt) #update all_sprites
 
-        self.bush_collision() # methode muss aufgerufen werden, damit coll. hier fkt
-        self.projectile_collision()
+
+        # graphical
+        self.all_sprites.draw_all_objects(self.player) #zuerst die denn darauf muessen noch gezeichnet werden:
+        self.ui.display() #missionen anzeigen: links oben
+        self.overlay.display() # leben anzeigen: rechts oben
+        self.tint_screen(dt) # gesamter bildschirm
         
-        self.all_sprites.update(dt)
 
-        self.all_sprites.draw_all_objects(self.player)
 
-        self.ui.display()
-        self.overlay.display()
-        
-        self.tint_screen(dt)
-
-        if self.dialog_tree: self.dialog_tree.update()
+        self.update_missions() #passiert was in "data.py"
+        if self.dialog_tree: self.dialog_tree.update() #fuer den dialog
