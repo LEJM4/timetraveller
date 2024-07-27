@@ -1,12 +1,15 @@
 from settings import *
 from objects import *
+from dialog import DialogSprite
+from geometrie import Circle
 
 class Camera(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
         self.relocation = vector()
         self.display_surface = pygame.display.get_surface()
-        self.icon_e_original = import_image('graphics', 'ui', 'e-button-icon')
+        self.icon_e_original = import_image('graphics', 'ui', 'e_icon')
+        #source:   https://uxwing.com/e-alphabet-round-icon/
         self.icon_e = self.icon_e_original  
 
     def draw_all_objects(self, player):
@@ -28,6 +31,10 @@ class Camera(pygame.sprite.Group):
                 if sprite == player and player.transition_collision:
                     icon_position = player.rect.midtop - vector(self.icon_e.get_width() / 2, self.icon_e.get_height() + 10)
                     self.display_surface.blit(self.icon_e, icon_position - self.relocation)
+                if player.noticed and not player.in_dialog: #braucht zwei, weil ansonsten das icon waerend des dialogs dauerhaft angezeigt wird
+                    icon_position = player.rect.midtop - vector(self.icon_e.get_width() / 2, self.icon_e.get_height() + 10)
+                    self.display_surface.blit(self.icon_e, icon_position - self.relocation)
+                
 
     def sort_sprites(self):
         return sorted(self.sprites(), key=self.sprite_sort_key)

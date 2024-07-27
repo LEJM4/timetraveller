@@ -14,7 +14,7 @@ TILE_SIZE = 64 #Tile_Pixel = 64x64
 
 
 
-
+font_size = {'dialog' : SCREEN_HEIGHT // 15 }
 
 
 #button setup
@@ -43,7 +43,8 @@ LAYERS = {
     'trail': 2,
     'gras':3,
 	'main': 4,
-    'top':5
+    'top':5,
+    'dialog':6
     }
 #a = pygame.display.get_desktop_sizes()
 #print(a)

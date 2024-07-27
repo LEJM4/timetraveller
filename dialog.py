@@ -2,14 +2,14 @@ from settings import *
 from timer import Timer
 
 class Robo(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, player, character_data, create_dialog, z_layer=LAYERS['main']):
+    def __init__(self, pos, groups, player, character_data, create_dialog, z_layer=LAYERS['water']):
         super().__init__(groups)
         self.player = player
         self.pos = pos
         self.z_layer = z_layer
         self.image = import_image('graphics', 'ui', 'full_heart')
         self.rect = self.image.get_rect(center = pos)
-        self.notice_radius = 200
+        self.notice_radius = 150
         self.character_data = character_data
         self.create_dialog = create_dialog
         # print(self.character_data)
@@ -32,11 +32,19 @@ class Robo(pygame.sprite.Sprite):
         return self.character_data['dialog'][current_dialog_id]
 
     def update(self, dt):
+        keys = pygame.key.get_just_pressed() #ueberprueft
         if self.check_distance(self.notice_radius):
             if self.character_data['can_talk']:
-                self.create_dialog(self)
-                self.player.block()
-
+                self.player.noticed = True #damit icon eingeblendet wird
+                if keys[pygame.K_e]:
+                    self.player.block()
+                    self.create_dialog(self)
+                    self.player.in_dialog = True #muss true sein damit in camera das icon nicht mehr angezeigt wird
+                #self.player.noticed = False #muss hier nochmal falls weil ansonsten, wenn er einmal im radius war, wird icon dauerhaft angezeigt
+            else:
+                self.player.noticed = False
+        else:
+            self.player.noticed = False
 
 
 
@@ -79,19 +87,23 @@ class DialogTree:
 class DialogSprite(pygame.sprite.Sprite):
     def __init__(self, message, character, groups, font):
         super().__init__(groups)
-        self.z_layer = LAYERS['main']
+        self.z_layer = LAYERS['dialog']
         self.screen = pygame.display.get_surface()
 
         self.screen_width, self.screen_height = self.screen.get_size()
 
-        tt = pygame.Surface((self.screen_width, self.screen_height // 3))
-        tt.fill('green')  
+		# text 
+        text_surf = font.render(message, False, 'black')
+        padding = 5
+        width = max(30, text_surf.get_width() + padding * 2)
+        height = text_surf.get_height() + padding * 2
 
-        text_surf = font.render(message, False, (0, 0, 0))
+        # background
+        surf = pygame.Surface((width, height), pygame.SRCALPHA)
+        surf.fill((0,0,0,0))
+        pygame.draw.rect(surf, 'white', surf.get_frect(topleft = (0,0)),0, 4)
+        surf.blit(text_surf, text_surf.get_frect(center = (width / 2, height / 2)))
 
-
-        text_rect = text_surf.get_rect(center=(self.screen_width // 2, tt.get_height() // 2))
-        tt.blit(text_surf, text_rect)
-
-        self.image = tt
-        self.rect = self.image.get_rect(midbottom=(self.screen_width // 2, self.screen_height))
+        self.image = surf
+        self.rect = self.image.get_frect(midbottom = character.rect.midtop + vector(0,-10))
+        #clear code

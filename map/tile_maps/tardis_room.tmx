@@ -102,7 +102,7 @@
    </properties>
    <point/>
   </object>
-  <object id="69" name="robo" x="318.667" y="310.667">
+  <object id="69" name="robo" x="320.667" y="278.303">
    <properties>
     <property name="character_id" value="robo"/>
     <property name="direction" value="up"/>

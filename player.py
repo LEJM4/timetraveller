@@ -27,6 +27,9 @@ class Player(Entity):
 		self.projectile_shot = 	False
 		self.transition_collision = False
 
+		self.in_dialog = False
+		self.noticed = False
+
 	def import_pictures_4_animation(self):
 		#self.frames = import_multiple_spritesheets(8, 4, *self.path)
 		#'''
@@ -65,7 +68,7 @@ class Player(Entity):
 				self.attack()
 
 			#collect
-			if keys[pygame.K_e]:
+			if keys[pygame.K_q]:
 				self.collecting = True
 				self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
 				self.frame_index = 0

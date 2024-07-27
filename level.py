@@ -74,7 +74,7 @@ class Level:
             'characters' : import_multiple_spritesheets('graphics', 'npc', 'npc_1')      
         }
 
-        self.fonts = {'dialog': pygame.font.Font(join('fonts', 'Enchanted Land.otf'), 30)}
+        self.fonts = {'dialog': pygame.font.Font(join('fonts', 'Enchanted Land.otf'), font_size['dialog'])}
 
 
     def create_map(self, tile_map, player_start_pos):
@@ -284,16 +284,19 @@ class Level:
 
 
     def bush_collision(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_e] and self.player.status == 'collect' and self.interaction_objects: #ueberprueft ob Taste: e -> status muss "collect" sein , und das obj muss in "interaction_objects" sein
-            interaction_objects = pygame.sprite.spritecollide(self.player, self.interaction_objects, True, pygame.sprite.collide_mask) #(object, mit dem object collidiert, DOKILL?, mask_collision)
-            #interaction_objects = liste von sprite objekten --> von denen benoetigt man das erste element --> deshalb index [0] 
-            if interaction_objects: 
-                item = interaction_objects[0]
-                item_type = item.item_type.lower() #item uebergeben
-
-                if item_type in ['blueberry', 'raspberry', 'coin']: #item type ueberpruefen
-                    self.update_inventory_values(item_type)
+        keys = pygame.key.get_just_pressed() 
+        if keys[pygame.K_q]: #ueberpruefen ob 'q' gedrueckt wird
+            #suche nach obj in `interaction_objects` welche mit spieler kollidieren
+            sprites = [sprite for sprite in self.interaction_objects if sprite.rect.colliderect(self.player.hitbox_player)]
+            #wenn gefunden
+            if sprites:
+                item = sprites[0]
+                item_type = item.item_type.lower() #item type extrahieren
+                item.kill() #object entfernen
+                
+                if item_type in ['blueberry', 'raspberry', 'coin']: #gueltigkeit von item type ueberpruefen
+                    self.update_inventory_values(item_type) #zu player_inventory hinzufuegen
+                    print(player_inventory)
 
 
     def update_inventory_values(self, item):
@@ -351,6 +354,7 @@ class Level:
 
     def create_dialog(self, object):
         if not self.dialog_tree:
+            self.player.noticed = False
             self.dialog_tree = DialogTree(object, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog)
 
 
@@ -359,6 +363,7 @@ class Level:
         Character_DATA['robo']['can_talk'] = False
         character.character_data['can_talk'] = False
         self.dialog_tree = None
+        self.player.in_dialog = False
         self.player.unblock()
 
 
