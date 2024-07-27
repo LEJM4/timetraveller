@@ -112,11 +112,6 @@ class Level:
                         z_layer=LAYERS['ground'])
 
         ###creaate all objects
-
-        #tile_map = load_pygame(self.map_string)
-        nature_layer = tile_map.get_layer_by_name('nature')
-        buildings_layer = tile_map.get_layer_by_name('buildings')
-
         #water layer
         if 'water' in tile_layer_names:
             for water in tile_map.get_layer_by_name('water'):
@@ -166,7 +161,10 @@ class Level:
                             image=nature_obj.image,
                             groups=[self.all_sprites, self.interaction_objects],
                             item_type='')
-
+                else:
+                    General(pos=(nature_obj.x, nature_obj.y),
+                            image=nature_obj.image,
+                            groups=[self.all_sprites])
         #building layer
         if 'buildings' in object_layer_names:
             buildings_layer = tile_map.get_layer_by_name('buildings')
@@ -174,7 +172,7 @@ class Level:
                 if building.name == 'tardis':
                     Tardis(pos=(building.x, building.y),
                             image=building.image,
-                            groups=[self.all_sprites, self.interaction_objects],
+                            groups=[self.all_sprites, self.interaction_objects, self.obstacle_objects],
                             item_type='')
                 elif building.name in ['house_1', 'house_2', 'house_3']:
                     House(pos=(building.x, building.y),
@@ -310,11 +308,17 @@ class Level:
 
 
     def transition_check(self):
+        keys = pygame.key.get_just_pressed()
         sprites = [sprite for sprite in self.transition_objects if sprite.rect.colliderect(self.player.hitbox_player)]
         if sprites:
-            self.player.block()
-            self.transition_destination = sprites[0].destination
-            self.tint_mode = 'tint'
+            self.player.transition_collision = True
+            if keys[pygame.K_e]:
+                self.player.block()
+                self.transition_destination = sprites[0].destination
+                self.tint_mode = 'tint'
+        else:
+            self.player.transition_collision = False
+            
 
 
     def tint_screen(self, dt):

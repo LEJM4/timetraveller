@@ -25,6 +25,7 @@ class Player(Entity):
 		#
 		self.create_star_projectile = create_projectile
 		self.projectile_shot = 	False
+		self.transition_collision = False
 
 	def import_pictures_4_animation(self):
 		#self.frames = import_multiple_spritesheets(8, 4, *self.path)
