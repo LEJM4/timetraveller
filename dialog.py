@@ -1,5 +1,6 @@
 from settings import *
 from timer import Timer
+from support import *
 
 class Robo(pygame.sprite.Sprite):
     def __init__(self, pos, groups, player, character_data, create_dialog, z_layer=LAYERS['water']):
@@ -12,28 +13,14 @@ class Robo(pygame.sprite.Sprite):
         self.notice_radius = 150
         self.character_data = character_data
         self.create_dialog = create_dialog
-        # print(self.character_data)
-        # print('robo ist da')
 
-    def check_distance(self, radius, tolerance = 30):
-        distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)) 
-        #distance_vector = vector vom spieler - vector vom zombie
-        # moeglich waere auch:
-        # distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)).magnitude() 
-        #magnitude : https://pyga.me/docs/ref/math.html#pygame.math.Vector2.magnitude
-        # quadriert und zieht die Wurzel --> wurzel ziehen ist fuer computer bloed zu rechnen --> deshalb quadrieren
-        # (Danke "dezer_ted")
-        self.distance_squared = distance_vector.length_squared()
-        radius_squared = radius**2
-        return self.distance_squared < radius_squared
-    
     def get_dialog(self):
         current_dialog_id = str(self.character_data['current_dialog'])
         return self.character_data['dialog'][current_dialog_id]
-
-    def update(self, dt):
+    
+    def dialog_available(self):
         keys = pygame.key.get_just_pressed() #ueberprueft
-        if self.check_distance(self.notice_radius):
+        if check_distance(self.notice_radius, self.player, self):
             if self.character_data['can_talk']:
                 self.player.noticed = True #damit icon eingeblendet wird
                 if keys[pygame.K_e]:
@@ -46,6 +33,9 @@ class Robo(pygame.sprite.Sprite):
         else:
             self.player.noticed = False
 
+
+    def update(self, dt):
+        self.dialog_available()
 
 
 
