@@ -355,6 +355,7 @@ class Level:
     def create_dialog(self, object):
         if not self.dialog_tree:
             self.player.noticed = False
+            self.player.status = 'idle'
             self.dialog_tree = DialogTree(object, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog)
 
 

@@ -107,19 +107,9 @@ class Star(pygame.sprite.Sprite):
         self.rect.center = (round(self.pos.x), round(self.pos.y))
 
 
-
-class Sprite(pygame.sprite.Sprite):
-	def __init__(self, pos, surf, groups, z = LAYERS['main']):
-		super().__init__(groups)
-		self.image = surf 
-		self.rect = self.image.get_frect(topleft = pos)
-		self.z = z
-		self.y_sort = self.rect.centery
-		self.hitbox = self.rect.copy()
-
-class TransitionObjects(Sprite):
+class TransitionObjects(General):
     def __init__(self, pos, size, destination, groups,  z_layer=LAYERS['main']):
-        surf = pygame.Surface(size)
-        super().__init__(pos, surf, groups, z_layer)
+        image = pygame.Surface(size)
+        super().__init__(pos, image, groups, z_layer)
         self.destination = destination
 
