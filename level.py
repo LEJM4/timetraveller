@@ -395,7 +395,7 @@ class Level:
 
 
         # graphical
-        self.all_sprites.draw_all_objects(self.player) #zuerst die denn darauf muessen noch gezeichnet werden:
+        self.all_sprites.draw_all_objects(self.player, dt) #zuerst die denn darauf muessen noch gezeichnet werden:
         self.ui.display() #missionen anzeigen: links oben
         self.overlay.display() # leben anzeigen: rechts oben
         self.tint_screen(dt) # gesamter bildschirm
