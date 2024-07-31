@@ -11,6 +11,8 @@ class General(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect
         self.z_layer = z_layer
+        self.mask = pygame.mask.from_surface(self.image)
+
 
 class AnimatedSprites(General):
     def __init__(self, pos, frame_list, groups, animation_speed, z_layer=LAYERS['main']):
@@ -30,60 +32,25 @@ class AnimatedSprites(General):
         self.animation(dt)
 
 
-class PlantParent(pygame.sprite.Sprite):
-    def __init__(self, pos, image, groups, z_layer = LAYERS['main']):
-        super().__init__(groups)
-        self.image = image
-        self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect
-        self.z_layer = z_layer
+class NatureSprite(General):
+    def __init__(self, pos, image, groups,  item_type= None, z_layer=LAYERS['main']):
+        super().__init__(pos, image, groups, z_layer)
+        self.item_type = item_type
 
 
-class Tree(PlantParent):
-    def __init__(self, pos, image, groups, item_type):
-        super().__init__(pos, image, groups)
+class Tree(NatureSprite):
+    def __init__(self, pos, image, groups, item_type, z_layer=LAYERS['main']):
+        super().__init__(pos, image, groups, item_type, z_layer)
         self.hitbox = self.rect.inflate(-self.rect.width * 0.9 , -self.rect.height*0.2)
-        self.item_type = item_type
 
-
-class Bush(PlantParent):
-    def __init__(self, pos, image, groups, item_type):
-        super().__init__(pos, image, groups)
-        self.item_type = item_type
-        self.mask = pygame.mask.from_surface(self.image)
-
-class Trail(PlantParent):
+class Trail(General):
     def __init__(self, pos, image, groups, z_layer=LAYERS['main']):
         super().__init__(pos, image, groups, z_layer)
 
-class Item(pygame.sprite.Sprite):
-    def __init__(self, pos, image, groups, item_type):
-        super().__init__(groups)
-        self.image = image
-        self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect
+class Item(General):
+    def __init__(self, pos, image, groups, item_type, z_layer=LAYERS['main']):
+        super().__init__(pos, image, groups, z_layer)
         self.item_type = item_type
-
-
-class Tardis(PlantParent):
-    def __init__(self, pos, image, groups, item_type):
-        super().__init__(pos, image, groups)
-        self.item_type = item_type
-        self.mask = pygame.mask.from_surface(self.image)
-
-class House(PlantParent):
-    def __init__(self, pos, image, groups, item_type):
-        super().__init__(pos, image, groups)
-        self.item_type = item_type
-        self.mask = pygame.mask.from_surface(self.image)
-
-class Stone(PlantParent):
-    def __init__(self, pos, image, groups, item_type):
-        super().__init__(pos, image, groups)
-        self.item_type = item_type
-        self.mask = pygame.mask.from_surface(self.image)
-
-
 
 class Star(pygame.sprite.Sprite):
     def __init__(self, pos, direction, frames,animation_speed, groups, z_layer = LAYERS['main']):

@@ -89,11 +89,17 @@ class Level:
         #ground laayers
         if 'ground' in tile_layer_names:
             for x, y, image in tile_map.get_layer_by_name('ground').tiles():
-                General(pos=(x * TILE_SIZE, y * TILE_SIZE),
-                        image=image,
-                        groups=[self.all_sprites],
-                        z_layer=LAYERS['ground'])
-            
+                General(pos= (x * TILE_SIZE, y * TILE_SIZE),
+                        image= image,
+                        groups= [self.all_sprites],
+                        z_layer= LAYERS['ground'])
+                
+
+                # General(pos=(x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR),
+                #         image= pygame.transform.scale_by(image, SCALE_FACTOR),
+                #         groups=[self.all_sprites],
+                #         z_layer=LAYERS['ground'])
+                                   
         #trail laayer            
         if 'trail' in tile_layer_names:
             for x, y, image in tile_map.get_layer_by_name('trail').tiles():
@@ -101,6 +107,11 @@ class Level:
                         image=image,
                         groups=[self.all_sprites, self.trail],
                         z_layer=LAYERS['trail'])
+
+                # Trail(pos=(x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR),
+                #         image= pygame.transform.scale_by(image, SCALE_FACTOR),
+                #         groups=[self.all_sprites],
+                #         z_layer=LAYERS['ground'])
 
         #map_limit
         if 'map_limit' in tile_layer_names:
@@ -110,6 +121,12 @@ class Level:
                         image=tile.image,
                         groups=[self.obstacle_objects],  # #nicht zu "all_sprites"--> damit diese nicht gemalt werden
                         z_layer=LAYERS['ground'])
+
+                # General(pos=(x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR),
+                #         image= pygame.transform.scale_by(image, SCALE_FACTOR),
+                #         groups=[self.obstacle_objects],
+                #         z_layer=LAYERS['ground'])
+
 
         ###creaate all objects
         #water layer
@@ -121,7 +138,12 @@ class Level:
                                         frame_list=self.map_animations['water'],
                                         groups=[self.all_sprites, self.obstacle_objects],
                                         animation_speed=4)
-            
+
+                        # AnimatedSprites(pos=(x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR),
+                        # frame_list = [pygame.transform.scale_by(image, SCALE_FACTOR) for image in frame_list]
+                        #         groups= [self.all_sprites, self.obstacle_objects],
+                        #         z_layer=LAYERS['ground'])
+
         #nature layer
         if 'nature' in object_layer_names:
             nature_layer = tile_map.get_layer_by_name('nature')
@@ -142,25 +164,24 @@ class Level:
                             groups=[self.all_sprites],
                             item_type='big_tree')
                 elif nature_obj.name == 'empty':
-                    Bush(pos=(nature_obj.x, nature_obj.y),
+                    NatureSprite(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
                             groups=[self.all_sprites],
                             item_type='Empty')
                 elif nature_obj.name == 'blueberry':
-                    Bush(pos=(nature_obj.x, nature_obj.y),
+                    NatureSprite(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
                             groups=[self.all_sprites, self.interaction_objects],
                             item_type='Blueberry')
                 elif nature_obj.name == 'raspberry':
-                    Bush(pos=(nature_obj.x, nature_obj.y),
+                    NatureSprite(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
                             groups=[self.all_sprites, self.interaction_objects],
                             item_type='Raspberry')
                 elif nature_obj.name == 'stone':
-                    Stone(pos=(nature_obj.x, nature_obj.y),
+                    NatureSprite(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
-                            groups=[self.all_sprites, self.interaction_objects],
-                            item_type='')
+                            groups=[self.all_sprites, self.interaction_objects])
                 else:
                     General(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
@@ -169,20 +190,9 @@ class Level:
         if 'buildings' in object_layer_names:
             buildings_layer = tile_map.get_layer_by_name('buildings')
             for building in buildings_layer:
-                if building.name == 'tardis':
-                    Tardis(pos=(building.x, building.y),
-                            image=building.image,
-                            groups=[self.all_sprites, self.interaction_objects, self.obstacle_objects],
-                            item_type='')
-                elif building.name in ['house_1', 'house_2', 'house_3']:
-                    House(pos=(building.x, building.y),
-                            image=building.image,
-                            groups=[self.all_sprites, self.interaction_objects, self.obstacle_objects],
-                            item_type='')
-                else:
-                    General(pos=(building.x, building.y),
-                            image=building.image,
-                            groups=[self.all_sprites])
+                General(pos=(building.x, building.y),
+                        image=building.image,
+                        groups=[self.all_sprites, self.obstacle_objects])
             
         #transition
         if 'transition' in object_layer_names:
