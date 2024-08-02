@@ -14,6 +14,8 @@ class UserInterface:
         self.check_mark = import_image('graphics', 'ui', 'check_mark_green')
         self.missions_completed = 0
 
+        self.font_size = font_size['missions']
+
         
         self.mission_buttons = [  #creates a list with all buttons
 
@@ -40,7 +42,7 @@ class UserInterface:
                    border = True,
                    collision_allowed=False,
                    #button_color= 'grey',
-                   font_size=0.65),
+                   font_size= self.font_size),
 
 
             #mission 2
@@ -52,7 +54,7 @@ class UserInterface:
                    screen=self.screen,
                    border = True,
                    collision_allowed=False,
-                   font_size=0.65),
+                   font_size= self.font_size),
 
             #mission 3
             Button(text=missions_text[self.current_lvl][2],
@@ -63,7 +65,7 @@ class UserInterface:
                    screen=self.screen,
                    border = True,
                    collision_allowed=False,
-                   font_size=0.65) 
+                   font_size= self.font_size) 
         ]
 
         self.circles = [

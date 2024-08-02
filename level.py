@@ -74,7 +74,7 @@ class Level:
             'characters' : import_multiple_spritesheets('graphics', 'npc', 'npc_1')      
         }
 
-        self.fonts = {'dialog': pygame.font.Font(join('fonts', 'Enchanted Land.otf'), font_size['dialog'])}
+        self.fonts = {'dialog': pygame.font.Font(font_path, font_size['dialog'])}
 
 
     def create_map(self, tile_map, player_start_pos):

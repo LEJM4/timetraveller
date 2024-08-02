@@ -1,5 +1,3 @@
-import pygame
-from pyautogui import size
 from pygame.math import Vector2 as vector 
 from data import *
 from support import *
@@ -14,7 +12,8 @@ TILE_SIZE = 64 #Tile_Pixel = 64x64
 
 
 
-font_size = {'dialog' : SCREEN_HEIGHT // 15 }
+font_size = {'dialog' : SCREEN_HEIGHT // 16,
+             'missions': SCREEN_HEIGHT / 1600}
 
 
 #button setup
@@ -51,6 +50,8 @@ LAYERS = {
 # hier kommen dann evtl. noch dict. rein, um den Code in anderen
 #Dateien sauberer zu halten 
 
-font_path = 'fonts/Enchanted Land.otf'
+#font_path = join('fonts','Enchanted Land.otf')
 #https://www.dafont.com/de/search.php?q=Enchanted+Land
 
+font_path = join('fonts', 'Meditative.ttf')
+#https://www.dafont.com/de/meditative.font
