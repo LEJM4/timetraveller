@@ -20,6 +20,7 @@ class Player(Entity):
 		
 		#Parametergroups
 		self.interaction_objects = interaction_objects
+		self.interaction_objects_collide = False
 		self.trail = trail
 
 		#

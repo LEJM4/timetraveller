@@ -8,18 +8,28 @@ class Camera(pygame.sprite.Group):
         super().__init__()
         self.relocation = vector()
         self.display_surface = pygame.display.get_surface()
-        self.icon_e_original = import_image('graphics', 'ui', 'e_button_icon_0')
-        #source:   https://uxwing.com/e-alphabet-round-icon/
-        self.icon_e = self.icon_e_original  
 
-        self.icon_e_frames = [
-            import_image('graphics', 'ui', 'e_button_icon_0'),
-            import_image('graphics', 'ui', 'e_button_icon_1')
-        ]
+        self.icon_frames = {'icon_e_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')],
+                            'icon_space_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')],
+                            'icon_q_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')]
+                            }
 
         self.icon_e_animation = AnimatedSprites(
             pos=(0, 0),  # position wird spaeter angepasst
-            frame_list=self.icon_e_frames,
+            frame_list=self.icon_frames['icon_e_frames'],
+            groups=[],  # keine gruppen erforderlich, da  blit verwendet wird
+            animation_speed=1.2  # geschwindigkeit der animation
+        )
+        self.icon_space_animation = AnimatedSprites(
+            pos=(0, 0),  # position wird spaeter angepasst
+            frame_list=self.icon_frames['icon_space_frames'],
+            groups=[],  # keine gruppen erforderlich, da  blit verwendet wird
+            animation_speed=1.2  # geschwindigkeit der animation
+        )
+
+        self.icon_q_animation = AnimatedSprites(
+            pos=(0, 0),  # position wird spaeter angepasst
+            frame_list= self.icon_frames['icon_q_frames'],
             groups=[],  # keine gruppen erforderlich, da  blit verwendet wird
             animation_speed=1.2  # geschwindigkeit der animation
         )
@@ -50,7 +60,13 @@ class Camera(pygame.sprite.Group):
                     #               kopf des spieler   -                 frame_breite                    frame_hoehe                      + 10 ueberm spieler
 
                     self.display_surface.blit(self.icon_e_animation.image, icon_position - self.relocation)
-                    #
+                
+                #if bush collision
+                if  (sprite == player and player.interaction_objects_collide):
+                    icon_position = player.rect.midtop - vector(self.icon_q_animation.image.get_width() / 2, self.icon_q_animation.image.get_height() + 10)
+                    #               kopf des spieler   -                 frame_breite                    frame_hoehe                      + 10 ueberm spieler
+                    self.display_surface.blit(self.icon_q_animation.image, icon_position - self.relocation)
+
 
                 
 

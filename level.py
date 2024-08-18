@@ -181,7 +181,7 @@ class Level:
                 elif nature_obj.name == 'stone':
                     NatureSprite(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
-                            groups=[self.all_sprites, self.interaction_objects])
+                            groups=[self.all_sprites])
                 else:
                     General(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
@@ -295,11 +295,13 @@ class Level:
 
     def bush_collision(self):
         keys = pygame.key.get_just_pressed() 
-        if keys[pygame.K_q]: #ueberpruefen ob 'q' gedrueckt wird
+        sprites = [sprite for sprite in self.interaction_objects if sprite.rect.colliderect(self.player.hitbox_player)]
             #suche nach obj in `interaction_objects` welche mit spieler kollidieren
-            sprites = [sprite for sprite in self.interaction_objects if sprite.rect.colliderect(self.player.hitbox_player)]
+        #suche nach obj in `interaction_objects` welche mit spieler kollidieren
+        if sprites:
+            self.player.interaction_objects_collide = True
+            if keys[pygame.K_q]: #ueberpruefen ob 'q' gedrueckt wird
             #wenn gefunden
-            if sprites:
                 item = sprites[0]
                 item_type = item.item_type.lower() #item type extrahieren
                 item.kill() #object entfernen
@@ -307,6 +309,8 @@ class Level:
                 if item_type in ['blueberry', 'raspberry', 'coin']: #gueltigkeit von item type ueberpruefen
                     self.update_inventory_values(item_type) #zu player_inventory hinzufuegen
                     print(player_inventory)
+        else: 
+            self.player.interaction_objects_collide = False
 
 
     def update_inventory_values(self, item):
