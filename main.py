@@ -51,49 +51,34 @@ class Game:
         self.esc_menu.check_4_esc_menu_active()
 
     def run(self):
-        self.screen.fill((0,0,0))
-
-        
+        self.screen.fill((0,0,0)) # bildschirm mit schwarzer farbe fuellen
         while True:
-            self.keys = pygame.key.get_pressed()
+            self.keys = pygame.key.get_pressed() # ueberpruefung zustands aller tasten --> gedrueckt oder nicht
+            for event in pygame.event.get(): # ueberpruefung aller events
+                if event.type == pygame.QUIT: # wenn das fenster geschlossen wird
+                    pygame.quit() # beenden von pygame
+                    sys.exit() # beenden des programms 
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                
-                if self.keys[pygame.K_BACKSPACE]:
-                    pygame.quit()
-                    sys.exit()
+                if event.type == pygame.KEYDOWN: # wenn eine taste gedrueckt wird
+                    if event.key == pygame.K_ESCAPE: # wenn die taste ESCAPE ist
+                        self.esc_pressed = not self.esc_pressed # setze self.esc_pressed auf: nicht self.esc_pressed (macht gegenteil vom voherigen zustand) 
+                        if self.esc_pressed: # wenn self.esc_pressed == True
+                            self.activate_esc_menu() # esc_menu anzeigen
 
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        self.esc_pressed = not self.esc_pressed #macht immer das gegenteil von dem Zustand 
-                        if self.esc_pressed:
-                            self.activate_esc_menu()
-                        
-
-
-                if self.esc_menu.button_pressed_exit == True:
+                if self.esc_menu.button_pressed_exit == True: # ueberpruefung ob exit-button im ESC-Menue gedrueckt
                     self.running = False
-                    pygame.quit()
-                    sys.exit()                   
-
-                    
+                    pygame.quit() # beenden von pygame
+                    sys.exit() # beenden des programms                  
                 
-            dt = self.clock.tick(60) / 1000
+            dt = self.clock.tick(60) / 1000 # berechnung framerate
             
-            self.level.run(dt)
+            self.level.run(dt) # laesst die methode run in level.py laufen
 
-            if self.esc_pressed:
-                self.esc_menu.run()
-                self.draw_mouse()
-
-
-
+            if self.esc_pressed: # wenn esc gedrueckt
+                self.esc_menu.run() # ausfuehren der methode --> zeigt die button an
+                self.draw_mouse() # anzeigen der mouse
    
-            pygame.display.update()
-
+            pygame.display.update() # aktualisierung bildschirm mit neuen grafiken und inhalten
 
 if __name__ == '__main__':
     game = Game()
