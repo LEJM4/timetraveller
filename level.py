@@ -68,7 +68,7 @@ class Level:
         #importieren von allen animationen
         self.map_animations = {
             # import der wasser animation
-            'water' : import_animation_frames(1, 1, 'graphics', 'ground', 'water','0'),
+            'water' : import_animation_frames(4, 1, 'graphics', 'ground', 'water','water_spritesheet'),
 
             # import der spieler assets
             'player': {'attack': sprite_sheet_vertical(4,4, 'graphics', 'player', 'attack'), 
@@ -84,7 +84,7 @@ class Level:
 
             #import aller projectile animation
             #'projectiles' : {'purple_flash': import_image(('graphics','objects','projectile','') , scale= 1)}
-            'projectiles' : {'purple_flash': import_animation_frames(4, 4, 'graphics','objects','projectile','projectile' , scale= 1)}
+            'projectiles' : {'purple_flash': import_animation_frames(4, 4, 'graphics','objects','projectile','projectile' , scale= 2)}
 
         }
         self.fonts = {'dialog': pygame.font.Font(font_path, font_size['dialog'])}
