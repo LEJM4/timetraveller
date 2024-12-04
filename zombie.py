@@ -3,16 +3,10 @@ from entity import Entity
 from timer import Timer
 from random import randint
 from game_data import *
-
+import pygame
 class Zombie:                                            
     def check_distance(self, radius, tolerance = 30):
         distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)) 
-        #distance_vector = vector vom spieler - vector vom zombie
-        # moeglich waere auch:
-        # distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)).magnitude() 
-        #magnitude : https://pyga.me/docs/ref/math.html#pygame.math.Vector2.magnitude
-        # quadriert und zieht die Wurzel --> wurzel ziehen ist fuer computer bloed zu rechnen --> deshalb quadrieren
-        # (Danke "dezer_ted")
         self.distance_squared = distance_vector.length_squared()
         radius_squared = radius**2
         return self.distance_squared < radius_squared
@@ -87,8 +81,8 @@ class Zombie:
 
 
 class Zombie_1(Entity, Zombie):
-    def __init__(self, pos, groups, facing_direction, obstacle_objects, data, path, player, id):
-        super().__init__(pos, groups, facing_direction, obstacle_objects, data, path, speed= 200)
+    def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, data, path, player, id):
+        super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, path, speed= 200)
         
         #OVERWRITES
         self.projectile = False
@@ -129,16 +123,6 @@ class Zombie_1(Entity, Zombie):
         self.target_pos =  None
         self.distance_squared = 1
 
-   
-        
-    def import_pictures_4_animation(self):
-        self.frames = import_multiple_spritesheets(4, 4, *self.path)
-        ''' 
-        self.frames = {'attack': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'attack'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-                       'collect': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'hendrik'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-                       'idle': character_image_importer(1,4, 'graphics', 'npc', 'npc_1', 'hendrik'), #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-                       'move': character_image_importer(4,4, 'graphics', 'npc', 'npc_1', 'hendrik')} #hendrik laesst mich nicht gut strukturierten und effizienten code schreiben
-        #'''
     
     def attack(self):
         self.attacking = True
@@ -216,8 +200,8 @@ class Zombie_1(Entity, Zombie):
 
 
 class Zombie_2(Entity, Zombie):
-    def __init__(self, pos, groups, facing_direction, obstacle_objects, data, path, player, create_projectile, id):
-        super().__init__(pos, groups, facing_direction, obstacle_objects, data, path, speed= 200)
+    def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, data, path, player, create_projectile, id):
+        super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, path, speed= 200)
         
         #OVERWRITES
         self.projectile = False
@@ -261,9 +245,6 @@ class Zombie_2(Entity, Zombie):
         self.target_pos =  None
         self.distance_squared = 1
         
-    def import_pictures_4_animation(self):
-        self.frames = import_multiple_spritesheets(4, 4, *self.path)
-
     def attack(self):
         self.attacking = True
         self.projectile_shot = False
