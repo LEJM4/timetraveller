@@ -79,22 +79,6 @@ def import_spritesheet(cols, rows, *path):
 	return frames
     # gibt das dictionary zurueck --> (enthaelt alle tiles aus dem spritesheet)
 
-def sprite_sheet_vertical(cols, row, *path):
-	frame_dict = import_spritesheet(cols, row,*path)
-	new_dict ={}
-	for row, direction in enumerate(('down','left', 'right','up')):
-		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
-		#new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
-	return new_dict
-
-def sprite_sheet_horizontal(cols, rows, *path):
-	frame_dict = import_spritesheet(cols, rows, *path)
-	new_dict = {}
-	for col, direction in enumerate(('down','up', 'left','right')):
-		new_dict[direction] = [frame_dict[(col, row)] for row in range(rows)]
-	return new_dict
-
-
 def import_animation_frames(cols, rows, *path, scale=SCALE_FACTOR):
     frames = []
     # liste enthaelt spaeter die einzelnen frames fuer die animation 
@@ -128,6 +112,40 @@ def import_animation_frames(cols, rows, *path, scale=SCALE_FACTOR):
     
     return frames
     # gibt frames zurueck --> enthaelt animation in aufsteigender reihenfolge
+
+
+def spritesheet_vertical(cols, row, *path):
+	frame_dict = import_spritesheet(cols, row,*path)
+    # laedt das spritesheet und speichert es als ein dictionary: frame_dict
+    # schluessel sind (col, row) und werte sind entsprechenden frames
+    
+	new_dict ={}
+    # erstellt ein neues dictionary --> um spater die frames nach bewegungsrichtung zu speichern
+
+	for row, direction in enumerate(('down','left', 'right','up')):
+        # iteriert durch jede zeile des spritesheets --> ordnet frames den richtungen zu
+        # reihenfolge: "down", "left", "right", "up"
+		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
+        # jeder richtung wird eine liste von frames zugeordnet --> die in der jeweiligen zeile liegen
+        # "col" ist dabei die aktuelle spalte
+	return new_dict
+    # gibt new_dict zurueck --> enthaelt frames sortiert nach bewegungsrichtungen 
+
+
+def spritesheet_horizontal(cols, rows, *path):
+	frame_dict = import_spritesheet(cols, rows, *path)
+	new_dict = {}
+	for col, direction in enumerate(('down','up', 'left','right')):
+		new_dict[direction] = [frame_dict[(col, row)] for row in range(rows)]
+	return new_dict
+
+def spritesheet_vertical_projectile(cols, row, *path):
+	frame_dict = import_spritesheet(cols, row,*path)
+	new_dict ={}
+	for row, direction in enumerate(('up','left', 'right','down')):
+		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
+		#new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
+	return new_dict
 
 
 def import_character_animation(cols, rows, *path):
@@ -246,15 +264,9 @@ while True:
 def check_distance(radius, target, entity):
 	distance_vector = (vector(target.rect.center) - vector(entity.rect.center)) 
 	#distance_vector = vector vom spieler - vector vom zombie
-	# moeglich waere auch:
-	# distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)).magnitude() 
-	#magnitude : https://pyga.me/docs/ref/math.html#pygame.math.Vector2.magnitude
-	# quadriert und zieht die Wurzel --> wurzel ziehen ist fuer computer bloed zu rechnen --> deshalb quadrieren
-	# (Danke "dezer_ted")
 	distance_squared = distance_vector.length_squared()
 	radius_squared = radius**2
 	return distance_squared < radius_squared
-
 
 
 

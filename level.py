@@ -71,19 +71,17 @@ class Level:
             'water' : import_animation_frames(4, 1, 'graphics', 'ground', 'water','water_spritesheet'),
 
             # import der spieler assets
-            'player': {'attack': sprite_sheet_vertical(4,4, 'graphics', 'player', 'attack'), 
-						'collect': sprite_sheet_vertical(7,4, 'graphics', 'player', 'collect'), 
-						'idle': sprite_sheet_vertical(1,4, 'graphics', 'player', 'idle'), 
-						'move': sprite_sheet_vertical(8,4, 'graphics', 'player', 'move')},
+            'player': {'attack': spritesheet_vertical(4,4, 'graphics', 'player', 'attack'), 
+                       'collect': spritesheet_vertical(7,4, 'graphics', 'player', 'collect'), 
+                       'idle': spritesheet_vertical(1,4, 'graphics', 'player', 'idle'), 
+                       'move': spritesheet_vertical(8,4, 'graphics', 'player', 'move')},
             
             # import der monster assets
-            #'monster': import_animation_frames(4, 4, 'graphics', 'npc', 'monster_1'),
-            'monster':{'attack': sprite_sheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'attack'), #
-                       'idle': sprite_sheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'idle'), 
-                       'move': sprite_sheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'move')},
+            'monster':{'attack': spritesheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'attack'), 
+                       'idle': spritesheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'idle'), 
+                       'move': spritesheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'move')},
 
-            #import aller projectile animation
-            #'projectiles' : {'purple_flash': import_image(('graphics','objects','projectile','') , scale= 1)}
+            #import der projectile animation
             'projectiles' : {'purple_flash': import_animation_frames(4, 4, 'graphics','objects','projectile','projectile' , scale= 2)}
 
         }
