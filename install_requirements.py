@@ -22,4 +22,4 @@ def installieren_aller_requirements():
         print("")
         print("Installation abgeschlossen.")
 
-installieren_aller_requirements()
+#installieren_aller_requirements()

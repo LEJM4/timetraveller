@@ -77,7 +77,6 @@ class Game:
             if self.esc_pressed: # wenn esc gedrueckt
                 self.esc_menu.run() # ausfuehren der methode --> zeigt die button an
                 self.draw_mouse() # anzeigen der mouse
-   
             pygame.display.update() # aktualisierung bildschirm mit neuen grafiken und inhalten
 
 if __name__ == '__main__':

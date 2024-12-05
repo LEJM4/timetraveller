@@ -52,26 +52,20 @@ class Item(General):
         super().__init__(pos, image, groups, z_layer)
         self.item_type = item_type
 
-class Star(pygame.sprite.Sprite):
-    def __init__(self, pos, direction, frames,animation_speed, groups, z_layer = LAYERS['main']):
-        super().__init__(groups)
-        self.image = frames
-        self.rect = self.image.get_rect(center = pos)
-        self.mask = pygame.mask.from_surface(self.image)
-
-        self.z_layer = z_layer
-
-        self.pos = vector(self.rect.center)
+class Projectile(AnimatedSprites):
+    def __init__(self, pos, direction, frames, animation_speed, groups, z_layer=LAYERS['main']):
+        # init von AnimatetSpr
+        super().__init__(pos, frames, groups, animation_speed, z_layer)
+        
+        # 
         self.direction = direction
-        self.animation_speed = animation_speed
         self.speed = 400
-    
-    def animation(self, dt):
-        pass
-    
+        self.pos = pos
+
     def update(self, dt):
         self.pos += self.direction * self.speed * dt
         self.rect.center = (round(self.pos.x), round(self.pos.y))
+        self.animation(dt)
 
 
 class TransitionObjects(General):

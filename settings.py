@@ -1,13 +1,13 @@
 from pygame.math import Vector2 as vector 
 from data import *
-from support import *
+from os.path import join
 # screen
 #SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
 #print (SCREEN_WIDTH, SCREEN_HEIGHT)
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
-SCALE_FACTOR = 4
+SCALE_FACTOR = 1
 TILE_SIZE = 64 #Tile_Pixel = 64x64
 
 
