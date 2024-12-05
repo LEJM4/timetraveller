@@ -125,9 +125,11 @@ def spritesheet_vertical(cols, row, *path):
 	for row, direction in enumerate(('down','left', 'right','up')):
         # iteriert durch jede zeile des spritesheets --> ordnet frames den richtungen zu
         # reihenfolge: "down", "left", "right", "up"
+
 		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
         # jeder richtung wird eine liste von frames zugeordnet --> die in der jeweiligen zeile liegen
         # "col" ist dabei die aktuelle spalte
+        
 	return new_dict
     # gibt new_dict zurueck --> enthaelt frames sortiert nach bewegungsrichtungen 
 

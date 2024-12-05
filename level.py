@@ -68,21 +68,21 @@ class Level:
         #importieren von allen animationen
         self.map_animations = {
             # import der wasser animation
-            'water' : import_animation_frames(4, 1, 'graphics', 'ground', 'water','water_spritesheet'),
+            'water': import_animation_frames(4, 1, 'graphics', 'ground', 'water','water_spritesheet'),
 
             # import der spieler assets
-            'player': {'attack': spritesheet_vertical(4,4, 'graphics', 'player', 'attack'), 
-                       'collect': spritesheet_vertical(7,4, 'graphics', 'player', 'collect'), 
-                       'idle': spritesheet_vertical(1,4, 'graphics', 'player', 'idle'), 
-                       'move': spritesheet_vertical(8,4, 'graphics', 'player', 'move')},
+            'player': {'attack': spritesheet_vertical(4,4, 'graphics','characters', 'player', 'attack'), 
+                       'collect': spritesheet_vertical(7,4, 'graphics','characters', 'player', 'collect'), 
+                       'idle': spritesheet_vertical(1,4, 'graphics','characters', 'player', 'idle'), 
+                       'move': spritesheet_vertical(8,4, 'graphics','characters', 'player', 'move')},
             
             # import der monster assets
-            'monster':{'attack': spritesheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'attack'), 
-                       'idle': spritesheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'idle'), 
-                       'move': spritesheet_vertical(4,4, 'graphics', 'npc', 'npc_1', 'move')},
+            'monster': {'attack': spritesheet_vertical(4,4, 'graphics','characters', 'monster', 'attack'), 
+                        'idle': spritesheet_vertical(4,4, 'graphics','characters', 'monster', 'idle'), 
+                        'move': spritesheet_vertical(4,4, 'graphics','characters', 'monster', 'move')},
 
             #import der projectile animation
-            'projectiles' : {'purple_flash': import_animation_frames(4, 4, 'graphics','objects','projectile','projectile' , scale= 2)}
+            'projectiles': {'purple_flash': import_animation_frames(4,4, 'graphics','objects','projectile','purple_flash_spritesheet')}
 
         }
         self.fonts = {'dialog': pygame.font.Font(font_path, font_size['dialog'])}
