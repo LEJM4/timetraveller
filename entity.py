@@ -144,8 +144,6 @@ class Entity(pygame.sprite.Sprite):
             self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if collecting
 
 
-        #return f"{self.facing_direction}{'' if moving else '_idle'}"
-
     def get_direction_key(self):
         if 1 == 2: 
             return 'up'
@@ -193,7 +191,6 @@ class Entity(pygame.sprite.Sprite):
             LIFE_DATA[self.entity_id]['health'] -= weapon_dict[weapon]
             self.is_vulnerable = False
             self.timers['hit_timer'].activate()
-        print(self.is_vulnerable)
     
     def wave_value(self):
         value = sin(pygame.time.get_ticks())
@@ -216,8 +213,6 @@ class Entity(pygame.sprite.Sprite):
 
     def reset_vulnerability(self):
         self.is_vulnerable = True
-        print('timer works')
-        print(self.is_vulnerable)
 
     def update_timer(self):
         for timer in self.timers.values():

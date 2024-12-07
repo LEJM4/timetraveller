@@ -27,9 +27,7 @@ class Timer:
 			#print(current_time)
 			if current_time - self.start_time >= self.duration:
 				if self.func:
-					self.func()
-					print('funktion ausgefuehrt')
+					self.func()	
 				self.deactivate()
-				print('deactoveasfdsfs<sdsdff')
 
 #timer code from "clear code"

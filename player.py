@@ -72,21 +72,13 @@ class Player(Entity):
 		self.direction = vector(0,0) #er bewegt sich nicht mehr --> er bleibt auf der Stelle stehen
 		self.frame_index = 0
 		self.projectile_shot = False
-		#self.create_star_bullet(self.rect.center, vector(1,0))
 		match self.facing_direction:
 			case 'left': self.projectile_direction = vector (-1,0)
 			case 'right': self.projectile_direction = vector (1,0)
 			case 'up': self.projectile_direction = vector (0,-1)
 			case 'down': self.projectile_direction = vector (0,1)
 
-	
-	
-
-
-
-
-
-
+		
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
 		if not self.blocked:
 			self.input() #player input --> movement

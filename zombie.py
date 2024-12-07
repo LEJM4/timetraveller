@@ -166,12 +166,9 @@ class Zombie_1(Entity, Zombie):
         if int(self.frame_index) == 1 and self.attacking:
             if self.check_distance(self.attack_radius):
                 self.player.damage(self.current_wepon)
-                print(self.player.health)
 
 
-
-
-        
+      
         if self.frame_index >= len(self.frames[self.status][self.facing_direction]):
             self.frame_index = 0
 
