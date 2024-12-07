@@ -290,6 +290,7 @@ class Zombie_2(Entity, Zombie):
                 
 
                 projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 1.5)
+                projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 1.05)
 
                 
                 self.create_star_projectile(projectile_start_pos, self.projectile_direction, self.facing_direction)
