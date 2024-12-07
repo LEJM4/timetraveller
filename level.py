@@ -57,11 +57,10 @@ class Level:
         self.tint_progress = 0
         self.tint_direction = -1
         self.tint_speed = 600
-        #print(self.map_animations['projectiles']['purple_flash'])
 
+#_________________________________________________________________________________________________________________________
+# NICHT MEHR VERAENDERN !!!!
 
-    #'''
-    # Version 1--> nur Hendriks Assets
     def import_tilemaps_and_game_assets(self):
         # importieren aller tilemaps --> alle karten auf denen man spielen kann
         self.tile_maps = tmx_importer('map', 'tile_maps')
@@ -88,62 +87,10 @@ class Level:
             'projectiles': {'purple_flash': spritesheet_vertical(4,4, 'graphics','objects','projectile','purple_flash_spritesheet')}
         }
         self.fonts = {'dialog': pygame.font.Font(font_path, font_size['dialog'])}
-    #'''
-    
-    """ 
-    # version 2, mit allen importen auch ohne hendriks assets
-    def import_tilemaps_and_game_assets(self):
-        #importieren aller tilemaps --> alle karten auf denen man spielen kann
-        self.tile_maps = tmx_importer('data_tiled','map', 'tile_maps')
+        
+    # BIS HIERHIN
+#_________________________________________________________________________________________________________________________ 
 
-        #importieren von allen animationen
-        self.map_animations = {
-            #import aller wasser animation
-            'water' : import_animation_frames(4, 1, 'graphics', 'ground', 'water', 'water'),
-
-            # import der character animation
-            'characters' : import_all_characters(4, 7, 'graphics', 'Characters'),
-
-            #import aller projectile animation
-            'projectiles' : {'Arrow': import_animation_frames(1, 1, 'graphics', 'FX', 'Projectile','Arrow', scale= 2), 
-                             'BigEnergyBall': import_animation_frames(4, 1, 'graphics', 'FX', 'Projectile','BigEnergyBall', scale= 2),
-                             'BigKunai': import_animation_frames(1, 1, 'graphics', 'FX', 'Projectile','BigKunai', scale= 2),
-                             'BigShuriken': import_animation_frames(2, 1, 'graphics', 'FX', 'Projectile','BigShuriken', scale= 2),
-                             'CanonBall': import_animation_frames(5, 1, 'graphics', 'FX', 'Projectile','CanonBall', scale= 2),
-                             'EnergyBall': import_animation_frames(4, 1, 'graphics', 'FX', 'Projectile','EnergyBall', scale= 2),
-                             'Fireball': import_animation_frames(4, 1, 'graphics', 'FX', 'Projectile','Fireball', scale= 2),
-                             'IceSpike': import_animation_frames(8, 1, 'graphics', 'FX', 'Projectile','IceSpike', scale= 2),
-                             'Kunai': import_animation_frames(1, 1, 'graphics', 'FX', 'Projectile','Kunai', scale= 2),
-                             'PlantSpike': import_animation_frames(4, 1, 'graphics', 'FX', 'Projectile','PlantSpike', scale= 2),
-                             'Shuriken': import_animation_frames(2, 1, 'graphics', 'FX', 'Projectile','Shuriken', scale= 2),
-                             'ShurikenMagic': import_animation_frames(2, 1, 'graphics', 'FX', 'Projectile','ShurikenMagic', scale= 2),
-                             'SpriteSheetRock': import_animation_frames(4, 1, 'graphics', 'FX', 'Projectile','SpriteSheetRock', scale= 2),
-                             },
-
-            'treasure':     {'BigTreasureChest': import_animation_frames(2, 1, 'graphics', 'Treasure','BigTreasureChest', scale= 3), 
-                             'Coin2': import_animation_frames(4, 1, 'graphics', 'Treasure','Coin2', scale= 2),
-                             'GoldCoin': import_animation_frames(1, 1, 'graphics', 'Treasure','GoldCoin', scale= 2),
-                             'GoldCup': import_animation_frames(1, 1, 'graphics', 'Treasure','GoldCup', scale= 2),
-                             'GoldKey': import_animation_frames(1, 1, 'graphics', 'Treasure','GoldKey', scale= 2),
-                             'LittleTreasureChest': import_animation_frames(2, 1, 'graphics', 'Treasure','LittleTreasureChest', scale= 2),
-                             'SilverCoin': import_animation_frames(1, 1, 'graphics','Treasure','SilverCoin', scale= 2),
-                             'SilverCup': import_animation_frames(1, 1, 'graphics', 'Treasure','SilverCup', scale= 2),
-                             'SilverKey': import_animation_frames(1, 1, 'graphics', 'Treasure','SilverKey', scale= 2)
-                             },
-            
-            #importieren der assets fuer die blaetter (gruen und rosa)
-            'leafes': {'green': import_animation_frames(6,1, 'graphics', 'FX', 'Particle', 'Leaf' ,scale= 2),
-                       'pink': import_animation_frames(6,1, 'graphics', 'FX', 'Particle', 'LeafPink', scale= 2)},
-
-            #importieren der assets fuer "regentropfen", "regentropfen_auf_dem_boden", "wolken" 
-            'weather': {'rain_drop_on_floor_frames': import_animation_frames(3, 1, 'graphics', 'FX', 'Particle', 'RainOnFloor', scale= 2),
-                        'rain_frames': import_animation_frames(3, 1, 'graphics', 'FX', 'Particle', 'Rain', scale= 4),
-                        'cloud_frames': import_animation_frames(1, 1, 'graphics', 'FX', 'Particle', 'Clouds', scale= 4)}    
-        }
-
-        self.fonts = {'dialog': pygame.font.Font(font_path, font_size['dialog'])}
-        #print(self.tile_maps['desert'].width)
-    """
     def create_map(self, tile_map, player_start_pos):
         #alle gruppen leeren
         for group in (self.all_sprites, self.obstacle_objects, self.interaction_objects, self.trail, self.projectile_group, self.transition_objects):

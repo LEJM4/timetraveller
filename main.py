@@ -50,6 +50,8 @@ class Game:
     def activate_esc_menu(self):
         self.esc_menu.check_4_esc_menu_active()
 
+#_________________________________________________________________________________________________________________________
+
     def run(self):
         self.screen.fill((0,0,0)) # bildschirm mit schwarzer farbe fuellen
         while True:
@@ -79,6 +81,7 @@ class Game:
                 self.draw_mouse() # anzeigen der mouse
             pygame.display.update() # aktualisierung bildschirm mit neuen grafiken und inhalten
 
+#_________________________________________________________________________________________________________________________
 if __name__ == '__main__':
     game = Game()
     game.run()

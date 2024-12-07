@@ -1,3 +1,5 @@
+#_________________________________________________________________________________________________________________________
+
 import subprocess as supr
 
 def installieren_aller_requirements():
@@ -22,4 +24,6 @@ def installieren_aller_requirements():
         print("")
         print("Installation abgeschlossen.")
 
-#installieren_aller_requirements()
+installieren_aller_requirements()
+
+#_________________________________________________________________________________________________________________________

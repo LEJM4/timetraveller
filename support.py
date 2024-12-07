@@ -8,6 +8,9 @@ from sys import exit
 from pygame.math import Vector2 as vector 
 
 
+#_________________________________________________________________________________________________________________________
+#NICHT MEHR VERAENDERN BIS!!!!
+
 #tilemap
 def tmx_importer(*path):
     tmx_dict = {} 
@@ -29,6 +32,8 @@ def tmx_importer(*path):
     return tmx_dict
     # gibt tmx_dict mit allen tmx-dateien zurueck
 
+
+
 # image and map stuff
 def import_image(*path, alpha = True, format = 'png', scale = SCALE_FACTOR): 
     # (pfad zur datei, alpha kanal, format, vergroesserungsfaktor)
@@ -41,6 +46,43 @@ def import_image(*path, alpha = True, format = 'png', scale = SCALE_FACTOR):
 
 	return pygame.transform.scale_by(surf, scale)
     # gibt das bild transformiert (vergroessert oder verkleinert) um den faktor "scale" zurueck
+
+
+
+def import_animation_frames(cols, rows, *path, scale = SCALE_FACTOR):
+    frames = []
+    # liste enthaelt spaeter die einzelnen frames fuer die animation 
+
+    surf = import_image(*path, scale = scale)
+    # laden des bilds mit funktion `import_image` und evt. skalieren
+
+    cell_width, cell_height = surf.get_width() / cols, surf.get_height() / rows
+    # definiert die breite einer zeile und spalte
+    # zellenbreite = breite von surf / anzahl der spalten
+    # zellenhoehe = hoehe von surf / anzahl der zeilen
+
+    for row in range(rows):
+        for col in range(cols):
+            cutout_rect = pygame.Rect(col * cell_width, row * cell_height, cell_width, cell_height)
+            # definiert einen rechteck bereich (cutout_rect) 
+            # --> dieser repraesentiert aktuelles tile in tilemap
+
+
+            cutout_surf = pygame.Surface((cell_width, cell_height), pygame.SRCALPHA)
+            # erstellt neue oberflaeche (surface) fuer einzelnes tile (cell_width, cell_height)
+            # "pygame.SRCALPHA" --> sorgt dafuer, dass oben erstellte oberflaeche 
+            # --> alpha-kanal (transparenz) unterstuetzt
+
+            cutout_surf.blit(surf, (0, 0), cutout_rect)
+            # zeichnet das aktuelle tile aus der tilemap auf die neue oberflaeche 
+            # --> also auf cutout_rect
+
+            frames.append(cutout_surf)
+            # fuegt ausgeschnittenes frame der liste frames hinzu
+    
+    return frames
+    # gibt frames zurueck --> enthaelt animation in aufsteigender reihenfolge
+
 
 
 def import_spritesheet(cols, rows, *path, scale = SCALE_FACTOR):
@@ -79,39 +121,6 @@ def import_spritesheet(cols, rows, *path, scale = SCALE_FACTOR):
 	return frames
     # gibt das dictionary zurueck --> (enthaelt alle tiles aus dem spritesheet)
 
-def import_animation_frames(cols, rows, *path, scale = SCALE_FACTOR):
-    frames = []
-    # liste enthaelt spaeter die einzelnen frames fuer die animation 
-
-    surf = import_image(*path, scale = scale)
-    # laden des bilds mit funktion `import_image` und evt. skalieren
-
-    cell_width, cell_height = surf.get_width() / cols, surf.get_height() / rows
-    # definiert die breite einer zeile und spalte
-    # zellenbreite = breite von surf / anzahl der spalten
-    # zellenhoehe = hoehe von surf / anzahl der zeilen
-
-    for row in range(rows):
-        for col in range(cols):
-            cutout_rect = pygame.Rect(col * cell_width, row * cell_height, cell_width, cell_height)
-            # definiert einen rechteck bereich (cutout_rect) 
-            # --> dieser repraesentiert aktuelles tile in tilemap
-
-
-            cutout_surf = pygame.Surface((cell_width, cell_height), pygame.SRCALPHA)
-            # erstellt neue oberflaeche (surface) fuer einzelnes tile (cell_width, cell_height)
-            # "pygame.SRCALPHA" --> sorgt dafuer, dass oben erstellte oberflaeche 
-            # --> alpha-kanal (transparenz) unterstuetzt
-
-            cutout_surf.blit(surf, (0, 0), cutout_rect)
-            # zeichnet das aktuelle tile aus der tilemap auf die neue oberflaeche 
-            # --> also auf cutout_rect
-
-            frames.append(cutout_surf)
-            # fuegt ausgeschnittenes frame der liste frames hinzu
-    
-    return frames
-    # gibt frames zurueck --> enthaelt animation in aufsteigender reihenfolge
 
 
 def spritesheet_vertical(cols, row, *path, scale = SCALE_FACTOR):
@@ -133,21 +142,6 @@ def spritesheet_vertical(cols, row, *path, scale = SCALE_FACTOR):
 	return new_dict
     # gibt new_dict zurueck --> enthaelt frames sortiert nach bewegungsrichtungen 
 
-
-def spritesheet_horizontal(cols, rows, *path):
-	frame_dict = import_spritesheet(cols, rows, *path)
-	new_dict = {}
-	for col, direction in enumerate(('down','up', 'left','right')):
-		new_dict[direction] = [frame_dict[(col, row)] for row in range(rows)]
-	return new_dict
-
-def spritesheet_vertical_projectile(cols, row, *path):
-	frame_dict = import_spritesheet(cols, row,*path)
-	new_dict ={}
-	for row, direction in enumerate(('up','left', 'right','down')):
-		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
-		#new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
-	return new_dict
 
 
 def import_character_animation(cols, rows, *path, scale = SCALE_FACTOR):
@@ -196,6 +190,25 @@ def import_character_animation(cols, rows, *path, scale = SCALE_FACTOR):
     return new_dict
     # gibt dictionary 'new_dict' zurueck --> mit allen moeglichen animationen des charakters
 
+# BIS HIERHIN!!!
+#_________________________________________________________________________________________________________________________
+
+def spritesheet_horizontal(cols, rows, *path):
+	frame_dict = import_spritesheet(cols, rows, *path)
+	new_dict = {}
+	for col, direction in enumerate(('down','up', 'left','right')):
+		new_dict[direction] = [frame_dict[(col, row)] for row in range(rows)]
+	return new_dict
+
+def spritesheet_vertical_projectile(cols, row, *path):
+	frame_dict = import_spritesheet(cols, row,*path)
+	new_dict ={}
+	for row, direction in enumerate(('up','left', 'right','down')):
+		new_dict[direction] = [frame_dict[(col, row)] for col in range(int(cols))]
+		#new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
+	return new_dict
+
+
 
 def import_all_characters(cols, rows, *path):
     character_assets = {}
@@ -234,32 +247,6 @@ def import_all_characters(cols, rows, *path):
     
     return character_assets
     # gibt dictionary mit allen animationen und facesets von den charakteren zurueck
-
-
-'''
-pygame.init()
-ds = pygame.display.set_mode((1100, 900))
-
-
-cols, rows = 4, 7  # 
-all_character_animations = import_all_characters(cols, rows, 'graphics','Characters')
-
-#
-for character, animations in all_character_animations.items():
-    print(f"Character: {character}, Animations: {animations.keys()}")
-
-
-while True:
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			pygame.quit()
-			exit()
-	ds.fill((0,0,0))
-	#ds.blit(aa[0], (0,0))
-	pygame.display.update()
-
-#'''
-
 
 
 #map 
