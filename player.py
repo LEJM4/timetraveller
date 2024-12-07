@@ -6,8 +6,8 @@ from data import *
 
 class Player(Entity):
 
-	def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, interaction_objects, trail, data, path, id, create_projectile):
-		super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, path)
+	def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, interaction_objects, trail, data, id, create_projectile):
+		super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data)
 		
         #OVERWRITES
 		self.health = hit_points['player']

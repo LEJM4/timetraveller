@@ -81,8 +81,8 @@ class Zombie:
 
 
 class Zombie_1(Entity, Zombie):
-    def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, data, path, player, id):
-        super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, path, speed= 200)
+    def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, data, player, id):
+        super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, speed= 200)
         
         #OVERWRITES
         self.projectile = False
@@ -94,8 +94,6 @@ class Zombie_1(Entity, Zombie):
         
         self.last_pos = 0.0
 
-        #
-        self.path = path
 
         #timers
         self.timers = {'walk_around': Timer(duration=  randint(3000,7000),
@@ -200,8 +198,8 @@ class Zombie_1(Entity, Zombie):
 
 
 class Zombie_2(Entity, Zombie):
-    def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, data, path, player, create_projectile, id):
-        super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, path, speed= 200)
+    def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, data, player, create_projectile, id):
+        super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data, speed= 200)
         
         #OVERWRITES
         self.projectile = False
@@ -212,9 +210,6 @@ class Zombie_2(Entity, Zombie):
         self.create_star_projectile = create_projectile
 
 
-
-        #
-        self.path = path
         self.last_pos = 0.0
         self.entity_id = id
 
@@ -297,7 +292,7 @@ class Zombie_2(Entity, Zombie):
                 projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 1.5)
 
                 
-                self.create_star_projectile(projectile_start_pos, self.projectile_direction)
+                self.create_star_projectile(projectile_start_pos, self.projectile_direction, self.facing_direction)
                 self.projectile_shot = True
 
             

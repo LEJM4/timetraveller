@@ -56,12 +56,13 @@ class Projectile(AnimatedSprites):
     def __init__(self, pos, direction, frames, animation_speed, groups, z_layer=LAYERS['main']):
         # init von AnimatetSpr
         super().__init__(pos, frames, groups, animation_speed, z_layer)
-        
-        # 
+
         self.direction = direction
         self.speed = 400
         self.pos = pos
 
+        self.frames = frames
+        
     def update(self, dt):
         self.pos += self.direction * self.speed * dt
         self.rect.center = (round(self.pos.x), round(self.pos.y))

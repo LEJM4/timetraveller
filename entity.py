@@ -7,7 +7,7 @@ from game_data import *
 from data import *
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos, groups,	frames, facing_direction, obstacle_objects, data, path, speed = 100):
+    def __init__(self, pos, groups,	frames, facing_direction, obstacle_objects, data, speed = 100):
         super().__init__(groups)
 
         #GAME-SETTINGS
@@ -19,9 +19,6 @@ class Entity(pygame.sprite.Sprite):
                                             autostart= False,
                                             func = self.reset_vulnerability)}
         
-        # 
-        self.path = path
-
         # graphic
         self.frames = frames
         self.facing_direction = facing_direction
@@ -149,6 +146,15 @@ class Entity(pygame.sprite.Sprite):
 
         #return f"{self.facing_direction}{'' if moving else '_idle'}"
 
+    def get_direction_key(self):
+        if 1 == 2: 
+            return 'up'
+        elif self.direction.y > 0:  
+            return 'down'
+        elif self.direction.x < 0:  
+            return 'left'
+        elif self.direction.x > 0:  
+            return 'right'
 
 
     def animation_leo(self, dt):
@@ -164,9 +170,7 @@ class Entity(pygame.sprite.Sprite):
                     case 'down': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2)
 
                      
-
-                
-                self.create_star_projectile(projectile_start_pos, self.projectile_direction)
+                self.create_star_projectile(projectile_start_pos, self.projectile_direction, self.facing_direction)
                 self.projectile_shot = True
 
             

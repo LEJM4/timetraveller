@@ -43,11 +43,11 @@ def import_image(*path, alpha = True, format = 'png', scale = SCALE_FACTOR):
     # gibt das bild transformiert (vergroessert oder verkleinert) um den faktor "scale" zurueck
 
 
-def import_spritesheet(cols, rows, *path):
+def import_spritesheet(cols, rows, *path, scale = SCALE_FACTOR):
     # spritesheet mit (spalten, reihen(zeilen), pfad zur datei) 
 
 	frames = {} # erstellt ein leeres Dictionary, welches spaeter gefuellt wird
-	surf = import_image(*path) # laedt mithilfe der funktion "import_image" die tilemap
+	surf = import_image(*path, scale = scale) # laedt mithilfe der funktion "import_image" die tilemap
       
 	cell_width, cell_height = surf.get_width() / cols, surf.get_height() / rows
     # definieren von zeile und spalte
@@ -79,11 +79,11 @@ def import_spritesheet(cols, rows, *path):
 	return frames
     # gibt das dictionary zurueck --> (enthaelt alle tiles aus dem spritesheet)
 
-def import_animation_frames(cols, rows, *path, scale=SCALE_FACTOR):
+def import_animation_frames(cols, rows, *path, scale = SCALE_FACTOR):
     frames = []
     # liste enthaelt spaeter die einzelnen frames fuer die animation 
 
-    surf = import_image(*path, scale=scale)
+    surf = import_image(*path, scale = scale)
     # laden des bilds mit funktion `import_image` und evt. skalieren
 
     cell_width, cell_height = surf.get_width() / cols, surf.get_height() / rows
@@ -114,8 +114,8 @@ def import_animation_frames(cols, rows, *path, scale=SCALE_FACTOR):
     # gibt frames zurueck --> enthaelt animation in aufsteigender reihenfolge
 
 
-def spritesheet_vertical(cols, row, *path):
-	frame_dict = import_spritesheet(cols, row,*path)
+def spritesheet_vertical(cols, row, *path, scale = SCALE_FACTOR):
+	frame_dict = import_spritesheet(cols, row, *path, scale = scale)
     # laedt das spritesheet und speichert es als ein dictionary: frame_dict
     # schluessel sind (col, row) und werte sind entsprechenden frames
     
@@ -150,8 +150,8 @@ def spritesheet_vertical_projectile(cols, row, *path):
 	return new_dict
 
 
-def import_character_animation(cols, rows, *path):
-    frame_dict = import_spritesheet(cols, rows, *path)
+def import_character_animation(cols, rows, *path, scale = SCALE_FACTOR):
+    frame_dict = import_spritesheet(cols, rows, *path, scale = scale)
     # laden des spritesheets --> speichern in dictionary aus der funktion 'import_spritesheet'
      
     new_dict = {

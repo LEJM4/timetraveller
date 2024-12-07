@@ -57,6 +57,7 @@ class Level:
         self.tint_progress = 0
         self.tint_direction = -1
         self.tint_speed = 600
+        #print(self.map_animations['projectiles']['purple_flash'])
 
 
     #'''
@@ -80,10 +81,11 @@ class Level:
             'monster': {'attack': spritesheet_vertical(4,4, 'graphics','characters', 'monster', 'attack'), 
                         'idle': spritesheet_vertical(4,4, 'graphics','characters', 'monster', 'idle'), 
                         'move': spritesheet_vertical(4,4, 'graphics','characters', 'monster', 'move')},
+                        
+            'skeleton': import_character_animation(4,7, 'graphics','characters', 'monster','Skeleton_SpriteSheet', scale = 3),
 
             #import der projectile animation
-            'projectiles': {'purple_flash': import_animation_frames(4,4, 'graphics','objects','projectile','purple_flash_spritesheet')}
-
+            'projectiles': {'purple_flash': spritesheet_vertical(4,4, 'graphics','objects','projectile','purple_flash_spritesheet')}
         }
         self.fonts = {'dialog': pygame.font.Font(font_path, font_size['dialog'])}
     #'''
@@ -283,29 +285,26 @@ class Level:
                                                 interaction_objects=self.interaction_objects,
                                                 trail=self.trail,
                                                 data=self.data,
-                                                path=('graphics', 'player'),
                                                 id=object.properties['entity_id'],
                                                 create_projectile=self.star_bullet_player)
 
                 elif object.name == 'zombie_1':
                     self.zombie = Zombie_1(pos=(object.x, object.y),
                                             groups=[self.all_sprites, self.enemy_group],
-                                            frames= self.map_animations['monster'],
+                                            frames= self.map_animations['skeleton'],
                                             facing_direction=object.properties['direction'],
                                             obstacle_objects=self.obstacle_objects,
                                             data=self.data,
-                                            path=('graphics', 'npc', 'npc_1'),
                                             player=self.player,
                                             id=object.properties['entity_id'])
 
                 elif object.name == 'zombie_2':
                     self.zombie = Zombie_2(pos=(object.x, object.y),
                                             groups=[self.all_sprites, self.enemy_group],
-                                            frames= self.map_animations['monster'],
+                                            frames= self.map_animations['skeleton'],
                                             facing_direction=object.properties['direction'],
                                             obstacle_objects=self.obstacle_objects,
                                             data=self.data,
-                                            path=('graphics', 'npc', 'npc_1'),
                                             player=self.player,
                                             create_projectile=self.star_bullet_player,
                                             id=object.properties['entity_id'])
@@ -318,10 +317,12 @@ class Level:
                                         create_dialog=self.create_dialog)
 
 
-    def star_bullet_player(self, pos, direction):#:, path):
+    def star_bullet_player(self, pos, direction, pointing_direction):
+        print(f'Die pointing direciton : {pointing_direction}')
+        #print(self.map_animations['projectiles']['purple_flash'])
         Projectile(pos= pos,
             direction = direction,
-            frames= self.map_animations['projectiles']['purple_flash'],
+            frames= self.map_animations['projectiles']['purple_flash'][pointing_direction],
             groups= [self.all_sprites , self.projectile_group],
             animation_speed=4)
 
