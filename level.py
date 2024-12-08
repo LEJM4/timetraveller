@@ -265,7 +265,7 @@ class Level:
 
 
     def star_bullet_player(self, pos, direction, pointing_direction):
-        print(f'Die pointing direciton : {pointing_direction}')
+        # print(f'Die pointing direciton : {pointing_direction}')
         #print(self.map_animations['projectiles']['purple_flash'])
         Projectile(pos= pos,
             direction = direction,
