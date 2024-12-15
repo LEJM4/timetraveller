@@ -1,9 +1,7 @@
 import pygame
 from settings import *
 from button import Button
-import sys
 import time
-from settings import SCREEN_WIDTH; SCREEN_HEIGHT
 
 
 class EscMenu:
