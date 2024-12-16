@@ -6,6 +6,8 @@ from math import sin
 from game_data import *
 from data import *
 
+# DIENT als elternklasse fuer die character und monster
+# enthaelt wichtige grundlagen und methoden
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	frames, facing_direction, obstacle_objects, data, speed = 100):
         super().__init__(groups)
@@ -210,6 +212,8 @@ class Entity(pygame.sprite.Sprite):
         if LIFE_DATA[self.entity_id]['health'] <= 0:
              player_inventory['corps'] += 1
              self.kill()
+             if self.entity_id == 'player':
+                 LIFE_DATA['player']['defeated'] = True
 
     def reset_vulnerability(self):
         self.is_vulnerable = True

@@ -89,3 +89,5 @@ class Button:
         pygame.draw.rect(self.screen, border_color, self.button_rect, border_thickness)
 
     
+    def is_clicked(self, mouse_pos):
+        return self.button_rect.collidepoint(mouse_pos)

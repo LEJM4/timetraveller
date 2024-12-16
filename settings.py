@@ -5,6 +5,8 @@ from os.path import join
 #SCREEN_WIDTH,SCREEN_HEIGHT = size() #--> Vollbild
 #print (SCREEN_WIDTH, SCREEN_HEIGHT)
 
+# verwaltung von den zentralen einstellungen wie z.b. bildschirmgroesse
+
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCALE_FACTOR = 1

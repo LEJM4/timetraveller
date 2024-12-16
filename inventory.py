@@ -2,6 +2,8 @@ from settings import *
 from button import Button
 from geometrie import *
 
+# prototyp fuer ein inventar 
+
 class Inventory:
     def __init__(self, screen):
         self.screen = screen
@@ -23,7 +25,7 @@ class Inventory:
 
     def update_inv(self, dt):
         keys = pygame.key.get_pressed()
-        mouse_button_down = pygame.mouse.get_just_pressed()[0]
+        mouse_button_down = pygame.mouse.get_pressed()[0]
         mouse_pos = pygame.mouse.get_pos()
         boxes = [(index, box) for index, box in enumerate(self.slots) if mouse_button_down and box.collidepoint(mouse_pos)]
         boxes_1 = [box for box in self.slots if mouse_button_down and box.collidepoint(mouse_pos)]

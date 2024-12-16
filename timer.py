@@ -1,5 +1,8 @@
 from pygame.time import get_ticks
 
+# timer sind dazu da, um nach einer bestimmten zeit, dinge auszuloesen
+# z.b. das zufaellige aendern der bewegung von den skelleten
+
 class Timer:
 	def __init__(self, duration, repeat = False, autostart = False, func = None):
 		self.duration = duration

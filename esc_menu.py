@@ -3,11 +3,12 @@ from settings import *
 from button import Button
 import time
 
+# viel code und viele dinge
+# buttons und ausrichtung ist skalierbar und passt sich der screen_size an
 
 class EscMenu:
     def __init__(self, screen):#, game_state_manager):
         #state
-        #self.game_state_manager = game_state_manager
         
 
         #
@@ -300,45 +301,3 @@ class EscMenu:
         #exit
         self.button_pressed_exit = False
         self.esc_visible = True  # 
-
-"""
-class TEST:
-    def __init__(self):
-        pygame.init()
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.esc_menu = EscMenu(self.screen)
-        self.esc_menu_running = True
-        self.spiel_aktiv = True  
-
-    def run(self):
-        while self.esc_menu_running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.esc_menu_running = False
-
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        self.activate_esc_menu()
-
-                if self.esc_menu.button_pressed_exit == True:
-                    self.esc_menu_running = False
-                    pygame.quit()
-                    sys.exit()                   
-
-
-
-            self.screen.fill((128, 0, 128))  # purple
-
-            if not self.spiel_aktiv:
-               self.esc_menu.run()  # 
-
-            pygame.display.flip()
-
-
-    def activate_esc_menu(self):
-        self.spiel_aktiv = not self.spiel_aktiv
-        self.esc_menu.check_4_esc_menu_active()
-
-a = TEST()
-a.run()
-"""

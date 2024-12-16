@@ -16,12 +16,15 @@ from user_interface import Overlay
 
 from dialog import *
 
+# level class mit die wichtigste datei
+# verwaltet zentral die geschenisse und ueberprueft die ereignisse
+
 class Level:
     def __init__(self, data):
         self.dialog_tree = None
 
         #display_surface
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = pygame.display.get_surface() #display surf
 
         #data 4 the berrys
         self.data = data
@@ -43,15 +46,15 @@ class Level:
         self.transition_objects = pygame.sprite.Group()
         self.enemy_group = pygame.sprite.Group()
 
-        self.import_tilemaps_and_game_assets()
-        self.create_map(self.tile_maps['lvl_1'], 'meadow')
+        self.import_tilemaps_and_game_assets() #importieren der daten
+        self.create_map(self.tile_maps['lvl_1'], 'meadow') # tilemap nach methode erschaffen
 
 
-        self.overlay = Overlay()
+        self.overlay = Overlay() # overlay class hinzufuegen
 
 
 		# transition / tint
-        self.transition_destination = None
+        self.transition_destination = None #tint setup
         self.tint_surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.tint_mode = 'untint'
         self.tint_progress = 0
@@ -264,9 +267,7 @@ class Level:
                                         create_dialog=self.create_dialog)
 
 
-    def star_bullet_player(self, pos, direction, pointing_direction):
-        # print(f'Die pointing direciton : {pointing_direction}')
-        #print(self.map_animations['projectiles']['purple_flash'])
+    def star_bullet_player(self, pos, direction, pointing_direction): # das wird an charactere uebergeben
         Projectile(pos= pos,
             direction = direction,
             frames= self.map_animations['projectiles']['purple_flash'][pointing_direction],
@@ -294,7 +295,7 @@ class Level:
         pass
 
 
-    def trail_collision(self):
+    def trail_collision(self): # ueberprueft ob der spieler sich auf dem weg befindet
         for trail in self.trail.sprites():
             if trail.hitbox.colliderect(self.player.hitbox_player):
                 self.player.speed = 200
@@ -305,7 +306,7 @@ class Level:
                 #self.change_speed = False
 
 
-    def bush_collision(self):
+    def bush_collision(self): # bush collision wichtig, damit er auch die beeren einsammeln kann
         keys = pygame.key.get_just_pressed() 
         sprites = [sprite for sprite in self.interaction_objects if sprite.rect.colliderect(self.player.hitbox_player)]
             #suche nach obj in `interaction_objects` welche mit spieler kollidieren
@@ -325,7 +326,7 @@ class Level:
             self.player.interaction_objects_collide = False
 
 
-    def update_inventory_values(self, item):
+    def update_inventory_values(self, item): # ueberprueft ob neue items hinzugefuegt werden muessen
         if item == 'blueberry':
             player_inventory[item] += 1
         
@@ -336,7 +337,7 @@ class Level:
             player_inventory[item] += 1
 
 
-    def transition_check(self):
+    def transition_check(self): # transition ist das, wenn eine neue karte erschaffen werden muss --> objekte in tiled
         keys = pygame.key.get_just_pressed()
         sprites = [sprite for sprite in self.transition_objects if sprite.rect.colliderect(self.player.hitbox_player)]
         if sprites:
@@ -350,23 +351,30 @@ class Level:
             
 
 
-    def tint_screen(self, dt):
+    def tint_screen(self, dt): # faerbt den screen nach und nach schwarz
         if self.tint_mode == 'untint':
             self.tint_progress -= self.tint_speed * dt
+        
+
+        if LIFE_DATA['player']['defeated']: # wenn spieler tot ist dann wird der screen schwarz
+            self.tint_mode = 'tint' 
 
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt
-            if self.tint_progress >= 255:
-                self.create_map(self.tile_maps[self.transition_destination[0]], self.transition_destination[1])
-                self.tint_mode = 'untint'
-                self.transition_destination = None
+            if LIFE_DATA['player']['defeated'] == False:
+
+
+                if self.tint_progress >= 255:
+                    self.create_map(self.tile_maps[self.transition_destination[0]], self.transition_destination[1])
+                    self.tint_mode = 'untint'
+                    self.transition_destination = None
 
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)
         self.display_surface.blit(self.tint_surf, (0,0))
 
 
-    def input(self):
+    def input(self): # ueberprueft den input
         if not self.dialog_tree:
             keys = pygame.key.get_just_pressed()
             if keys[pygame.K_RETURN]:
@@ -378,7 +386,7 @@ class Level:
                             self.create_dialog(object)
 
 
-    def create_dialog(self, object):
+    def create_dialog(self, object): # dialog wichtig fuer den roboter
         if not self.dialog_tree:
             self.player.noticed = False
             self.player.status = 'idle'
@@ -395,13 +403,13 @@ class Level:
 
 
     def update_missions(self):
-        if player_inventory['blueberry'] + player_inventory['raspberry'] >= 1:
+        if player_inventory['blueberry'] + player_inventory['raspberry'] >= 4:
             lvl[1] = True
         
         if Character_DATA['robo']['can_talk'] == False:
             lvl[2] = True
             
-        if player_inventory['corps'] == 2:
+        if player_inventory['corps'] >= 3:
             lvl[3] = True
 
     def run(self,dt):

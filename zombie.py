@@ -4,6 +4,12 @@ from timer import Timer
 from random import randint
 from game_data import *
 import pygame
+
+# 3 klassen
+# zombie ist die eltern klasse fuer die anderen beiden und enthaelt wichtige methoden
+# zombie 1 nahkampf zombie
+# zombie 2 fernkampf zombie
+
 class Zombie:                                            
     def check_distance(self, radius, tolerance = 30):
         distance_vector = (vector(self.player.rect.center) - vector(self.rect.center)) 

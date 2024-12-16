@@ -1,7 +1,7 @@
 from settings import *
 from support import *
 
-
+# formen welche beispielsweise fuer das menu gebraucht werden
 
 class Circle:
     def __init__(self, screen, color, color_2, center, radius):

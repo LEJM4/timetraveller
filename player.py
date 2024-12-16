@@ -4,6 +4,8 @@ from support import *
 from entity import Entity
 from data import *
 
+# class player nutzt sehr viel von entity
+ 
 class Player(Entity):
 
 	def __init__(self, pos, groups, frames, facing_direction, obstacle_objects, interaction_objects, trail, data, id, create_projectile):

@@ -3,6 +3,8 @@ from support import *
 from geometrie import *
 from data import *
 
+# ecke links oben ingame --> wird durch diese datei verwaltet
+
 class UserInterface:
     def __init__(self, current_lvl: str):
         self.screen = pygame.display.get_surface() 

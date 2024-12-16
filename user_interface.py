@@ -2,6 +2,8 @@ from settings import *
 from support import *
 from game_data import *
 
+# zeigt leben (oben rechts in der ecke) an
+
 class Overlay:
 	def __init__(self):
 		self.health = 6

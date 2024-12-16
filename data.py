@@ -17,7 +17,7 @@ player_inventory = {
 
 
 
-missions_text = {'lvl_1': ['Sammle 10 Beeren.' , 'Sprich mit dem Computer.', 'Töte alle Gegner.'],
+missions_text = {'lvl_1': ['Sammle 4 Beeren.' , 'Sprich mit dem Computer.', 'Töte 3 Gegner.'],
            'lvl_2': ['__', '__', '__']}
 
 

@@ -8,8 +8,11 @@ import pygame, sys
 from level import Level
 from data import Data   
 from esc_menu import EscMenu
+from start_menu import StartScreen
 from settings import *
 
+# main game-loop
+# ruft class level auf und steuert die menus
 
 class Game:
     def __init__(self):
@@ -33,6 +36,8 @@ class Game:
 
         #import menu
         self.esc_menu = EscMenu(self.screen)
+        self.start_menu = StartScreen(self.screen)
+        self.start_menu.run()
         self.esc_pressed = False
         #states:
         self.level = Level(self.data)
@@ -82,6 +87,8 @@ class Game:
             pygame.display.update() # aktualisierung bildschirm mit neuen grafiken und inhalten
 
 #_________________________________________________________________________________________________________________________
+
 if __name__ == '__main__':
     game = Game()
-    game.run()
+    if game.start_menu.running == False:
+        game.run()

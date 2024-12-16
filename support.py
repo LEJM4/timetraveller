@@ -7,6 +7,7 @@ from pytmx.util_pygame import load_pygame
 from sys import exit
 from pygame.math import Vector2 as vector 
 
+# enthaelt die funktionen, die fuer das importieren von daten wichtig sind
 
 #_________________________________________________________________________________________________________________________
 #NICHT MEHR VERAENDERN BIS!!!!
