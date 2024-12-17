@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="102" height="62" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="2016">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="102" height="62" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="2042">
  <tileset firstgid="1" source="../tile_sets/ground.tsx"/>
  <tileset firstgid="26" source="../tile_sets/tardis.tsx"/>
  <tileset firstgid="27" source="../tile_sets/stone.tsx"/>
@@ -494,38 +494,6 @@
   <object id="364" gid="29" x="6464" y="384" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="12" name="nature">
-  <object id="1252" name="tree_small" gid="32" x="640" y="2624" width="56" height="109"/>
-  <object id="1253" name="tree_small" gid="32" x="640" y="2560" width="56" height="109"/>
-  <object id="1254" name="tree_small" gid="32" x="640" y="2496" width="56" height="109"/>
-  <object id="1255" name="tree_small" gid="32" x="640" y="2432" width="56" height="109"/>
-  <object id="1256" name="tree_small" gid="32" x="640" y="2368" width="56" height="109"/>
-  <object id="1257" name="tree_small" gid="32" x="640" y="2304" width="56" height="109"/>
-  <object id="1258" name="tree_small" gid="32" x="640" y="2240" width="56" height="109"/>
-  <object id="1259" name="tree_small" gid="32" x="640" y="2176" width="56" height="109"/>
-  <object id="1260" name="tree_small" gid="32" x="640" y="2112" width="56" height="109"/>
-  <object id="1261" name="tree_small" gid="32" x="640" y="2048" width="56" height="109"/>
-  <object id="1262" name="tree_small" gid="32" x="640" y="1984" width="56" height="109"/>
-  <object id="1263" name="tree_small" gid="32" x="640" y="1920" width="56" height="109"/>
-  <object id="1264" name="tree_small" gid="32" x="640" y="1856" width="56" height="109"/>
-  <object id="1265" name="tree_small" gid="32" x="640" y="1792" width="56" height="109"/>
-  <object id="1266" name="tree_small" gid="32" x="640" y="1728" width="56" height="109"/>
-  <object id="1267" name="tree_small" gid="32" x="640" y="1664" width="56" height="109"/>
-  <object id="1268" name="tree_small" gid="32" x="640" y="1600" width="56" height="109"/>
-  <object id="1269" name="tree_small" gid="32" x="640" y="1536" width="56" height="109"/>
-  <object id="1270" name="tree_small" gid="32" x="640" y="1472" width="56" height="109"/>
-  <object id="1271" name="tree_small" gid="32" x="640" y="1408" width="56" height="109"/>
-  <object id="1272" name="tree_small" gid="32" x="640" y="1344" width="56" height="109"/>
-  <object id="1273" name="tree_small" gid="32" x="640" y="1280" width="56" height="109"/>
-  <object id="1274" name="tree_small" gid="32" x="640" y="1216" width="56" height="109"/>
-  <object id="1275" name="tree_small" gid="32" x="640" y="1152" width="56" height="109"/>
-  <object id="1276" name="tree_small" gid="32" x="640" y="1088" width="56" height="109"/>
-  <object id="1277" name="tree_small" gid="32" x="640" y="1024" width="56" height="109"/>
-  <object id="1278" name="tree_small" gid="32" x="640" y="960" width="56" height="109"/>
-  <object id="1279" name="tree_small" gid="32" x="640" y="896" width="56" height="109"/>
-  <object id="1280" name="tree_small" gid="32" x="640" y="832" width="56" height="109"/>
-  <object id="1281" name="tree_small" gid="32" x="640" y="768" width="56" height="109"/>
-  <object id="1282" name="tree_small" gid="32" x="640" y="704" width="56" height="109"/>
-  <object id="1363" name="tree_small" gid="32" x="640" y="640" width="56" height="109"/>
   <object id="1394" name="tree_small" gid="32" x="3776" y="640" width="56" height="109"/>
   <object id="1395" name="tree_small" gid="32" x="3712" y="640" width="56" height="109"/>
   <object id="1396" name="tree_small" gid="32" x="3648" y="640" width="56" height="109"/>
@@ -571,11 +539,6 @@
   <object id="1436" name="tree_small" gid="32" x="1088" y="640" width="56" height="109"/>
   <object id="1437" name="tree_small" gid="32" x="1024" y="640" width="56" height="109"/>
   <object id="1438" name="tree_small" gid="32" x="960" y="640" width="56" height="109"/>
-  <object id="1439" name="tree_small" gid="32" x="896" y="640" width="56" height="109"/>
-  <object id="1440" name="tree_small" gid="32" x="832" y="640" width="56" height="109"/>
-  <object id="1441" name="tree_small" gid="32" x="768" y="640" width="56" height="109"/>
-  <object id="1442" name="tree_small" gid="32" x="704" y="640" width="56" height="109"/>
-  <object id="1443" name="tree_small" gid="32" x="640" y="640" width="56" height="109"/>
   <object id="1444" name="tree_big" gid="33" x="4643.15" y="1997.82" width="201" height="229"/>
   <object id="1445" name="tree_big" gid="33" x="5888" y="3136" width="201" height="229"/>
   <object id="1446" name="tree_big" gid="33" x="5184" y="3520" width="201" height="229"/>
@@ -626,7 +589,6 @@
   <object id="1495" name="empty" gid="34" x="448" y="2240" width="64" height="64"/>
   <object id="1496" name="empty" gid="34" x="192" y="1920" width="64" height="64"/>
   <object id="1497" name="empty" gid="34" x="384" y="1536" width="64" height="64"/>
-  <object id="1498" name="empty" gid="34" x="512" y="1024" width="64" height="64"/>
   <object id="1499" name="empty" gid="34" x="128" y="1088" width="64" height="64"/>
   <object id="1500" name="empty" gid="34" x="448" y="576" width="64" height="64"/>
   <object id="1501" name="empty" gid="34" x="1088" y="256" width="64" height="64"/>
@@ -733,10 +695,8 @@
   <object id="1802" name="stone" gid="28" x="320" y="2141.5" width="64" height="39"/>
   <object id="1803" name="stone" gid="28" x="448" y="2368" width="64" height="39"/>
   <object id="1804" name="stone" gid="28" x="256" y="2333.5" width="64" height="39"/>
-  <object id="1805" name="stone" gid="28" x="512" y="2205.5" width="64" height="39"/>
   <object id="1806" name="stone" gid="28" x="128" y="2397.5" width="64" height="39"/>
   <object id="1807" name="stone" gid="28" x="576" y="285.5" width="64" height="39"/>
-  <object id="1808" name="stone" gid="28" x="704" y="541.5" width="64" height="39"/>
   <object id="1809" name="stone" gid="28" x="512" y="477.5" width="64" height="39"/>
   <object id="1810" name="stone" gid="28" x="768" y="349.5" width="64" height="39"/>
   <object id="1811" name="stone" gid="28" x="384" y="541.5" width="64" height="39"/>
@@ -882,6 +842,32 @@
   <object id="2006" name="stone" gid="28" x="3499.5" y="3141.5" width="64" height="39"/>
   <object id="2007" name="stone" gid="28" x="3371.5" y="3013.5" width="64" height="39"/>
   <object id="2015" name="tree_small" gid="32" x="3776" y="704" width="56" height="109"/>
+  <object id="2016" name="tree_big" gid="33" x="575.5" y="457.5" width="201" height="229"/>
+  <object id="2017" name="tree_big" gid="33" x="607.5" y="605.5" width="201" height="229"/>
+  <object id="2018" name="tree_big" gid="33" x="463.5" y="745.5" width="201" height="229"/>
+  <object id="2019" name="tree_big" gid="33" x="479.5" y="893.5" width="201" height="229"/>
+  <object id="2020" name="tree_big" gid="33" x="503.5" y="1025.5" width="201" height="229"/>
+  <object id="2021" name="tree_big" gid="33" x="383.5" y="1313.5" width="201" height="229"/>
+  <object id="2022" name="tree_big" gid="33" x="1087.5" y="2477.5" width="201" height="229"/>
+  <object id="2023" name="tree_big" gid="33" x="827.5" y="3173.5" width="201" height="229"/>
+  <object id="2024" name="tree_big" gid="33" x="1511.5" y="3221.5" width="201" height="229"/>
+  <object id="2025" name="tree_big" gid="33" x="911.5" y="3525.5" width="201" height="229"/>
+  <object id="2026" name="tree_big" gid="33" x="2363.5" y="3137.5" width="201" height="229"/>
+  <object id="2027" name="tree_big" gid="33" x="2311.5" y="3633.5" width="201" height="229"/>
+  <object id="2028" name="tree_big" gid="33" x="1831.5" y="3701.5" width="201" height="229"/>
+  <object id="2029" name="tree_big" gid="33" x="1955.5" y="3013.5" width="201" height="229"/>
+  <object id="2030" name="tree_big" gid="33" x="2923.5" y="3329.5" width="201" height="229"/>
+  <object id="2031" name="tree_big" gid="33" x="1167.5" y="2885.5" width="201" height="229"/>
+  <object id="2032" name="tree_big" gid="33" x="5019.5" y="3029.5" width="201" height="229"/>
+  <object id="2033" name="tree_big" gid="33" x="5575.5" y="2069.5" width="201" height="229"/>
+  <object id="2034" name="tree_big" gid="33" x="5247.5" y="2117.5" width="201" height="229"/>
+  <object id="2035" name="tree_big" gid="33" x="5387.5" y="2777.5" width="201" height="229"/>
+  <object id="2036" name="tree_big" gid="33" x="5995.5" y="2237.5" width="201" height="229"/>
+  <object id="2037" name="tree_big" gid="33" x="6139.5" y="1645.5" width="201" height="229"/>
+  <object id="2038" name="tree_big" gid="33" x="5475.5" y="1265.5" width="201" height="229"/>
+  <object id="2039" name="tree_big" gid="33" x="5531.5" y="605.5" width="201" height="229"/>
+  <object id="2040" name="tree_big" gid="33" x="5091.5" y="677.5" width="201" height="229"/>
+  <object id="2041" name="tree_big" gid="33" x="2402.17" y="809.5" width="201" height="229"/>
  </objectgroup>
  <objectgroup id="2" name="buildings">
   <object id="1134" name="tardis" gid="26" x="3328" y="1408" width="84" height="140"/>
@@ -927,7 +913,7 @@
    </properties>
    <point/>
   </object>
-  <object id="1838" name="player" x="1499.88" y="1059.27">
+  <object id="1838" name="player" x="1501.88" y="1030.77">
    <properties>
     <property name="direction" value="down"/>
     <property name="entity_id" value="player"/>
