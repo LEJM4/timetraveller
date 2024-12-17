@@ -38,9 +38,9 @@ class Button:
 
     def draw(self, screen):
 
-        # Transparente oberfläche für button 
+        # transparente oberflaeche fuer button 
         button_surface = pygame.Surface((self.button_width, self.button_height), pygame.SRCALPHA)
-        button_surface.fill(self.button_color)   #oberfläche mit transp. Farbe
+        button_surface.fill(self.button_color)   #oberflaeche mit transp. Farbe
         if self.collision_allowed:
             self.button_collision()
         

@@ -12,7 +12,6 @@ class Player(Entity):
 		super().__init__(pos, groups, frames, facing_direction, obstacle_objects, data)
 		
         #OVERWRITES
-		self.health = hit_points['player']
 		self.current_wepon = 'pistol'
 
 		

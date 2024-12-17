@@ -4,7 +4,8 @@ from player import Player
 from zombie import Zombie_1, Zombie_2
 from os.path import join
 from game_data import *
-#from entity import Entity, Player
+import sys
+from timer import Timer
 
 from camera import Camera
 from objects import *
@@ -61,6 +62,11 @@ class Level:
         self.tint_direction = -1
         self.tint_speed = 600
 
+        self.timers = {'player_death': Timer(duration=  (1500), # ist dafuer da, dass sich das spiel, wenn der spieler stirbt beendet
+                                            repeat = False,
+                                            autostart= False,
+                                            func =self.end_game),}
+
 #_________________________________________________________________________________________________________________________
 # NICHT MEHR VERAENDERN !!!!
 
@@ -93,6 +99,8 @@ class Level:
         
     # BIS HIERHIN
 #_________________________________________________________________________________________________________________________ 
+
+    # die methode ist dafuer da alle sprites zu erschaffen --> alle object und tile layer
 
     def create_map(self, tile_map, player_start_pos):
         #alle gruppen leeren
@@ -202,7 +210,7 @@ class Level:
                 else:
                     General(pos=(nature_obj.x, nature_obj.y),
                             image=nature_obj.image,
-                            groups=[self.all_sprites])
+                            groups=[self.all_sprites, self.obstacle_objects])
         #building layer
         if 'buildings' in object_layer_names:
             buildings_layer = tile_map.get_layer_by_name('buildings')
@@ -362,8 +370,6 @@ class Level:
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt
             if LIFE_DATA['player']['defeated'] == False:
-
-
                 if self.tint_progress >= 255:
                     self.create_map(self.tile_maps[self.transition_destination[0]], self.transition_destination[1])
                     self.tint_mode = 'untint'
@@ -400,6 +406,10 @@ class Level:
         self.dialog_tree = None
         self.player.in_dialog = False
         self.player.unblock()
+    
+    def end_game(self): # methode, damit sich das game beendet --> wird in self.timers verwendet
+        pygame.quit() # beenden von pygame
+        sys.exit() # beenden des programms  
 
 
     def update_missions(self):
@@ -412,8 +422,14 @@ class Level:
         if player_inventory['corps'] >= 3:
             lvl[3] = True
 
+    def update_timer(self):
+        for timer in self.timers.values():
+            timer.update()
+
     def run(self,dt):
         self.display_surface.fill('purple')
+
+        self.update_timer()
 
 
         # ingame activity
@@ -438,3 +454,6 @@ class Level:
 
         self.update_missions() #passiert was in "data.py"
         if self.dialog_tree: self.dialog_tree.update() #fuer den dialog
+
+        if LIFE_DATA['player']['defeated'] == False:
+            self.timers['player_death'].activate()

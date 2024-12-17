@@ -1,6 +1,5 @@
 import pygame
 from settings import *
-from settings import LAYERS
 from support import *
 
 # wichtig um zwischen den objekten zu unterscheiden

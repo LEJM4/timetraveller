@@ -3,6 +3,8 @@ from objects import *
 from dialog import DialogSprite
 from geometrie import Circle
 
+# sorgt fuer das zeichnen aller sprites
+
 class Camera(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
