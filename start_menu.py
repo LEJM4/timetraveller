@@ -36,7 +36,7 @@ class StartScreen:
         
     def run(self):
         while self.running:
-            self.screen.fill("cyan")  # hintergrundfarbe
+            self.screen.fill("purple")  # hintergrundfarbe
             self.start_button.draw(self.screen)
             self.exit_button.draw(self.screen)
             self.draw_mouse()
