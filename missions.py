@@ -13,7 +13,6 @@ class UserInterface:
         self.circle_color_2 = (30, 142, 0, 200)
 
 
-        self.check_mark = import_image('graphics', 'ui', 'check_mark_green')
         self.missions_completed = 0
 
         self.font_size = font_size['missions']
