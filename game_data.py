@@ -47,7 +47,7 @@ Character_DATA = {
 	'robo': {
 		'health': 6,
 		'dialog': {
-			'1': ['Nah, wie geht es dir?', 'In der Stadt sind viele Monster\n die unheil angerichtet haben!', 'Töte diese Kreaturen!'], 
+			'1': ['Nah, wie geht es dir?', 'In der Stadt sind viele Monster\n die Unheil angerichtet haben!', 'Töte diese Kreaturen!'], 
 			'2': ['Hallo', 'was geht']},
 		'current_dialog': 1,
         'can_talk': True

@@ -12,8 +12,8 @@ class Camera(pygame.sprite.Group):
         self.display_surface = pygame.display.get_surface()
 
         self.icon_frames = {'icon_e_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')],
-                            'icon_space_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')],
-                            'icon_q_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')]
+                            'icon_space_frames': [import_image('graphics', 'ui', 'space_button_icon_0'), import_image('graphics', 'ui', 'space_button_icon_1')],
+                            'icon_q_frames': [import_image('graphics', 'ui', 'q_button_icon_0'), import_image('graphics', 'ui', 'q_button_icon_1')]
                             }
 
         self.icon_e_animation = AnimatedSprites(
@@ -44,8 +44,12 @@ class Camera(pygame.sprite.Group):
         # skaliert icon auf breite des spielers
         player_width = player.rect.width
         self.icon_e_animation.frames = [pygame.transform.scale(frame, (player_width, frame.get_height())) for frame in self.icon_e_animation.frames] 
+        self.icon_q_animation.frames = [pygame.transform.scale(frame, (player_width, frame.get_height())) for frame in self.icon_q_animation.frames] 
+        self.icon_space_animation.frames = [pygame.transform.scale(frame, (player_width, frame.get_height())) for frame in self.icon_space_animation.frames] 
         #skaliert alle frames in der  liste --> oben
         self.icon_e_animation.update(dt) 
+        self.icon_q_animation.update(dt) 
+        self.icon_space_animation.update(dt) 
         #aktualisiert animation einmal pro frame
 
 
@@ -68,6 +72,12 @@ class Camera(pygame.sprite.Group):
                     icon_position = player.rect.midtop - vector(self.icon_q_animation.image.get_width() / 2, self.icon_q_animation.image.get_height() + 10)
                     #               kopf des spieler   -                 frame_breite                    frame_hoehe                      + 10 ueberm spieler
                     self.display_surface.blit(self.icon_q_animation.image, icon_position - self.relocation)
+                
+                if player.in_dialog:
+                    icon_position = player.rect.midtop - vector(self.icon_space_animation.image.get_width() / 2, self.icon_space_animation.image.get_height() + 10)
+                    #               kopf des spieler   -                 frame_breite                    frame_hoehe                      + 10 ueberm spieler
+                    self.display_surface.blit(self.icon_space_animation.image, icon_position - self.relocation)
+                    
 
 
                 

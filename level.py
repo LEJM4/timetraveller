@@ -306,11 +306,11 @@ class Level:
     def trail_collision(self): # ueberprueft ob der spieler sich auf dem weg befindet
         for trail in self.trail.sprites():
             if trail.hitbox.colliderect(self.player.hitbox_player):
-                self.player.speed = 200
+                self.player.speed = speed['trail']
                 #self.change_speed = True
                 break
             else:
-                self.speed = 400
+                self.speed = speed['player']
                 #self.change_speed = False
 
 

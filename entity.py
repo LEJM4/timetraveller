@@ -128,12 +128,7 @@ class Entity(pygame.sprite.Sprite):
         
         else:
             self.status = 'idle'
-            """
-            if self.facing_direction.endswith('_idle'): 
-                self.facing_direction = self.facing_direction
-            else:
-                self.facing_direction += '_idle'
-            """
+
         
         #attack
         if self.attacking:
@@ -200,6 +195,7 @@ class Entity(pygame.sprite.Sprite):
             return True
         else:
             return False
+        
     def blink_mask(self):
         if not self.is_vulnerable:
             if self.wave_value():

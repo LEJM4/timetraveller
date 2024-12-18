@@ -16,7 +16,8 @@ class Player(Entity):
 
 		
 		self.entity_id = id
-		self.speed = 500
+		self.speed = 300
+
 
 		
 		#Parametergroups
@@ -79,7 +80,38 @@ class Player(Entity):
 			case 'up': self.projectile_direction = vector (0,-1)
 			case 'down': self.projectile_direction = vector (0,1)
 
+
+	def animation_leo(self, dt):
+
+		self.frame_index += self.animation_speed * dt
+		if self.current_wepon == 'pistol':    
+			if int(self.frame_index) == 1 and self.attacking and not self.projectile_shot:
+				
+				match self.facing_direction:
+					case 'left': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2.4)
+					case 'right': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2.37)
+					case 'up': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width // 1.5)
+					case 'down': projectile_start_pos = self.rect.center + self.projectile_direction * (self.rect.width //2)
+
+						
+				self.create_star_projectile(projectile_start_pos, self.projectile_direction, self.facing_direction)
+				self.projectile_shot = True
+
+			
 		
+		if self.frame_index >= len(self.frames[self.status][self.facing_direction]):
+			self.frame_index = 0
+
+			if self.attacking:
+				self.attacking = False
+			
+			if self.collecting:
+				self.collecting = False
+		
+
+		self.image = self.frames[self.status][self.facing_direction][int(self.frame_index)]
+		self.mask = pygame.mask.from_surface(self.image)
+
 	def update(self, dt): #update Methode in pygame --> verwendung mit 'pygame.time.Clock() --> aktualisiert SPiel
 		if not self.blocked:
 			self.input() #player input --> movement
