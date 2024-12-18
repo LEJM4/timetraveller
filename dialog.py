@@ -2,6 +2,7 @@ from settings import *
 from timer import Timer
 from support import *
 
+# erster test fuer eine class, die einen dialog fuehren kann
 class Robo(pygame.sprite.Sprite):
     def __init__(self, pos, groups, player, character_data, create_dialog, z_layer=LAYERS['water']):
         super().__init__(groups)

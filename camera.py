@@ -1,7 +1,5 @@
 from settings import *
 from objects import *
-from dialog import DialogSprite
-from geometrie import Circle
 
 # sorgt fuer das zeichnen aller sprites
 
@@ -11,6 +9,7 @@ class Camera(pygame.sprite.Group):
         self.relocation = vector()
         self.display_surface = pygame.display.get_surface()
 
+        # importieren der frames fuer die animation der icons
         self.icon_frames = {'icon_e_frames': [import_image('graphics', 'ui', 'e_button_icon_0'), import_image('graphics', 'ui', 'e_button_icon_1')],
                             'icon_space_frames': [import_image('graphics', 'ui', 'space_button_icon_0'), import_image('graphics', 'ui', 'space_button_icon_1')],
                             'icon_q_frames': [import_image('graphics', 'ui', 'q_button_icon_0'), import_image('graphics', 'ui', 'q_button_icon_1')]
@@ -50,8 +49,6 @@ class Camera(pygame.sprite.Group):
         self.icon_e_animation.update(dt) 
         self.icon_q_animation.update(dt) 
         self.icon_space_animation.update(dt) 
-        #aktualisiert animation einmal pro frame
-
 
         for layer in LAYERS.values():
             for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):

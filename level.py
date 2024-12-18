@@ -19,6 +19,7 @@ from dialog import *
 
 # level class mit die wichtigste datei
 # verwaltet zentral die geschenisse und ueberprueft die ereignisse
+# wenn man sich in ruhe die karte angucken moechte --> dann in "settings.py" --> spieler leben hoch oder zombie leben auf 0
 
 class Level:
     def __init__(self, data):
@@ -100,9 +101,10 @@ class Level:
     # BIS HIERHIN
 #_________________________________________________________________________________________________________________________ 
 
-    # die methode ist dafuer da alle sprites zu erschaffen --> alle object und tile layer
 
     def create_map(self, tile_map, player_start_pos):
+    # die methode ist dafuer da alle sprites zu erschaffen --> alle object und tile layer
+    # es wird ueberprueft ob dieser layer (in tiled) existiert 
         #alle gruppen leeren
         for group in (self.all_sprites, self.obstacle_objects, self.interaction_objects, self.trail, self.projectile_group, self.transition_objects):
             group.empty()
@@ -244,7 +246,7 @@ class Level:
                                                 trail=self.trail,
                                                 data=self.data,
                                                 id=object.properties['entity_id'],
-                                                create_projectile=self.star_bullet_player)
+                                                create_projectile=self.projectile)
 
                 elif object.name == 'zombie_1':
                     self.zombie = Zombie_1(pos=(object.x, object.y),
@@ -264,7 +266,7 @@ class Level:
                                             obstacle_objects=self.obstacle_objects,
                                             data=self.data,
                                             player=self.player,
-                                            create_projectile=self.star_bullet_player,
+                                            create_projectile=self.projectile,
                                             id=object.properties['entity_id'])
 
                 elif object.name == 'robo':
@@ -275,7 +277,7 @@ class Level:
                                         create_dialog=self.create_dialog)
 
 
-    def star_bullet_player(self, pos, direction, pointing_direction): # das wird an charactere uebergeben
+    def projectile(self, pos, direction, pointing_direction): # das wird an charactere uebergeben
         Projectile(pos= pos,
             direction = direction,
             frames= self.map_animations['projectiles']['purple_flash'][pointing_direction],
@@ -285,6 +287,7 @@ class Level:
 
 
     def projectile_collision(self):
+        # ueberprueft collision des projectiles --> damit, wenn es auf ein objekt trifft entfernt wird
         for obj in self.obstacle_objects.sprites():
             pygame.sprite.spritecollide(obj, self.projectile_group, True)
 
@@ -299,18 +302,17 @@ class Level:
         #projectiles = [projectile for projectile in self.projectile_group if projectile.rect.colliderect(self.player.hitbox_player)]
         if pygame.sprite.spritecollide(self.player, self.projectile_group, True , pygame.sprite.collide_mask):
            self.player.damage('pistol')
-            #pass
-        pass
+
 
 
     def trail_collision(self): # ueberprueft ob der spieler sich auf dem weg befindet
         for trail in self.trail.sprites():
             if trail.hitbox.colliderect(self.player.hitbox_player):
-                self.player.speed = speed['trail']
+                self.player.speed = SPEED_SETTINGS['trail']
                 #self.change_speed = True
                 break
             else:
-                self.speed = speed['player']
+                self.speed = SPEED_SETTINGS['player']
                 #self.change_speed = False
 
 
@@ -400,6 +402,7 @@ class Level:
 
 
     def end_dialog(self, character):
+        # beendet den dialog
         #print(Character_DATA[character.character_data]['dialog'][1])
         Character_DATA['robo']['can_talk'] = False
         character.character_data['can_talk'] = False
@@ -439,7 +442,7 @@ class Level:
         self.projectile_collision() #projectile_collision ueberpruefen
         #self.trail_collision() #trail_collision ueberpruefen
 
-        
+
         #update
         self.all_sprites.update(dt) #update all_sprites
 

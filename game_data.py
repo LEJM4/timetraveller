@@ -1,44 +1,45 @@
 # verwaltung der ingame daten
+from settings import hit_points
 
 LIFE_DATA = {
 	'player': {
-		'health': 6,
+		'health': hit_points['player'],
 		'defeated': False,
 		},
     'o1': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o2': {
-		'health': 6,
+		'health': hit_points['zombie_2'],
 		'defeated': False,
 		},
 	'o3': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o4': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o5': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o6': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o7': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o8': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 	'o9': {
-		'health': 6,
+		'health': hit_points['zombie_1'],
 		'defeated': False,
 		},
 }

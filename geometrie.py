@@ -1,7 +1,7 @@
 from settings import *
 from support import *
 
-# formen welche beispielsweise fuer das menu gebraucht werden
+# formen welche beispielsweise fuer ui gebraucht werden --> kreise werden gruen (wenn mission erledigt)
 
 class Circle:
     def __init__(self, screen, color, color_2, center, radius):

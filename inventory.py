@@ -3,6 +3,7 @@ from button import Button
 from geometrie import *
 
 # prototyp fuer ein inventar 
+# code einfach ausfuehren und mal auf einen slot klicken
 
 class Inventory:
     def __init__(self, screen):
@@ -64,7 +65,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit
-        display_surface.fill((2,0,100))
+        display_surface.fill(('purple'))
         inv.display()
         pygame.display.update()
 #"""

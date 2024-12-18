@@ -3,7 +3,9 @@ from settings import font_path
 
 class Button:
     def __init__(self, text, x_position, y_position, button_width, button_height, screen, border = False, collision_allowed = True, button_color = (50, 62, 79, 150), font_size = 0.78, text_color = (255, 255 ,255)):
-        
+        # erschafft einen button 
+        # verwendung in start- und esc-menu
+
         self.collision_allowed = collision_allowed
         self.border = border
 
@@ -35,8 +37,8 @@ class Button:
         self.mouse_pressed = False
         self.button_is_pressed = False
 
-
     def draw(self, screen):
+    # zeichnet den button auf den screen
 
         # transparente oberflaeche fuer button 
         button_surface = pygame.Surface((self.button_width, self.button_height), pygame.SRCALPHA)
@@ -53,6 +55,7 @@ class Button:
 
 
     def button_collision(self):
+        # ueberprueft die button_collision
         mouse_pos = pygame.mouse.get_pos()
         mouse_get_pressed_left = pygame.mouse.get_pressed()[0] #[0] = linke Maustaste ;[1] = Mausrad ; [2] = rechte Maustaste
 
@@ -79,6 +82,7 @@ class Button:
 
 
     def button_border_and_size(self):
+        # wenn die maus ueber den button geht, dann soll das visuell erkennbar sein
         border_color = self.text_color_overlap  
         border_thickness = int(self.button_width / 40) # dicke rahmen
 

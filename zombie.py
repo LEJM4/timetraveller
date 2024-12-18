@@ -97,7 +97,7 @@ class Zombie_1(Entity, Zombie):
         self.current_wepon = 'hand'
         self.animation_speed = 4
 
-        self.speed = speed['zombie_1']
+        self.speed = SPEED_SETTINGS['zombie_1']
         
         self.last_pos = 0.0
 
@@ -213,7 +213,7 @@ class Zombie_2(Entity, Zombie):
 
         self.create_star_projectile = create_projectile
 
-        self.speed = speed['zombie_2']
+        self.speed = SPEED_SETTINGS['zombie_2']
         self.last_pos = 0.0
         self.entity_id = id
 
@@ -286,6 +286,7 @@ class Zombie_2(Entity, Zombie):
 
 
     def animation_leo(self, dt):
+        # leicht verandert, da das rect des zombies anders als z.b. player ist --> andere position erschaffung projectile
 
         self.frame_index += self.animation_speed * dt
         if self.current_weapon == 'pistol':    

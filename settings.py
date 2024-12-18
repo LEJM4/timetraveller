@@ -29,7 +29,7 @@ button_pos = {'missions': [(20,20),(20, 25 + button_size['missions'][1],),(20, 3
 
 
 #
-speed = {'projectile': 350,
+SPEED_SETTINGS = {'projectile': 350,
          'trail': 340,
          'player': 300,
          'zombie_1': 200,
@@ -40,9 +40,9 @@ weapon_dict = {'hand': 1,
                'sword':2,
                'pistol': 1}
 
-hit_points = {'player': 5,
-              'zombie_1': 6,
-              'zombie_2' : 4}
+hit_points = {'player': 6, # hier die lebenspunkte des spielers erhoehen auf z.b. 100 --> dann kann man die karte erkunden
+              'zombie_1': 5, # diesen int auf 0 setzen 
+              'zombie_2' : 3} # diesen int auf 0 setzen
 
 #print(button_pos['missions'])
 LAYERS = {

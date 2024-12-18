@@ -253,9 +253,9 @@ def import_all_characters(cols, rows, *path):
 #map 
 def check_distance(radius, target, entity):
 	distance_vector = (vector(target.rect.center) - vector(entity.rect.center)) 
-	#distance_vector = vector vom spieler - vector vom zombie
-	distance_squared = distance_vector.length_squared()
-	radius_squared = radius**2
+	#distance_vector = vector vom z.b. spieler - vector von z.b. zombie
+	distance_squared = distance_vector.length_squared() # --> lieber quadrieren statt radizieren
+	radius_squared = radius**2 # --> lieber quadrieren statt radizieren
 	return distance_squared < radius_squared
 
 

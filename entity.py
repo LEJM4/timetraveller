@@ -6,7 +6,7 @@ from math import sin
 from game_data import *
 from data import *
 
-# DIENT als elternklasse fuer die character und monster
+# DIENT als elternklasse fuer die player und monster
 # enthaelt wichtige grundlagen und methoden
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups,	frames, facing_direction, obstacle_objects, data, speed = 100):
@@ -60,7 +60,6 @@ class Entity(pygame.sprite.Sprite):
 
 
 
-        #states
         #moving
         self.moving = False
 
@@ -139,17 +138,6 @@ class Entity(pygame.sprite.Sprite):
         if self.collecting:
             self.status = 'collect'
             self.facing_direction = self.facing_direction.replace('_idle', '')  # remove _idle if collecting
-
-
-    def get_direction_key(self):
-        if 1 == 2: 
-            return 'up'
-        elif self.direction.y > 0:  
-            return 'down'
-        elif self.direction.x < 0:  
-            return 'left'
-        elif self.direction.x > 0:  
-            return 'right'
 
 
     def animation_leo(self, dt):

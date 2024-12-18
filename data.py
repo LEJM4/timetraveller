@@ -1,3 +1,7 @@
+# enthaelt daten ueber das spieler inventar
+# und ueber die direkten missionen
+# kann dennoch mit z.b. setttings oder game_data zusammengefasst werden
+
 class Data:
     def __init__(self):
         self.blueberry = 0
