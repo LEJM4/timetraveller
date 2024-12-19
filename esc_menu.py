@@ -280,10 +280,12 @@ class EscMenu:
             self.settings()
 
         if self.settings_audio == True:
+            self.esc_visible = False
             pass
 
         if self.settings_screen == True:
-            self.settings_screen_button()
+            self.esc_visible = False
+            pass
          
         if self.button_pressed_exit == True:
             pass
